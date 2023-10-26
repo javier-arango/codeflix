@@ -1,4 +1,9 @@
+// This project is using the @typescript-eslint plugin for eslint checks
+// Here is the documentation for every check -> https://typescript-eslint.io/rules/
 {
+  "parserOptions": {
+    "project": "./tsconfig.json" // Add this line
+  },
   "plugins": ["@typescript-eslint"],
   "extends": [
     "next/core-web-vitals",
@@ -14,7 +19,6 @@
     "@typescript-eslint/no-explicit-any": "error",
     "@typescript-eslint/consistent-type-exports": "error",
     "@typescript-eslint/consistent-type-imports": "error",
-    "@typescript-eslint/explicit-function-return-type": "error",
     "@typescript-eslint/no-confusing-non-null-assertion": "error"
   }
 }
