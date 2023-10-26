@@ -1,6 +1,14 @@
-# Cinemify - Your Portal to Cinema
+<p align="center">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="https://github.com/javier-arango/cinemify/assets/58098790/6e067888-8d2a-42aa-b29e-02ba1ae73148">
+      <img src="https://github.com/javier-arango/cinemify/assets/58098790/6e067888-8d2a-42aa-b29e-02ba1ae73148" alt="Cinemify" width="400" />
+    </picture>
+</p>
 
-Cinemify is your one-stop destination for the ultimate movie experience, right from discovery to reviews and trailers. With a rich, user-friendly interface powered by Next.js and TypeScript, we make movie exploration seamless and fun. Dive into detailed information about films, craft insightful reviews, and get a sneak peek with high-quality trailers. Whether you're a casual viewer or a cinephile, Cinemify offers something for everyone.
+<h3 align="center">Your Portal to Cinema</h3>
+
+<br/>
+<p align="center">Cinemify is your one-stop destination for the ultimate movie experience, right from discovery to reviews and trailers. With a rich, user-friendly interface powered by Next.js and TypeScript, we make movie exploration seamless and fun. Dive into detailed information about films, craft insightful reviews, and get a sneak peek with high-quality trailers. Whether you're a casual viewer or a cinephile, Cinemify offers something for everyone.</p>
 
 ## Table of Contents
 - [Core App Features](#core-app-features)
