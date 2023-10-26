@@ -12,7 +12,6 @@ Cinemify is your one-stop destination for the ultimate movie experience, right f
 ## Core App Features
 
 - `Search Functionality`: Search for movies by title, director, actor, or genre.
-- `Recommendations`: Get personalized movie recommendations based on your watch history and preferences.
 - `Trending Movies`: Stay up-to-date with the most popular movies right now.
 - `User Ratings`: Rate movies on a scale of 1 to 10.
 - `Write Reviews`: Share your thoughts on a movie with a detailed review.
