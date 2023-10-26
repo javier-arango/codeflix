@@ -1,4 +1,4 @@
-# Cinemify - Your Cinema Journey Starts Here
+# Cinemify - Your Portal to Cinema
 
 Cinemify is your one-stop destination for the ultimate movie experience, right from discovery to reviews and trailers. With a rich, user-friendly interface powered by Next.js and TypeScript, we make movie exploration seamless and fun. Dive into detailed information about films, craft insightful reviews, and get a sneak peek with high-quality trailers. Whether you're a casual viewer or a cinephile, Cinemify offers something for everyone.
 
