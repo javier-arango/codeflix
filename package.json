@@ -1,6 +1,21 @@
 {
   "name": "cinemify",
+  "author": "Javier Arango",
+  "description": "Your go-to hub for discovering, reviewing, and watching movies.",
   "version": "0.1.0",
+  "license": "MIT",
+  "homepage": "https://github.com/javier-arango/cinemify#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/javier-arango/cinemify.git"
+  },
+  "keywords": [
+    "cinemify"
+  ],
+  "engines": {
+    "node": ">=18",
+    "npm": ">=9"
+  },
   "private": true,
   "scripts": {
     "dev": "next dev",
