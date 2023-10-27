@@ -5,10 +5,10 @@
     </picture>
 </p>
 
-<h3 align="center">Your Portal to Cinema</h3>
+<h3 align="center">Fuel Your Code. Spark Your Journey.</h3>
 
 <br/>
-<p align="center">Cinemify is your one-stop destination for the ultimate movie experience, right from discovery to reviews and trailers. With a rich, user-friendly interface powered by Next.js and TypeScript, we make movie exploration seamless and fun. Dive into detailed information about films, craft insightful reviews, and get a sneak peek with high-quality trailers. Whether you're a casual viewer or a cinephile, Cinemify offers something for everyone.</p>
+<p align="center">Codeflix is your one-stop educational platform designed exclusively for computer science students. Whether you're delving into algorithms, exploring backend development, or learning front-end frameworks, Codeflix offers an expansive collection of curated educational videos to guide your journey. With features that allow users to categorize videos, create personalized playlists, and dive deeper into specific topics, we're here to accelerate your learning process and elevate your coding skills.</p>
 
 ## Table of Contents
 - [Core App Features](#core-app-features)
@@ -19,13 +19,16 @@
 
 ## Core App Features
 
-- `Search Functionality`: Search for movies by title, director, actor, or genre.
-- `Trending Movies`: Stay up-to-date with the most popular movies right now.
-- `User Ratings`: Rate movies on a scale of 1 to 10.
-- `Write Reviews`: Share your thoughts on a movie with a detailed review.
-- `Watch Trailers`: Enjoy high-quality trailers directly within the app.
-- `Sign-up/Login`: Register an account and log in securely.
-- `Profile Customization`: Add a profile picture, set a bio, and list your favorite genres and movies.
+- `Search Functionality`: Users can search for educational videos by topic, difficulty level, or instructor.
+- `Category Browsing`: Navigate through pre-defined categories such as Backend, Frontend, Algorithms, and more.
+- `Trending Videos`: Keep tabs on the most popular and highly-rated educational videos in the computer science realm.
+- `User Ratings`: Rate videos on a scale of 1 to 5 to help improve content quality and recommendations.
+- `Write Reviews`: Share your insights on a particular video or topic by writing a detailed review.
+- `Custom Playlists`: Create, edit, and manage personalized playlists of videos for streamlined learning.
+- `In-Video Features`: Utilize options like adjustable playback speed, closed captions, and in-video note-taking.
+- `Sign-up/Login`: Securely register and log into your account with email verification and two-factor authentication.
+- `Profile Customization`: Customize your user profile with a photo, short bio, and your areas of interest in computer science.
+- `Supplementary Resources`: Access additional reading material, code samples, and quizzes related to each video topic.
 
 ## Technology Stack
 
@@ -33,10 +36,10 @@ This blend of technologies ensures that Cinemify is built on a modern, efficient
 
 #### Web Framework
 - `Next.js`: Utilized for both server-side and client-side rendering, Next.js enables a fast and SEO-friendly user experience.
+- `React.js`: Primarily used for building user interfaces, React.js allows for efficient and dynamic rendering of UI components.
 
 #### Development Language
 - `TypeScript`: Adopted for both front-end and back-end development, TypeScript offers strong type-checking to catch errors during development, leading to robust and maintainable code.
-Styling
 - `SCSS`: SCSS is used for styling the front-end, allowing for variables, nesting, and other features that make the CSS both more maintainable and extendable.
 
 #### Database
@@ -45,7 +48,6 @@ Styling
 
 #### API Communication
 - `RESTful API`: The back-end communicates with the front-end using REST API endpoints, facilitating seamless data exchange.
-- `TMDb API`: The app leverages the TMDb API to source accurate and extensive movie data.
 
 #### Authentication
 - `NextAuth.js`: This library is used for implementing secure authentication workflows with various OAuth providers and other custom strategies.
@@ -55,10 +57,8 @@ Styling
 graph TD
     A[Users] --> B[Front-End]
     B --> C[Backend]
-    C -->|User Data| D[Prisma ORM]
+    C -->|Data| D[Prisma ORM]
     D --> E[SQLite Database]
-    C -->|Movie Data| F[TMDb API]
-    F --> C
     C -->|Authentication| G[NextAuth.js]
     C --> B
 ```
