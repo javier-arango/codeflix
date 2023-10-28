@@ -1,9 +1,10 @@
 <p align="center">
     <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="https://github.com/javier-arango/cinemify/assets/58098790/6e067888-8d2a-42aa-b29e-02ba1ae73148">
-      <img src="https://github.com/javier-arango/cinemify/assets/58098790/6e067888-8d2a-42aa-b29e-02ba1ae73148" alt="Cinemify" width="400" />
+      <source media="(prefers-color-scheme: dark)" srcset="https://github.com/javier-arango/codeflix/assets/58098790/9a05bbbb-de7d-4a09-8ffa-58f970054211">
+      <img src="https://github.com/javier-arango/codeflix/assets/58098790/9a05bbbb-de7d-4a09-8ffa-58f970054211" alt="Cinemify" width="500" />
     </picture>
 </p>
+
 
 <h3 align="center">Fuel Your Code. Spark Your Journey.</h3>
 
