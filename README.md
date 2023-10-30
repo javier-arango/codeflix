@@ -14,7 +14,15 @@
 ## Table of Contents
 - [Core App Features](#core-app-features)
 - [Technology Stack](#technology-stack)
+  - [Web Framework](#web-framework)
+  - [Development Language](#development-language)
+  - [Database](#database)
+  - [API Communication](#api-communication)
+  - [Authentication](#authentication)
 - [App Architecture](#app-architecture)
+- [Database Design](#database-design)
+  - [Database Tables](#database-tables)
+  - [Database Schema](#database-schema)
 - [Getting Started](#getting-started)
 - [License](#license)
 
@@ -62,6 +70,115 @@ graph TD
     D --> E[SQLite Database]
     C -->|Authentication| G[NextAuth.js]
     C --> B
+```
+
+## Database Design
+Database design is a crucial component of any application, as it ensures that the data is stored in a logical and efficient manner. The database design for Cinemify is based on the following ER diagram and schema.
+
+### Database Tables
+Database tables are the building blocks of any database, and they are used to store data in a structured format. The following tables are used in Cinemify.
+
+```mermaid
+erDiagram
+    USER {
+        user_id INT PK
+        user_name VARCHAR
+        email VARCHAR
+        password VARCHAR
+        first_name VARCHAR
+        last_name VARCHAR
+        image VARCHAR
+        bio TEXT "NULABLE"
+        date_created DATETIME
+    }
+
+    PLAYLIST {
+        playlist_id INT PK
+        name VARCHAR
+        description TEXT
+    }
+    
+    HISTORY {
+        history_id INT PK
+        view_date DATETIME
+    }
+    
+    VIDEO {
+        video_id INT PK
+        title VARCHAR
+        publish_date DATETIME
+        views_count INT
+        description LONGTEXT
+        category_id INT
+    }
+    
+    VIDEO_COMMENT {
+        comment_id INT PK
+        comment TEXT
+        date_posted DATETIME
+    }
+    
+    VIDEO_TAGS {
+        tag_id INT PK
+        tag_name VARCHAR
+    }
+```
+
+### Database Schema
+Database schema is the skeleton structure that represents the logical view of the entire database. The following schema is used in Cinemify.
+
+```mermaid
+erDiagram
+    USER ||--o{ PLAYLIST : "creates"
+    USER ||--o{ HISTORY : "owns"
+    USER ||--o{ VIDEO_COMMENT : "comments"
+    VIDEO ||--o{ PLAYLIST : "included_in"
+    VIDEO ||--o{ HISTORY : "viewed_in"
+    VIDEO ||--o{ VIDEO_COMMENT : "has_comments"
+    VIDEO ||--o{ VIDEO_TAGS : "has_tags"
+    
+    USER {
+        user_id INT PK
+        user_name VARCHAR
+        email VARCHAR
+        password VARCHAR
+        first_name VARCHAR
+        last_name VARCHAR
+        image VARCHAR
+        bio TEXT "NULABLE"
+        date_created DATETIME
+    }
+
+    PLAYLIST {
+        playlist_id INT PK
+        name VARCHAR
+        description TEXT
+    }
+    
+    HISTORY {
+        history_id INT PK
+        view_date DATETIME
+    }
+    
+    VIDEO {
+        video_id INT PK
+        title VARCHAR
+        publish_date DATETIME
+        views_count INT
+        description LONGTEXT
+        category_id INT
+    }
+    
+    VIDEO_COMMENT {
+        comment_id INT PK
+        comment TEXT
+        date_posted DATETIME
+    }
+    
+    VIDEO_TAGS {
+        tag_id INT PK
+        tag_name VARCHAR
+    }
 ```
 
 
