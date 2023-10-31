@@ -26,7 +26,8 @@
       "@utils/*": ["utils/*"],
       "@constants/*": ["constants/*"],
       "@services/*": ["services/*"],
-      "@config/*": ["config/*"]
+      "@config/*": ["config/*"],
+      "@lib/*": ["lib/*"]
     }
   },
   "include": [
