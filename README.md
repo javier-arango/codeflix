@@ -116,6 +116,7 @@ erDiagram
         views_count INT
         description LONGTEXT
         category_id INT
+        url TEXT
     }
     
     VIDEO_COMMENT {
@@ -173,6 +174,7 @@ erDiagram
         views_count INT
         description LONGTEXT
         category_id INT
+        url TEXT
     }
     
     VIDEO_COMMENT {

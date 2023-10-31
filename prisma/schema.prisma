@@ -17,7 +17,7 @@ model User {
   password      String
   firstName     String
   lastName      String
-  avatar        String
+  avatar        String         @default("https://res.cloudinary.com/dp28illl8/image/upload/v1698787786/profile/default_avatar.jpg")
   bio           String?
   dateCreated   DateTime       @default(now())
   playlists     Playlist[]
@@ -53,6 +53,7 @@ model Video {
   videoComments VideoComment[]
   playlists     Playlist[]
   histories     History[]
+  url           String
 }
 
 model VideoComment {
