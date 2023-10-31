@@ -62,6 +62,7 @@ This blend of technologies ensures that Cinemify is built on a modern, efficient
 
 #### API Communication
 - `RESTful API`: The back-end communicates with the front-end using REST API endpoints, facilitating seamless data exchange.
+- `Couldinary API`: This cloud-based image and video management platform is used for storing and serving user-uploaded images.
 
 #### Authentication
 - `NextAuth.js`: This library is used for implementing secure authentication workflows with various OAuth providers and other custom strategies.
