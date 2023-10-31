@@ -14,8 +14,21 @@
 ## Table of Contents
 - [Core App Features](#core-app-features)
 - [Technology Stack](#technology-stack)
+  - [Web Framework](#web-framework)
+  - [Development Language](#development-language)
+  - [Database](#database)
+  - [API Communication](#api-communication)
+  - [Authentication](#authentication)
 - [App Architecture](#app-architecture)
+- [Database Design](#database-design)
+  - [Database Tables](#database-tables)
+  - [Database Schema](#database-schema)
 - [Getting Started](#getting-started)
+    - [Development Server](#development-server)
+    - [Database Setup with Prisma](#database-setup-with-prisma)
+      - [Migration](#migration)
+      - [Manual Seeding](#manual-seeding)
+      - [Visualize the Database](#visualize-the-database)
 - [License](#license)
 
 ## Core App Features
@@ -64,9 +77,119 @@ graph TD
     C --> B
 ```
 
+## Database Design
+Database design is a crucial component of any application, as it ensures that the data is stored in a logical and efficient manner. The database design for Cinemify is based on the following ER diagram and schema.
+
+### Database Tables
+Database tables are the building blocks of any database, and they are used to store data in a structured format. The following tables are used in Cinemify.
+
+```mermaid
+erDiagram
+    USER {
+        user_id INT PK
+        user_name VARCHAR
+        email VARCHAR
+        password VARCHAR
+        first_name VARCHAR
+        last_name VARCHAR
+        image VARCHAR
+        bio TEXT "NULABLE"
+        date_created DATETIME
+    }
+
+    PLAYLIST {
+        playlist_id INT PK
+        name VARCHAR
+        description TEXT
+    }
+    
+    HISTORY {
+        history_id INT PK
+        view_date DATETIME
+    }
+    
+    VIDEO {
+        video_id INT PK
+        title VARCHAR
+        publish_date DATETIME
+        views_count INT
+        description LONGTEXT
+        category_id INT
+    }
+    
+    VIDEO_COMMENT {
+        comment_id INT PK
+        comment TEXT
+        date_posted DATETIME
+    }
+    
+    VIDEO_TAGS {
+        tag_id INT PK
+        tag_name VARCHAR
+    }
+```
+
+### Database Schema
+Database schema is the skeleton structure that represents the logical view of the entire database. The following schema is used in Cinemify.
+
+```mermaid
+erDiagram
+    USER ||--o{ PLAYLIST : "creates"
+    USER ||--o{ HISTORY : "owns"
+    USER ||--o{ VIDEO_COMMENT : "comments"
+    VIDEO ||--o{ PLAYLIST : "included_in"
+    VIDEO ||--o{ HISTORY : "viewed_in"
+    VIDEO ||--o{ VIDEO_COMMENT : "has_comments"
+    VIDEO ||--o{ VIDEO_TAGS : "has_tags"
+    
+    USER {
+        user_id INT PK
+        user_name VARCHAR
+        email VARCHAR
+        password VARCHAR
+        first_name VARCHAR
+        last_name VARCHAR
+        image VARCHAR
+        bio TEXT "NULABLE"
+        date_created DATETIME
+    }
+
+    PLAYLIST {
+        playlist_id INT PK
+        name VARCHAR
+        description TEXT
+    }
+    
+    HISTORY {
+        history_id INT PK
+        view_date DATETIME
+    }
+    
+    VIDEO {
+        video_id INT PK
+        title VARCHAR
+        publish_date DATETIME
+        views_count INT
+        description LONGTEXT
+        category_id INT
+    }
+    
+    VIDEO_COMMENT {
+        comment_id INT PK
+        comment TEXT
+        date_posted DATETIME
+    }
+    
+    VIDEO_TAGS {
+        tag_id INT PK
+        tag_name VARCHAR
+    }
+```
+
 
 ## Getting Started
 
+### Development Server
 First, run the development server:
 
 ```bash
@@ -84,6 +207,47 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+
+### Database Setup with Prisma
+
+This project is configured with Prisma, an advanced Object-Relational Mapping (ORM) to facilitate seamless database operations. Follow the steps below for both development and testing environments.
+
+#### Migration
+
+Run the migration command to establish the database schema. Prisma Migrate uses your migration files to manage the schema changes:
+
+```bash
+npm run prisma:migrate
+# or
+yarn prisma:migrate
+```
+
+> **Note:** Prisma Migrate integrates with seeds. When it resets the development database, it automatically triggers the seeding.
+
+#### Manual Seeding
+
+Execute the seeding command to populate your database with predefined data essential for testing. Modify the `prisma/seed.ts` file if you wish to make changes to the default seeding data:
+
+```bash
+npm run prisma:seed
+# or
+yarn prisma:seed
+```
+
+#### Visualize the Database
+
+Prisma Studio provides a graphical interface, enabling you to visualize and manage your database records effortlessly. You can run the following command to start Prisma Studio:
+
+```bash
+npm run prisma:studio
+# or
+yarn prisma:studio
+```
+
+Visit [http://localhost:5555](http://localhost:5555/) to access Prisma Studio and manage your database interactively.
+
+
+
 
 ## License
 [MIT](https://github.com/javier-arango/cinemify/blob/main/LICENSE)
