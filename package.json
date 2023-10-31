@@ -25,7 +25,7 @@
     "format": "prettier --write .",
     "prepare": "husky install",
     "test": "jest",
-    "prisma:dashboard": "npx prisma studio",
+    "prisma:studio": "npx prisma studio",
     "prisma:seed": "npx prisma db seed",
     "prisma:migrate": "npx prisma migrate dev --name init"
   },

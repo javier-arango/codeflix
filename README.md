@@ -24,6 +24,11 @@
   - [Database Tables](#database-tables)
   - [Database Schema](#database-schema)
 - [Getting Started](#getting-started)
+    - [Development Server](#development-server)
+    - [Database Setup with Prisma](#database-setup-with-prisma)
+      - [Migration](#migration)
+      - [Manual Seeding](#manual-seeding)
+      - [Visualize the Database](#visualize-the-database)
 - [License](#license)
 
 ## Core App Features
@@ -184,6 +189,7 @@ erDiagram
 
 ## Getting Started
 
+### Development Server
 First, run the development server:
 
 ```bash
@@ -201,6 +207,47 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+
+### Database Setup with Prisma
+
+This project is configured with Prisma, an advanced Object-Relational Mapping (ORM) to facilitate seamless database operations. Follow the steps below for both development and testing environments.
+
+#### Migration
+
+Run the migration command to establish the database schema. Prisma Migrate uses your migration files to manage the schema changes:
+
+```bash
+npm run prisma:migrate
+# or
+yarn prisma:migrate
+```
+
+> **Note:** Prisma Migrate integrates with seeds. When it resets the development database, it automatically triggers the seeding.
+
+#### Manual Seeding
+
+Execute the seeding command to populate your database with predefined data essential for testing. Modify the `prisma/seed.ts` file if you wish to make changes to the default seeding data:
+
+```bash
+npm run prisma:seed
+# or
+yarn prisma:seed
+```
+
+#### Visualize the Database
+
+Prisma Studio provides a graphical interface, enabling you to visualize and manage your database records effortlessly. You can run the following command to start Prisma Studio:
+
+```bash
+npm run prisma:studio
+# or
+yarn prisma:studio
+```
+
+Visit [http://localhost:5555](http://localhost:5555/) to access Prisma Studio and manage your database interactively.
+
+
+
 
 ## License
 [MIT](https://github.com/javier-arango/cinemify/blob/main/LICENSE)
