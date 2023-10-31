@@ -14,8 +14,6 @@ async function main() {
       password: 'alicepassword',
       firstName: 'Alice',
       lastName: 'Johnson',
-      avatar:
-        'https://www.fakepersongenerator.com/Face/male/male20151083718736328.jpg',
       bio: 'Learning to code!',
       dateCreated: new Date(),
     },
@@ -31,6 +29,7 @@ async function main() {
         publishDate: new Date(),
         viewsCount: i * 100,
         description: `Description for tutorial ${i}.`,
+        url: `https://www.youtube.com/watch?v=d56mG7DezGs`,
       },
     })
 
