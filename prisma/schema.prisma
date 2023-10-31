@@ -9,3 +9,65 @@ datasource db {
   provider = "sqlite"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  userId        String         @id @default(uuid())
+  userName      String         @unique
+  email         String         @unique
+  password      String
+  firstName     String
+  lastName      String
+  avatar        String
+  bio           String?
+  dateCreated   DateTime       @default(now())
+  playlists     Playlist[]
+  histories     History[]
+  videoComments VideoComment[]
+}
+
+model Playlist {
+  playlistId  String  @id @default(uuid())
+  name        String
+  description String?
+  userId      String
+  user        User    @relation(fields: [userId], references: [userId])
+  videos      Video[]
+}
+
+model History {
+  historyId String   @id @default(uuid())
+  viewDate  DateTime
+  userId    String
+  user      User     @relation(fields: [userId], references: [userId])
+  videoId   String
+  video     Video    @relation(fields: [videoId], references: [videoId])
+}
+
+model Video {
+  videoId       String         @id @default(uuid())
+  title         String
+  publishDate   DateTime
+  viewsCount    Int
+  description   String?
+  videoTags     VideoTag[]
+  videoComments VideoComment[]
+  playlists     Playlist[]
+  histories     History[]
+}
+
+model VideoComment {
+  commentId  String   @id @default(uuid())
+  comment    String
+  datePosted DateTime
+  userId     String
+  user       User     @relation(fields: [userId], references: [userId])
+  videoId    String
+  video      Video    @relation(fields: [videoId], references: [videoId])
+}
+
+model VideoTag {
+  tagId   String @id @default(uuid())
+  tagName String
+  videoId String
+  video   Video  @relation(fields: [videoId], references: [videoId])
+}

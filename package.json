@@ -1,7 +1,7 @@
 {
   "name": "cinemify",
   "author": "Javier Arango",
-  "description": "Your go-to hub for discovering, reviewing, and watching movies.",
+  "description": "Your ultimate platform for discovering, learning, and mastering computer science through curated videos.",
   "version": "0.1.0",
   "license": "MIT",
   "homepage": "https://github.com/javier-arango/cinemify#readme",
@@ -24,7 +24,13 @@
     "lint": "next lint",
     "format": "prettier --write .",
     "prepare": "husky install",
-    "test": "jest"
+    "test": "jest",
+    "prisma:dashboard": "npx prisma studio",
+    "prisma:seed": "npx prisma db seed",
+    "prisma:migrate": "npx prisma migrate dev --name init"
+  },
+  "prisma": {
+    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
   },
   "dependencies": {
     "@prisma/client": "^5.5.2",
@@ -49,6 +55,7 @@
     "prettier": "^3.0.3",
     "prisma": "^5.5.2",
     "sass": "^1.69.4",
+    "ts-node": "^10.9.1",
     "typescript": "^5"
   }
 }
