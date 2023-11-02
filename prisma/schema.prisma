@@ -10,65 +10,81 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  userId        String         @id @default(uuid())
-  userName      String         @unique
-  email         String         @unique
-  password      String
-  firstName     String
-  lastName      String
-  avatar        String         @default("https://res.cloudinary.com/dp28illl8/image/upload/v1698787786/profile/default_avatar.jpg")
-  bio           String?
-  dateCreated   DateTime       @default(now())
-  playlists     Playlist[]
-  histories     History[]
-  videoComments VideoComment[]
-}
-
-model Playlist {
-  playlistId  String  @id @default(uuid())
-  name        String
-  description String?
-  userId      String
-  user        User    @relation(fields: [userId], references: [userId])
-  videos      Video[]
-}
-
-model History {
-  historyId String   @id @default(uuid())
-  viewDate  DateTime
-  userId    String
-  user      User     @relation(fields: [userId], references: [userId])
-  videoId   String
-  video     Video    @relation(fields: [videoId], references: [videoId])
-}
-
 model Video {
-  videoId       String         @id @default(uuid())
-  title         String
-  publishDate   DateTime
-  viewsCount    Int
-  description   String?
-  videoTags     VideoTag[]
-  videoComments VideoComment[]
-  playlists     Playlist[]
-  histories     History[]
+  videoId       String   @id
   url           String
+  title         String
+  categoryId    String
+  description   String
+  publishedAt   DateTime
+  channelTitle  String
+  thumbnailUrl  String
+  viewsCount    Int      @default(0)
+  likesCount    Int      @default(0)
+  commentsCount Int
+  channelId     String
+  Channel       Channel  @relation(fields: [channelId], references: [channelId])
 }
 
-model VideoComment {
-  commentId  String   @id @default(uuid())
-  comment    String
-  datePosted DateTime
-  userId     String
-  user       User     @relation(fields: [userId], references: [userId])
-  videoId    String
-  video      Video    @relation(fields: [videoId], references: [videoId])
+model Channel {
+  channelId        String   @id
+  url              String
+  title            String
+  videosCount      Int      @default(0)
+  description      String
+  publishedAt      DateTime
+  thumbnailUrl     String
+  viewsCount       Int      @default(0)
+  subscribersCount Int      @default(0)
+  videos           Video[]
 }
 
-model VideoTag {
-  tagId   String @id @default(uuid())
-  tagName String
-  videoId String
-  video   Video  @relation(fields: [videoId], references: [videoId])
-}
+// model User {
+//   userId        String         @id @default(uuid())
+//   userName      String         @unique
+//   email         String         @unique
+//   password      String
+//   firstName     String
+//   lastName      String
+//   avatar        String         @default("https://res.cloudinary.com/dp28illl8/image/upload/v1698787786/profile/default_avatar.jpg")
+//   bio           String?
+//   dateCreated   DateTime       @default(now())
+//   playlists     Playlist[]
+//   histories     History[]
+//   videoComments VideoComment[]
+// }
+
+// model Playlist {
+//   playlistId  String  @id @default(uuid())
+//   name        String
+//   description String?
+//   userId      String
+//   user        User    @relation(fields: [userId], references: [userId])
+//   videos      Video[]
+// }
+
+// model History {
+//   historyId String   @id @default(uuid())
+//   viewDate  DateTime
+//   userId    String
+//   user      User     @relation(fields: [userId], references: [userId])
+//   videoId   String
+//   video     Video    @relation(fields: [videoId], references: [videoId])
+// }
+
+// model VideoComment {
+//   commentId  String   @id @default(uuid())
+//   comment    String
+//   datePosted DateTime
+//   userId     String
+//   user       User     @relation(fields: [userId], references: [userId])
+//   videoId    String
+//   video      Video    @relation(fields: [videoId], references: [videoId])
+// }
+
+// model VideoTag {
+//   tagId   String @id @default(uuid())
+//   tagName String
+//   videoId String
+//   video   Video  @relation(fields: [videoId], references: [videoId])
+// }
