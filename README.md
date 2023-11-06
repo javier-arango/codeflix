@@ -18,6 +18,7 @@
       - [Migration](#migration)
       - [Manual Seeding](#manual-seeding)
       - [Visualize the Database](#visualize-the-database)
+- [Contribution](#contribution)
 - [License](#license)
 
 ## Getting Started
@@ -82,7 +83,7 @@ Visit [http://localhost:5555](http://localhost:5555/) to access Prisma Studio an
 
 ## Contribution
 
-Contributions to Codeflix are welcomed! Please refer to the [CONTRIBUTING.md]() file for guidelines on how to make meaningful additions to our platform.
+Contributions to Codeflix are welcomed! Please refer to the [CONTRIBUTING.md](https://github.com/javier-arango/codeflix/blob/main/CONTRIBUTING.md) file for guidelines on how to make meaningful additions to our platform.
 
 ## License
 [MIT](https://github.com/javier-arango/cinemify/blob/main/LICENSE)
