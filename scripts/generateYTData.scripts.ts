@@ -248,7 +248,7 @@ function writeDataToFile(filePath: string, data: YouTubeData) {
   // Log the data
   console.log(`Data written to ${filePath}`)
   console.log('Data:', jsonData)
-  console.log("\n")
+  console.log('\n')
   console.log('Total Data:')
   console.log('Total videos:', data.videos.length)
   console.log('Total channels:', data.channels.length)
