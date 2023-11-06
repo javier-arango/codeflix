@@ -1,0 +1,1 @@
+All static assets should go here

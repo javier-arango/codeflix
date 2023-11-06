@@ -1,10 +1,18 @@
+import fs from 'fs'
+import path from 'path'
 import { google } from 'googleapis'
-import { getEnvVariable } from '../src/utils/get-env-variable.utils'
-import { VIDEO_CATEGORIES } from '../src/constants/video-categories.constants'
+import { getEnvVariable } from '../src/utils/getEnvVariable.utils'
+import { VIDEO_CATEGORIES } from '../src/constants/videoCategories.constants'
 import type { youtube_v3 } from 'googleapis'
-import type { Category } from '../src/constants/video-categories.constants'
+import type { Category } from '../src/constants/videoCategories.constants'
 import type { Video, Channel } from '@prisma/client'
 
+interface YouTubeData {
+  videos: Video[]
+  channels: Channel[]
+}
+
+// YouTube Data Retriever class for fetching data from YouTube API
 class YoutubeDataRetriever {
   private youtube: youtube_v3.Youtube
   private videos_data: Video[] = []
@@ -40,30 +48,44 @@ class YoutubeDataRetriever {
   }
 
   private parseVideoData(
-    video_details: youtube_v3.Schema$Video,
+    videoDetails: youtube_v3.Schema$Video,
     categoryId: string
   ): Video {
-    const videoId = video_details.id!
-    const videoUrl = `https://www.youtube.com/watch?v=${videoId}`
-    const videoSnippet = video_details.snippet!
-    const videoStatistics = video_details.statistics!
-    const videoThumbnail_url = this.getHighestResThumbnailUrl(
-      videoSnippet.thumbnails!
-    )
+    const videoId = videoDetails.id!
+    const videoSnippet = videoDetails.snippet!
+    const videoStatistics = videoDetails.statistics!
 
     return {
       videoId: videoId,
-      url: videoUrl,
+      url: `https://www.youtube.com/watch?v=${videoId}`,
       title: videoSnippet.title!,
       categoryId: categoryId,
+      duration: videoDetails.contentDetails!.duration!,
       description: videoSnippet.description!,
       publishedAt: new Date(videoSnippet.publishedAt!),
       channelId: videoSnippet.channelId!,
       channelTitle: videoSnippet.channelTitle!,
-      thumbnailUrl: videoThumbnail_url,
-      viewsCount: Number(videoStatistics.viewCount!),
-      likesCount: Number(videoStatistics.likeCount!),
-      commentsCount: Number(videoStatistics.commentCount),
+      thumbnailUrl: this.getHighestResThumbnailUrl(videoSnippet.thumbnails!),
+      viewsCount: Number(videoStatistics.viewCount!) | 0,
+      likesCount: Number(videoStatistics.likeCount!) | 0,
+      commentsCount: Number(videoStatistics.commentCount) | 0,
+    }
+  }
+
+  private parseChannelData(channelDetails: youtube_v3.Schema$Channel): Channel {
+    const channelId = channelDetails.id!
+    const channelSnippet = channelDetails.snippet!
+    const channelStatistics = channelDetails.statistics!
+
+    return {
+      channelId: channelId,
+      url: `https://www.youtube.com/channel/${channelId}`,
+      title: channelSnippet.title!,
+      description: channelSnippet.description!,
+      publishedAt: new Date(channelSnippet.publishedAt!),
+      thumbnailUrl: channelSnippet.thumbnails!.high!.url!,
+      viewsCount: Number(channelStatistics.viewCount!),
+      subscribersCount: Number(channelStatistics.subscriberCount!),
     }
   }
 
@@ -71,7 +93,7 @@ class YoutubeDataRetriever {
     video_id: string
   ): Promise<youtube_v3.Schema$Video> {
     const response = await this.youtube.videos.list({
-      part: ['snippet', 'statistics'],
+      part: ['snippet', 'statistics', 'contentDetails'],
       id: [video_id],
     })
 
@@ -93,12 +115,15 @@ class YoutubeDataRetriever {
       const response = await this.youtube.search.list({
         part: ['snippet'],
         maxResults: maxResultsPerCategory,
-        q: categoryValue,
+        q: `${categoryValue} full course for computer science students`,
         type: ['video'],
         videoCaption: 'closedCaption',
         videoDefinition: 'high',
         videoDimension: '2d',
+        topicId: '/m/01k8wb', // Knowledge
+        relevanceLanguage: 'en',
         videoEmbeddable: 'true',
+        videoDuration: 'long',
       })
 
       const videos = (
@@ -153,27 +178,12 @@ class YoutubeDataRetriever {
       throw new Error(`Channel with ID ${channelId} not found.`)
     }
 
-    const channel = items[0]
-    const channelSnippet = channel.snippet!
-    const channelStatistics = channel.statistics!
-
-    return {
-      channelId: channelId,
-      url: `https://www.youtube.com/channel/${channelId}`,
-      title: channelSnippet.title!,
-      videosCount: 0,
-      description: channelSnippet.description!,
-      publishedAt: new Date(channelSnippet.publishedAt!),
-      thumbnailUrl: channelSnippet.thumbnails!.high!.url!,
-      viewsCount: Number(channelStatistics.viewCount!),
-      subscribersCount: Number(channelStatistics.subscriberCount!),
-    }
+    return this.parseChannelData(items[0])
   }
 
   private async fetchAndStoreChannelData(channelId: string): Promise<Channel> {
     // If the channel data is already fetched, return it.
     if (this.channels_data[channelId]) {
-      this.channels_data[channelId].videosCount++
       return this.channels_data[channelId]
     }
 
@@ -187,10 +197,10 @@ class YoutubeDataRetriever {
   }
 
   // Public methods
-  public async fetchVideosByCategories(
+  public async fetchYTDataByCategories(
     categories: Category,
     maxResultsPerCategory: number = 10
-  ): Promise<Video[]> {
+  ): Promise<YouTubeData> {
     const categoryPromises = Object.entries(categories).map(
       ([categoryKey, categoryValue]) =>
         this.fetchAndProcessVideo(
@@ -214,27 +224,56 @@ class YoutubeDataRetriever {
       }
     }
 
-    return uniqueVideos
-  }
-
-  public getData(): { videos: Video[]; channels: Channel[] } {
     return {
-      videos: this.videos_data,
+      videos: uniqueVideos,
       channels: Object.values(this.channels_data),
     }
   }
 }
 
+// Helper functions for writing data to a file
+function writeDataToFile(filePath: string, data: YouTubeData) {
+  // Convert the data to a string
+  const jsonData = JSON.stringify(data, null, 2)
+
+  // Ensure the directory exists
+  const dir = path.dirname(filePath)
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir, { recursive: true })
+  }
+
+  // Write the data to a new file
+  fs.writeFileSync(filePath, jsonData, 'utf-8')
+
+  // Log the data
+  console.log(`Data written to ${filePath}`)
+  console.log('Data:', jsonData)
+  console.log("\n")
+  console.log('Total Data:')
+  console.log('Total videos:', data.videos.length)
+  console.log('Total channels:', data.channels.length)
+}
+
 async function main() {
   const API_KEY = getEnvVariable('GOOGLE_API_KEY')
-  const youtubeData = new YoutubeDataRetriever(API_KEY)
+  const youtubeDataRetriever = new YoutubeDataRetriever(API_KEY)
 
   // Define your categories
   const categories = VIDEO_CATEGORIES
 
   // Fetch videos
-  await youtubeData.fetchVideosByCategories(categories, 1)
-  console.log(youtubeData.getData())
+  const youtubeData = await youtubeDataRetriever.fetchYTDataByCategories(
+    categories,
+    10
+  )
+  if (!youtubeData) {
+    console.error('Failed to fetch YouTube data.')
+    return
+  }
+
+  // Write the data to a file
+  const filePath = './gen/youtube_data.gen.json'
+  writeDataToFile(filePath, youtubeData)
 }
 
 main()
