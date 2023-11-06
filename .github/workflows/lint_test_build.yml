@@ -14,15 +14,16 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/setup-node@v2
+        uses: actions/checkout@v2
 
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
           node-version: "18.x"
+          cache: 'npm'
 
       - name: Install Dependencies
-        run: npm install
+        run: npm ci
 
       - name: Run Linter
         run: npm run lint
@@ -33,15 +34,16 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/setup-node@v2
+        uses: actions/checkout@v2
 
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
           node-version: "18.x"
+          cache: 'npm'
 
       - name: Install Dependencies
-        run: npm install
+        run: npm ci
 
       - name: Run Tests
         run: npm test
@@ -52,15 +54,16 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/setup-node@v2
+        uses: actions/checkout@v2
 
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
           node-version: "18.x"
+          cache: 'npm'
 
       - name: Install Dependencies
-        run: npm install
+        run: npm ci
 
       - name: Build Project
         run: npm run build
