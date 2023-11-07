@@ -20,6 +20,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "production:build": "npx prisma generate && npx prisma migrate deploy && next build",
     "start": "next start",
     "lint": "next lint",
     "format": "prettier --write .",
@@ -31,8 +32,7 @@
     "prisma:migrate": "npx dotenv -e .env.local -- prisma migrate dev --name init",
     "prisma:generate": "npx dotenv -e .env.local -- prisma generate",
     "prisma:studio": "npx dotenv -e .env.local -- prisma studio",
-    "gen:yt-data": "dotenv -e .env.local -- ts-node --skip-project scripts/generateYTData.scripts.ts",
-    "production:build": "npx prisma generate && npx prisma migrate deploy && next build"
+    "gen:yt-data": "dotenv -e .env.local -- ts-node --skip-project scripts/generateYTData.scripts.ts"
   },
   "prisma": {
     "seed": "dotenv -e .env.local -- ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"

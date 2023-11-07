@@ -86,11 +86,19 @@ Visit [http://localhost:5555](http://localhost:5555/) to access Prisma Studio an
 Contributions to Codeflix are welcomed! Please refer to the [CONTRIBUTING.md](https://github.com/javier-arango/codeflix/blob/main/CONTRIBUTING.md) file for guidelines on how to make meaningful additions to our platform.
 
 ## Helpful Resources
-- [Using Prisma with Supabase](https://www.prisma.io/docs/guides/database/supabase)
+#### Supabase
 - [Supabase Prisma Integration](https://supabase.com/partners/integrations/prisma)
-- [Prisma Connection management](https://www.prisma.io/docs/guides/performance-and-optimization/connection-management#serverless-environments-faas)
+
+#### Prisma
+- [Using Prisma with Supabase](https://www.prisma.io/docs/guides/database/supabase)
+- [Prisma CRUD](https://www.prisma.io/docs/concepts/components/prisma-client/crud)
+- [Connection management](https://www.prisma.io/docs/guides/performance-and-optimization/connection-management#serverless-environments-faas)
+
+#### Next.js
+- [Route Handlers](https://nextjs.org/docs/app/building-your-application/routing/route-handlers)
+- [Pages and Layouts](https://nextjs.org/docs/app/building-your-application/routing/pages-and-layouts)
 - [Data Fetching, Caching, and Revalidating](https://nextjs.org/docs/app/building-your-application/data-fetching/fetching-caching-and-revalidating)
 - [Fetching Data on the Client with third-party libraries](https://swr.vercel.app/docs/getting-started)
 
 ## License
-[MIT](https://github.com/javier-arango/cinemify/blob/main/LICENSE)
+This project is released under the [MIT License](https://github.com/javier-arango/cinemify/blob/main/LICENSE)
