@@ -25,6 +25,7 @@
     "format": "prettier --write .",
     "prepare": "husky install",
     "test": "jest",
+    "postinstall": "prisma generate",
     "prisma:seed": "npx dotenv -e .env.local -- prisma db seed",
     "prisma:push": "npx dotenv -e .env.local -- prisma db push",
     "prisma:migrate": "npx dotenv -e .env.local -- prisma migrate dev --name init",
