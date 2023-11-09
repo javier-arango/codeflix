@@ -1,7 +1,9 @@
+import NavBar from "@components/NavBar"
+
 export default function HomePage() {
   return (
     <main>
-      <h1>Cinemify</h1>
+      <NavBar />
     </main>
   )
 }
