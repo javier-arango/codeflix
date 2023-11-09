@@ -1,6 +1,8 @@
+@import 'base/variables.scss';
+
 #banner {
-  height: 400px;
-  background-color: blue;
+  height: 500px;
+  background-color: $color-blue;
 }
 
 #container {
@@ -17,19 +19,25 @@
 #imgCont {
   height: 100%;
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: flex-end;
 }
 
 #image {
-  width: 100%;
+  width: 90%;
+  object-fit: "cover";
 }
 
 #msgCont {
-  padding: 20px;
-  color: white;
+  padding: 50px;
+  color: $color-white;
 }
 
 #title {
-  margin-bottom: 10px;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+#message{
+    font-weight: bold;
 }
