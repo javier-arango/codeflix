@@ -1,5 +1,25 @@
 // All the global variables are defined here
-// $color-red: #086375;
+
+// Breakpoints
+$breakpoints: (
+  small : 480px,
+  medium: 700px, // Previously 640px
+  large : 1024px
+);
+
+// Colors
 $color-green: #00C2D1;
 $color-blue: #0A1045;
 $color-white: #FFFFFF;
+
+// Font-sizes
+
+$p-font-size-mobile : 15px;
+$p-font-size-small  : 16px;
+$p-font-size-medium : 17px;
+$p-font-size-large  : 19px;
+
+$h1-font-size-mobile: 28px;
+$h1-font-size-small : 31px;
+$h1-font-size-medium: 33px;
+$h1-font-size-large : 36px;
