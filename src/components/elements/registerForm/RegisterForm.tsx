@@ -26,7 +26,7 @@ export const RegisterForm = () => {
 
   const registerUser = async () => {
     setLoading(true)
-    const response = await fetch('/api/register', {
+    const response = await fetch('/api/auth/register', {
       method: 'POST',
       body: JSON.stringify(formData),
       headers: {
