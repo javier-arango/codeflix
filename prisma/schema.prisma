@@ -23,7 +23,7 @@ model Video {
   thumbnailUrl  String
   viewsCount    Int      @default(0)
   likesCount    Int      @default(0)
-  commentsCount Int
+  commentsCount Int      @default(0)
   channelId     String
   channel       Channel  @relation(fields: [channelId], references: [channelId])
 }
@@ -40,20 +40,17 @@ model Channel {
   videos           Video[]
 }
 
-// model User {
-//   userId        String         @id @default(uuid())
-//   userName      String         @unique
-//   email         String         @unique
-//   password      String
-//   firstName     String
-//   lastName      String
-//   avatar        String         @default("https://res.cloudinary.com/dp28illl8/image/upload/v1698787786/profile/default_avatar.jpg")
-//   bio           String?
-//   dateCreated   DateTime       @default(now())
-//   playlists     Playlist[]
-//   histories     History[]
-//   videoComments VideoComment[]
-// }
+model User {
+  id        String   @id @default(cuid())
+  firstName String?
+  lastName  String?
+  email     String   @unique
+  password  String
+  avatar    String?  @default("https://res.cloudinary.com/dp28illl8/image/upload/v1698787786/profile/default_avatar.jpg")
+  bio       String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
 
 // model Playlist {
 //   playlistId  String  @id @default(uuid())
