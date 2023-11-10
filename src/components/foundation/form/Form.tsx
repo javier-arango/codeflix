@@ -1,6 +1,7 @@
 'use client'
 
 import { useCallback } from 'react'
+import { FormInput } from './components'
 
 interface FormProps {
   children?: React.ReactNode
@@ -14,7 +15,9 @@ interface FormProps {
   style?: React.CSSProperties
 }
 
-export const Form = ({
+export const Form: React.FunctionComponent<FormProps> & {
+  Input: typeof FormInput
+} = function Form({
   children,
   onSubmit,
   method = 'post',
@@ -24,7 +27,7 @@ export const Form = ({
   name,
   preventDefault = true,
   style,
-}: FormProps) => {
+}: FormProps) {
   const autoCompleteInputs = normalizeAutoComplete(autoComplete)
 
   const handleSubmit = useCallback(
@@ -62,6 +65,9 @@ function normalizeAutoComplete(autoComplete?: boolean) {
 
   return autoComplete ? 'on' : 'off'
 }
+
+// Sub-components
+Form.Input = FormInput
 
 // Display name
 Form.displayName = 'Form'

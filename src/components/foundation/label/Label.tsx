@@ -1,6 +1,6 @@
 'use client'
 
-interface LabelProps {
+export interface LabelProps {
   children?: React.ReactNode
   style?: React.CSSProperties
   htmlFor?: string

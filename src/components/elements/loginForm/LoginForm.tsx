@@ -4,7 +4,7 @@ import { signIn } from 'next-auth/react'
 import { useState } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import toast from 'react-hot-toast'
-import { Button, Form, Input, Label, LoadingDots } from '@components/foundation'
+import { Button, Form, LoadingDots } from '@components/foundation'
 
 export const LoginForm = () => {
   const router = useRouter()
@@ -37,31 +37,27 @@ export const LoginForm = () => {
 
   return (
     <Form onSubmit={onSubmit}>
-      <div>
-        <Label htmlFor="email">Email address</Label>
-        <Input
-          required
-          type="email"
-          id="email"
-          name="email"
-          autoComplete
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="example@example.com"
-        />
-      </div>
+      <Form.Input
+        required
+        type="email"
+        id="email"
+        name="email"
+        autoComplete
+        inputLabel="Email address"
+        placeholder="example@example.com"
+        onChange={(e) => setEmail(e.target.value)}
+      />
 
-      <div>
-        <Label htmlFor="password"> Password </Label>
-        <Input
-          required
-          id="password"
-          type="password"
-          name="password"
-          autoComplete={false}
-          placeholder="Enter password"
-          onChange={(e) => setPassword(e.target.value)}
-        />
-      </div>
+      <Form.Input
+        required
+        id="password"
+        type="password"
+        name="password"
+        autoComplete={false}
+        inputLabel="Password"
+        placeholder="Enter password"
+        onChange={(e) => setPassword(e.target.value)}
+      />
 
       <Button type="submit" disabled={loading}>
         {loading ? <LoadingDots color="#808080" /> : <p>Sign In</p>}

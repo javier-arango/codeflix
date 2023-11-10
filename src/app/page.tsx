@@ -7,6 +7,7 @@ export default async function HomePage() {
 
   return (
     <main>
+      <h1>Cinemify</h1>
       <NavBar userName={JSON.stringify(session?.user?.name)} />
 
       <h2>Server Session</h2>

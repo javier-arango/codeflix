@@ -1,6 +1,6 @@
 'use client'
 
-interface InputProps {
+export interface InputProps {
   onChange?(event: React.ChangeEvent<HTMLInputElement>): unknown
   value?: string
   id?: string

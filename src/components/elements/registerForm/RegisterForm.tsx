@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { signIn } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import toast from 'react-hot-toast'
-import { Button, Form, Input, Label, LoadingDots } from '@components/foundation'
+import { Button, Form, LoadingDots } from '@components/foundation'
 
 export const RegisterForm = () => {
   const router = useRouter()
@@ -48,9 +48,7 @@ export const RegisterForm = () => {
       })
 
       if (!userSignInResponse?.error) {
-        toast.success(
-          'Account created successfully! Redirecting to home page...'
-        )
+        toast.success('Account created successfully!')
         router.push('/')
       } else {
         toast.error(userSignInResponse.error)
@@ -63,57 +61,49 @@ export const RegisterForm = () => {
 
   return (
     <Form onSubmit={onSubmit} autoComplete>
-      <div>
-        <Label htmlFor="first-name">First Name</Label>
-        <Input
-          required
-          type="text"
-          id="first-name"
-          name="firstName"
-          placeholder="Enter first name"
-          value={formData.firstName}
-          onChange={handleInputChange}
-        />
-      </div>
+      <Form.Input
+        required
+        type="text"
+        id="first-name"
+        name="firstName"
+        inputLabel="First Name"
+        placeholder="Enter first name"
+        value={formData.firstName}
+        onChange={handleInputChange}
+      />
 
-      <div>
-        <Label htmlFor="last-name">Last Name</Label>
-        <Input
-          required
-          type="text"
-          id="last-name"
-          name="lastName"
-          placeholder="Enter last name"
-          value={formData.lastName}
-          onChange={handleInputChange}
-        />
-      </div>
+      <Form.Input
+        required
+        type="text"
+        id="last-name"
+        name="lastName"
+        inputLabel="Last Name"
+        placeholder="Enter last name"
+        value={formData.lastName}
+        onChange={handleInputChange}
+      />
 
-      <div>
-        <Label htmlFor="email">Email</Label>
-        <Input
-          required
-          id="email"
-          type="email"
-          name="email"
-          placeholder="example@example.com"
-          value={formData.email}
-          onChange={handleInputChange}
-        />
-      </div>
+      <Form.Input
+        required
+        id="email"
+        type="email"
+        name="email"
+        inputLabel="Email address"
+        placeholder="example@example.com"
+        value={formData.email}
+        onChange={handleInputChange}
+      />
 
-      <div>
-        <Label htmlFor="password">Password</Label>
-        <Input
-          required
-          id="password"
-          type="password"
-          name="password"
-          placeholder="Enter password"
-          value={formData.password}
-          onChange={handleInputChange}
-        />
-      </div>
+      <Form.Input
+        required
+        id="password"
+        type="password"
+        name="password"
+        inputLabel="Password"
+        placeholder="Enter password"
+        value={formData.password}
+        onChange={handleInputChange}
+      />
 
       <Button type="submit" disabled={loading}>
         {loading ? <LoadingDots /> : 'Sign Up'}
