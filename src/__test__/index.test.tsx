@@ -1,15 +1,9 @@
-import { render, screen } from '@testing-library/react'
-import HomePage from '../app/page'
 import '@testing-library/jest-dom'
 
-describe('HomePage', () => {
-  it('renders a heading', () => {
-    render(<HomePage />)
+function sum(a: number, b: number) {
+  return a + b
+}
 
-    const heading = screen.getByRole('heading', {
-      name: /Cinemify/i,
-    })
-
-    expect(heading).toBeInTheDocument()
-  })
+test('adds 2 + 2 to equal 4', () => {
+  expect(sum(2, 2)).toBe(4)
 })

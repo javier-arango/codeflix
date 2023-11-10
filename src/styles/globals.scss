@@ -10,29 +10,11 @@ body {
 
   // User Select
   cursor: default;
-  user-select: none;
-  -moz-user-select: none;
-  -webkit-user-select: none;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 a {
-  color: white;
   cursor: pointer;
   text-decoration: none;
-}
-
-@media screen and (min-width: 841px) and (max-width: 1280px) and (orientation: landscape) {
-  body,
-  html {
-    font-size: 0.85vw;
-  }
-}
-
-@media screen and (min-width: 841px) and (max-width: 1280px) and (max-aspect-ratio: 4 / 3) {
-  body,
-  html {
-    font-size: 0.75vw;
-  }
 }
