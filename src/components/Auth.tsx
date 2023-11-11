@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import styles from '../styles/Auth.module.scss';
 import authImage from '../../public/assets/test-online.svg';
+import AuthForm from './AuthForm';
 
 export default function Auth () {
     return (
@@ -10,7 +11,9 @@ export default function Auth () {
             <h1 id={styles.message}>Message</h1>
             <Image id={styles.image} src={authImage} alt="Learning picture" />
           </div>
-          <div id={styles.authCont}></div>
+          <div id={styles.authCont}>
+            <AuthForm />
+          </div>
         </div>
       </section>
     )
