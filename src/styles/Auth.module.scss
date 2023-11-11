@@ -2,11 +2,12 @@
 
 #auth {
   background-color: white;
-  min-height: 800px;
+  height: 100%;
 }
 
 #container {
   width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -35,4 +36,10 @@
 #message{
     color: white;
     font-size: h1-font-size-medium;
+}
+
+#authCont{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
