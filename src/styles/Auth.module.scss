@@ -1,0 +1,38 @@
+@import 'base/variables.scss';
+
+#auth {
+  background-color: white;
+  min-height: 800px;
+}
+
+#container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#messageCont,
+#authCont {
+  width: 50%;
+  height: 100%;
+}
+
+#messageCont {
+  background-color: $color-blue;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#image {
+  width: 70%;
+  object-fit: "cover";
+}
+
+#message{
+    color: white;
+    font-size: h1-font-size-medium;
+}
