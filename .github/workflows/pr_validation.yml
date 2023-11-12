@@ -19,4 +19,3 @@ jobs:
           prefix_case_sensitive: true
           min_length: 5
           max_length: 180
-          github_token: ${{ github.token }}

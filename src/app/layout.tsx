@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Roboto } from 'next/font/google'
+import { Inter } from 'next/font/google'
 import '@styles/globals.scss'
 
 const roboto = Roboto({weight: "400", style: "normal", subsets: ["latin"]});
@@ -17,7 +17,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={roboto.className}>{children}</body>
+      <body className={roboto.className}>
+        <Toaster />
+        <Providers>{children}</Providers>
+      </body>
     </html>
   )
 }
