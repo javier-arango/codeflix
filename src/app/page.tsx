@@ -1,14 +1,14 @@
 import { getServerSession } from 'next-auth'
 import { authOptions } from './api/(auth)/auth/[...nextauth]/route'
-import { NavBar } from '@components/index'
+import NavBar from '@components/NavBar'
 
 export default async function HomePage() {
   const session = await getServerSession(authOptions)
 
   return (
     <main>
-      <h1>Cinemify</h1>
-      <NavBar userName={JSON.stringify(session?.user?.name)} />
+      {/* <NavBar userName={JSON.stringify(session?.user?.name)} /> */}
+      <NavBar />
 
       <h2>Server Session</h2>
       <pre>{JSON.stringify(session)}</pre>

@@ -15,19 +15,22 @@ body {
 
   // User Select
   cursor: default;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 a {
+  color: white;
   cursor: pointer;
   text-decoration: none;
 }
 
-main{
+main {
   width: 100%;
   height: inherit;
-  overflow: hidden;
 }
 
 nav,
@@ -44,10 +47,10 @@ footer {
   overflow: hidden;
 }
 
-h1{
+h1 {
   font-size: $h1-font-size-medium;
 }
 
-p{
+p {
   font-size: $p-font-size-medium;
 }

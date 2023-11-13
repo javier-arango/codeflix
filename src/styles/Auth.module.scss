@@ -30,16 +30,19 @@
 
 #image {
   width: 70%;
-  object-fit: "cover";
+  object-fit: 'cover';
 }
 
-#message{
-    color: white;
-    font-size: h1-font-size-medium;
+#message {
+  width: 70%;
+  color: white;
+  font-size: 25px;
+  text-align: center;
+  margin-bottom: 50px;
 }
 
-#authCont{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+#authCont {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

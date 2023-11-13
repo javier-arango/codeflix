@@ -1,3 +1,5 @@
+@import 'base/variables.scss';
+
 #nav {
   background-color: white;
   height: 70px;
@@ -10,14 +12,14 @@
   align-items: center;
 }
 
-#logo{
-    color: black;
+#logo {
+  color: black;
 }
 
 #searchBar {
   padding: 10px 30px;
   border: 1px solid;
-  border-color: aqua;
+  border-color: $color-green;
   border-radius: 5px;
 }
 
@@ -31,16 +33,21 @@
 }
 
 .navItem {
-  color: aqua;
+  color: $color-green;
   cursor: pointer;
 }
 
 #authButton {
   padding: 10px 30px;
   color: white;
-  background-color: aqua;
+  background-color: $color-green;
   border-radius: 20px;
-  border: 1px solid aqua;
+  border: 1px solid $color-green;
   outline: none;
   cursor: pointer;
+}
+
+#profileIMg {
+  filter: invert(55%) sepia(35%) saturate(2770%) hue-rotate(144deg)
+    brightness(99%) contrast(101%);
 }

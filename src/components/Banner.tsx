@@ -7,11 +7,7 @@ export default function Banner() {
     <section id={styles.banner}>
       <div id={styles.container} className="container">
         <div id={styles.imgCont}>
-          <Image
-            id={styles.image}
-            src={bannerImage}
-            alt="Learning picture"
-          />
+          <Image id={styles.image} src={bannerImage} alt="Learning picture" />
         </div>
         <div id={styles.msgCont}>
           <h1 id={styles.title}>Level up your skills</h1>
