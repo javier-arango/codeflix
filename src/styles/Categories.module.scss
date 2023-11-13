@@ -1,0 +1,35 @@
+#categorySection {
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.allCategories {
+  width: 100%;
+  min-height: 100px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding-top: 20px;
+}
+
+.someCategories {
+  width: 100%;
+  min-height: 100px;
+  display: flex;
+  justify-content: space-between;
+  padding-top: 20px;
+}
+
+#header {
+  width: 100%;
+  min-height: 35px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#browseText {
+  font-size: 25px;
+  color: white;
+}
