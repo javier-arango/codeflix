@@ -12,7 +12,7 @@ datasource db {
 }
 
 model Video {
-  videoId       String   @id
+  videoId       String     @id
   url           String
   title         String
   duration      String
@@ -21,11 +21,21 @@ model Video {
   publishedAt   DateTime
   channelTitle  String
   thumbnailUrl  String
-  viewsCount    Int      @default(0)
-  likesCount    Int      @default(0)
-  commentsCount Int      @default(0)
+  viewsCount    Int        @default(0)
+  likesCount    Int        @default(0)
+  commentsCount Int        @default(0)
   channelId     String
-  channel       Channel  @relation(fields: [channelId], references: [channelId])
+  channel       Channel    @relation(fields: [channelId], references: [channelId])
+  playlists     Playlist[]
+}
+
+model Playlist {
+  id          String  @id @default(cuid())
+  name        String
+  description String?
+  userId      String?
+  user        User?   @relation(fields: [userId], references: [id])
+  videos      Video[]
 }
 
 model Channel {
@@ -41,25 +51,17 @@ model Channel {
 }
 
 model User {
-  id        String   @id @default(cuid())
+  id        String     @id @default(cuid())
   firstName String?
   lastName  String?
-  email     String   @unique
+  email     String     @unique
   password  String
-  avatar    String?  @default("https://res.cloudinary.com/dp28illl8/image/upload/v1698787786/profile/default_avatar.jpg")
+  avatar    String?    @default("https://res.cloudinary.com/dp28illl8/image/upload/v1698787786/profile/default_avatar.jpg")
   bio       String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  playlists Playlist[]
 }
-
-// model Playlist {
-//   playlistId  String  @id @default(uuid())
-//   name        String
-//   description String?
-//   userId      String
-//   user        User    @relation(fields: [userId], references: [userId])
-//   videos      Video[]
-// }
 
 // model History {
 //   historyId String   @id @default(uuid())
@@ -78,11 +80,4 @@ model User {
 //   user       User     @relation(fields: [userId], references: [userId])
 //   videoId    String
 //   video      Video    @relation(fields: [videoId], references: [videoId])
-// }
-
-// model VideoTag {
-//   tagId   String @id @default(uuid())
-//   tagName String
-//   videoId String
-//   video   Video  @relation(fields: [videoId], references: [videoId])
 // }
