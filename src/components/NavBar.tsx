@@ -1,7 +1,7 @@
 import Image from 'next/image'
-import styles from '../styles/Navbar.module.scss'
-import profileImg from '../../public/assets/account_circle.svg'
 import Link from 'next/link'
+import profileImg from '../../public/assets/account_circle.svg'
+import styles from '../styles/Navbar.module.scss'
 
 export default function NavBar() {
   const loggedIn = false
@@ -9,7 +9,9 @@ export default function NavBar() {
   return (
     <nav id={styles.nav}>
       <div id={styles.container} className="container">
-        <h1 id={styles.logo}>Codeflix</h1>
+        <Link href="/">
+          <h1 id={styles.logo}>Codeflix</h1>
+        </Link>
         <input id={styles.searchBar} type="search" placeholder="Search" />
         <ul id={styles.navItems}>
           <li className={styles.navItem}>categories</li>
