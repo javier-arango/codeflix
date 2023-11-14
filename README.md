@@ -93,6 +93,8 @@ Contributions to Codeflix are welcomed! Please refer to the [CONTRIBUTING.md](ht
 - [Using Prisma with Supabase](https://www.prisma.io/docs/guides/database/supabase)
 - [Prisma CRUD](https://www.prisma.io/docs/concepts/components/prisma-client/crud)
 - [Connection management](https://www.prisma.io/docs/guides/performance-and-optimization/connection-management#serverless-environments-faas)
+- [DB Relations](https://www.prisma.io/docs/concepts/components/prisma-schema/relations)
+- [Implicit Many to Many Relation](https://www.prisma.io/docs/concepts/components/prisma-schema/relations/many-to-many-relations#implicit-many-to-many-relations)
 
 #### Next.js
 - [Route Handlers](https://nextjs.org/docs/app/building-your-application/routing/route-handlers)
