@@ -49,7 +49,7 @@ export async function POST(request: Request) {
      *      "name": "Algorithm and Data Structures",
      *      "description": "A playlist about algorithms and data structures"
      * }
-     * 
+     *
      * Example input without video:
      * {
      * "userEmail": "test@test.com"
