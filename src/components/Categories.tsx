@@ -17,7 +17,7 @@ export default function Categories(props: CategoriesProps) {
   const getCategories = (num: number) => {
     const array = []
 
-    for (var i = 1; i <= num; i++) {
+    for (let i = 1; i <= num; i++) {
       array.push(
         <Category
           key={i}

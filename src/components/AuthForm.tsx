@@ -11,7 +11,7 @@ export default function AuthForm() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const [isSignup, setIsSignup] = useState(false)
-  const [loading, setLoading] = useState(false)
+  // const [loading, setLoading] = useState(false)
   const callbackUrl = searchParams.get('callbackUrl') || '/' // Redirect to home page if no callbackUrl is provided
   const [formData, setFormData] = useState({
     firstName: '',
@@ -29,7 +29,7 @@ export default function AuthForm() {
   }
 
   const registerUser = async () => {
-    setLoading(true)
+    // setLoading(true)
     const response = await fetch('/api/register', {
       method: 'POST',
       body: JSON.stringify(formData),
@@ -37,7 +37,7 @@ export default function AuthForm() {
         'Content-Type': 'application/json',
       },
     })
-    setLoading(false)
+    // setLoading(false)
     return response
   }
 
@@ -65,7 +65,7 @@ export default function AuthForm() {
 
   const onSubmitLogin = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    setLoading(true)
+    // setLoading(true)
 
     const email = formData.email
     const password = formData.password
@@ -81,7 +81,7 @@ export default function AuthForm() {
       if (!res?.error) {
         router.push(callbackUrl)
       } else {
-        setLoading(false)
+        // setLoading(false)
         toast.error('Invalid email or password')
       }
     } catch (err) {}
@@ -140,14 +140,14 @@ export default function AuthForm() {
       {isSignup ? (
         <h2>
           Aleady have an account?{' '}
-          <span className={styles.switch} onClick={(e) => setIsSignup(false)}>
+          <span className={styles.switch} onClick={() => setIsSignup(false)}>
             Login
           </span>
         </h2>
       ) : (
         <h2>
-          Don't have an account?{' '}
-          <span className={styles.switch} onClick={(e) => setIsSignup(true)}>
+          Don&apos;t have an account?{' '}
+          <span className={styles.switch} onClick={() => setIsSignup(true)}>
             Sign Up
           </span>
         </h2>
