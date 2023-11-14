@@ -6,7 +6,7 @@ import type { User } from '@prisma/client'
 
 export const authOptions: NextAuthOptions = {
   pages: {
-    signIn: '/login',
+    signIn: '/auth',
     signOut: '/logout',
   },
   session: {

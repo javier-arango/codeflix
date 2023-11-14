@@ -1,6 +1,6 @@
 import NavBar from '@components/NavBar'
 
-export default function HomePage() {
+export default function ProfilePage() {
   return (
     <main>
       <NavBar />
@@ -9,4 +9,4 @@ export default function HomePage() {
 }
 
 // Display name
-HomePage.displayName = 'HomePage'
+ProfilePage.displayName = 'Profile'
