@@ -27,7 +27,6 @@
     "cacheLocation": ".cache/eslint",
     "extensions": [".js", ".jsx", ".mjs", ".json", ".ts", ".tsx"]
   },
-  "eslint.packageManager": "npm",
   "eslint.useESLintClass": true,
   "eslint.validate": [
     "json",
@@ -37,7 +36,6 @@
     "typescript",
     "typescriptreact"
   ],
-  "eslint.workingDirectories": ["./src"],
   "files.associations": {
     "*.js": "javascriptreact",
     "*.ts": "typescript",
