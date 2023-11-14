@@ -1,17 +1,22 @@
 import prisma from '@lib/prisma'
 
-interface UserRequest {
-  id: string
-}
-
 export async function POST(request: Request) {
   try {
-    const data: UserRequest = await request.json()
-    const { id: id } = data
+    const { searchParams } = new URL(request.url)
+    const playlistId = searchParams.get('id')
+
+    // Check if a playlist id param was passed
+    // Example: /api/playlist/delete?id=1
+    if (!playlistId) {
+      return Response.json(
+        { error: 'Bad Request: id is required' },
+        { status: 400 }
+      )
+    }
 
     // Find if the playlist exists
     const playlist = await prisma.playlist.findUnique({
-      where: { id: id },
+      where: { id: playlistId },
     })
 
     // Check if the playlist exists
@@ -20,14 +25,13 @@ export async function POST(request: Request) {
     }
 
     // Delete the playlist
-    await prisma.playlist.delete({ where: { id: id } })
+    await prisma.playlist.delete({ where: { id: playlistId } })
 
     return Response.json(
       { message: 'Playlist was successfully deleted' },
       { status: 200 }
     )
   } catch (err) {
-    console.log('Error', err)
     return Response.json({ error: 'Internal Server Error' }, { status: 500 })
   }
 }
