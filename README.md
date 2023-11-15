@@ -1,10 +1,9 @@
 <p align="center">
     <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="https://github.com/javier-arango/codeflix/assets/58098790/9a05bbbb-de7d-4a09-8ffa-58f970054211">
-      <img src="https://github.com/javier-arango/codeflix/assets/58098790/9a05bbbb-de7d-4a09-8ffa-58f970054211" alt="Cinemify" width="500" />
+      <source media="(prefers-color-scheme: dark)" srcset="https://github.com/javier-arango/codeflix/assets/58098790/49336bd9-9a4e-4e64-bd2e-ee463388b8e0">
+      <img src="https://github.com/javier-arango/codeflix/assets/58098790/49336bd9-9a4e-4e64-bd2e-ee463388b8e0" alt="Cinemify" width="500" />
     </picture>
 </p>
-
 
 <h3 align="center">Fuel Your Code. Spark Your Journey.</h3>
 
@@ -14,6 +13,7 @@
     <img src="https://github.com/javier-arango/codeflix/actions/workflows/lint_test_build.yml/badge.svg" />
     <img src="https://github.com/javier-arango/codeflix/actions/workflows/pr_validation.yml/badge.svg" />
     <img src="https://therealsujitk-vercel-badge.vercel.app/?app=codeflix" />
+    <img src="https://sonarcloud.io/api/project_badges/measure?project=javier-arango_codeflix&metric=alert_status" />
 </p>
 
 
