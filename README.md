@@ -9,6 +9,14 @@
 <h3 align="center">Fuel Your Code. Spark Your Journey.</h3>
 
 <br/>
+
+<p align="center">
+    <img src="https://github.com/javier-arango/codeflix/actions/workflows/lint_test_build.yml/badge.svg" />
+    <img src="https://github.com/javier-arango/codeflix/actions/workflows/pr_validation.yml/badge.svg" />
+    <img src="https://therealsujitk-vercel-badge.vercel.app/?app=codeflix" />
+</p>
+
+
 <p align="center">Codeflix is your one-stop educational platform designed exclusively for computer science students. Whether you're delving into algorithms, exploring backend development, or learning front-end frameworks, Codeflix offers an expansive collection of curated educational videos to guide your journey. With features that allow users to categorize videos, create personalized playlists, and dive deeper into specific topics, we're here to accelerate your learning process and elevate your coding skills.</p>
 
 ## Table of Contents
