@@ -1,7 +1,13 @@
 // This project is using the @typescript-eslint plugin for eslint checks
 // Here is the documentation for every check -> https://typescript-eslint.io/rules/
 {
-  "ignorePatterns": ["*.json", "**/*.json", "next.config.js"],
+  "ignorePatterns": [
+    "*.json",
+    "**/*.json",
+    "next.config.js",
+    "postcss.config.js",
+    "tailwind.config.js"
+  ],
   "parserOptions": {
     "project": "./tsconfig.json"
   },

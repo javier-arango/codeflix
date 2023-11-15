@@ -1,3 +1,4 @@
+import '@styles/globals.css'
 import type { Metadata } from 'next'
 import { Roboto } from 'next/font/google'
 import { Toaster } from 'react-hot-toast'
