@@ -1,8 +1,7 @@
-import { Roboto } from 'next/font/google'
-import { Providers } from './providers'
 import type { Metadata } from 'next'
+import { Roboto } from 'next/font/google'
 import { Toaster } from 'react-hot-toast'
-import '@styles/globals.scss'
+import { Providers } from './providers'
 
 const roboto = Roboto({ weight: '400', style: 'normal', subsets: ['latin'] })
 
