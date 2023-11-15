@@ -1,0 +1,40 @@
+.loadingSpinner {
+  display: inline-block;
+  border-radius: 50%;
+  animation: rotate 0.7s linear infinite;
+  background: linear-gradient(90deg, $color-white 0%, $color-green 53%);
+
+  &::after {
+    content: '';
+    background: $color-white;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    border-radius: 50%;
+    margin: 5px;
+  }
+
+  // Define sizes
+  &.large {
+    padding: 40px;
+  }
+
+  &.medium {
+    padding: 30px; // Adjust the size as needed
+  }
+
+  &.small {
+    padding: 20px; // Adjust the size as needed
+  }
+
+  @keyframes rotate {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+}
