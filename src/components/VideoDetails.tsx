@@ -3,6 +3,7 @@
 import type { Video } from '@prisma/client'
 import { fetcher } from '@utils/fetcher.utils'
 import useSWR from 'swr'
+import { LoadingSpinner } from './LoadingSpinner'
 import { VideoPlayer } from './VideoPlayer'
 
 interface VideoDetailsProps {
@@ -16,13 +17,17 @@ export const VideoDetails = ({ videoId }: VideoDetailsProps) => {
     fetcher
   )
 
-  if (error) return <div>failed to load</div>
-  if (isLoading) return <div>loading...</div>
-  if (!data) return <div>no data</div>
+  if (error) return <div>Failed to load</div>
+  if (isLoading) return <LoadingSpinner size="medium" />
+  if (!data) return <div>No data</div>
 
   return (
     <div>
-      <VideoPlayer id="video-details-player" videoId={videoId} />
+      <VideoPlayer
+        id="video-details-player"
+        title={data.title}
+        videoId={videoId}
+      />
 
       <div>
         <h1>{data?.title}</h1>
