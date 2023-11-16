@@ -6,7 +6,7 @@ export default function CategoriesPage() {
   return (
     <>
       <NavBar />
-      <Title title={'Categories'} />
+      <Title title={'Browse by Categories'} />
       <Categories allCategories={true} />
     </>
   )
