@@ -1,3 +1,4 @@
+import { AppNavBar } from '@components/navBar/NavBar'
 import '@styles/globals.css'
 import type { Metadata } from 'next'
 import { Roboto } from 'next/font/google'
@@ -18,10 +19,13 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className="dark">
       <body className={roboto.className}>
-        <Toaster />
-        <Providers>{children}</Providers>
+        <Providers>
+          <Toaster />
+          <AppNavBar />
+          {children}
+        </Providers>
       </body>
     </html>
   )
