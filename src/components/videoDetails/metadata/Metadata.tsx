@@ -24,8 +24,8 @@ export const Metadata = ({
   subscribersCount,
   // videoTitle,
   videoDescription, // viewsCount,
-} // likesCount,
-: MetadataProps) => {
+  // likesCount,
+}: MetadataProps) => {
   const [isFollowed, setIsFollowed] = React.useState(false)
 
   return (
