@@ -1,12 +1,10 @@
-import NavBar from '@components/NavBar'
-import { VideoDetails } from '@components/VideoDetails'
+import { VideoDetails } from '@components/videoDetails/VideoDetails'
 
 export default function VideoPage({ params }: { params: { id: string } }) {
   const { id } = params
 
   return (
     <div>
-      <NavBar />
       <VideoDetails videoId={id} />
     </div>
   )

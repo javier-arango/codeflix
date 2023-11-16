@@ -1,5 +1,4 @@
-// Components
-import { LoadingSpinner } from '@components/LoadingSpinner'
+import { Spinner } from '@nextui-org/react'
 
 const customStyles = {
   display: 'flex',
@@ -12,7 +11,7 @@ const customStyles = {
 export default function Loading() {
   return (
     <div style={customStyles}>
-      <LoadingSpinner />
+      <Spinner size="lg" />
     </div>
   )
 }
