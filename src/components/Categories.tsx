@@ -1,34 +1,31 @@
 import Link from 'next/link'
 import styles from '../styles/Categories.module.scss'
 import Category from './Category'
-
-// Testing
-import categoryImage from '../../public/assets/database.png'
+import { CategoryInfo } from '@constants/videoCategories.constants'
 
 type CategoriesProps = {
   allCategories: boolean
+  categories: CategoryInfo[]
 }
 
 export default function Categories(props: CategoriesProps) {
-  // it is all categories get all categories from database
-  // if not get only 4 from database
-  const quantity = props.allCategories ? 20 : 4
-
-  const getCategories = (num: number) => {
+  const getCategories = (categories: CategoryInfo[]) => {
     const array = []
 
-    for (let i = 1; i <= num; i++) {
+    for (let i = 1; i < categories.length; i++) {
       array.push(
         <Category
           key={i}
-          applyMargin={num == 4 ? false : true}
-          image={categoryImage}
+          applyMargin={categories.length == 4 ? false : true}
+          category={categories[i]}
         />
       )
     }
 
     return array
   }
+
+  // console.log(props.categories)
 
   return (
     <section id={styles.categorySection}>
@@ -38,7 +35,7 @@ export default function Categories(props: CategoriesProps) {
             <div id={styles.header}>
               <h1 id={styles.browseText}>Browse Categories</h1>
               <Link href={'/categories'}>
-                <h2>View all</h2>
+                <h2 id={styles.viewAll}>View all</h2>
               </Link>
             </div>
           )}
@@ -47,7 +44,7 @@ export default function Categories(props: CategoriesProps) {
               props.allCategories ? styles.allCategories : styles.someCategories
             }
           >
-            {getCategories(quantity)}
+            {getCategories(props.categories)}
           </div>
         </div>
       </div>

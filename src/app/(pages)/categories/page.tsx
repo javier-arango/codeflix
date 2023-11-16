@@ -7,7 +7,7 @@ export default function CategoriesPage() {
     <>
       <NavBar />
       <Title title={'Browse by Categories'} />
-      <Categories allCategories={true} />
+      <Categories allCategories={true} categories={[]} />
     </>
   )
 }
