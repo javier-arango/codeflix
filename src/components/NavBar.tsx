@@ -14,7 +14,9 @@ export default function NavBar() {
         </Link>
         <input id={styles.searchBar} type="search" placeholder="Search" />
         <ul id={styles.navItems}>
-          <li className={styles.navItem}>categories</li>
+          <Link href="/categories">
+            <li className={styles.navItem}>categories</li>
+          </Link>
           <li className={styles.navItem}>
             {loggedIn ? (
               <Link href={'/profile'}>
