@@ -1,0 +1,40 @@
+#videosSection {
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.allVideos {
+  width: 100%;
+  min-height: 100px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding-top: 20px;
+}
+
+.someVideos {
+  width: 100%;
+  min-height: 100px;
+  display: flex;
+  justify-content: space-between;
+  padding-top: 20px;
+}
+
+#header {
+  width: 100%;
+  min-height: 35px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  color: black;
+}
+
+#categoryTitle {
+  font-size: 25px;
+  color: black;
+}
+
+#viewAll{
+  color: black;
+}
