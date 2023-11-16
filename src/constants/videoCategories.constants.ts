@@ -14,21 +14,26 @@ export type CategoryKey =
   | 'programming'
   | 'uiux'
 
-export interface Category extends Record<CategoryKey, string> {}
+export type CategoryInfo = {
+  name: string
+  imgUrl: string
+}
+
+export interface Category extends Record<CategoryKey, CategoryInfo> {}
 
 export const VIDEO_CATEGORIES: Category = {
-  algorithms: 'Algorithms and Data Structures',
-  ai: 'Artificial Intelligence',
-  db: 'Database Management',
-  cybersecurity: 'Cybersecurity',
-  datascience: 'Data Science',
-  database: 'Database Management',
-  frontend: 'React JS',
-  fullstack: 'Full Stack Development',
-  iot: 'Internet of Things (IoT)',
-  ml: 'Machine Learning',
-  mobile: 'Mobile App Development',
-  os: 'Operating Systems',
-  programming: 'Java Programming Language',
-  uiux: 'Design Systems UX/UI',
+  algorithms: { name: 'Algorithms and Data Structures', imgUrl: '' },
+  ai: { name: 'Artificial Intelligence', imgUrl: '' },
+  db: { name: 'Database Management', imgUrl: '' },
+  cybersecurity: { name: 'Cybersecurity', imgUrl: '' },
+  datascience: { name: 'Data Science', imgUrl: '' },
+  database: { name: 'Database Management', imgUrl: '' },
+  frontend: { name: 'React JS', imgUrl: '' },
+  fullstack: { name: 'Full Stack Development', imgUrl: '' },
+  iot: { name: 'Internet of Things (IoT)', imgUrl: '' },
+  ml: { name: 'Machine Learning', imgUrl: '' },
+  mobile: { name: 'Mobile App Development', imgUrl: '' },
+  os: { name: 'Operating Systems', imgUrl: '' },
+  programming: { name: 'Java Programming Language', imgUrl: '' },
+  uiux: { name: 'Design Systems UX/UI', imgUrl: '' },
 }
