@@ -18,9 +18,16 @@
 
 #searchBar {
   padding: 10px 30px;
+  padding-right:  10px;
   border: 1px solid;
   border-color: $color-green;
   border-radius: 5px;
+}
+
+#searchBar:focus {
+  outline: none !important;
+  border: 2px solid $color-green;
+  box-shadow: 0 0 4px $color-green;
 }
 
 #navItems {
