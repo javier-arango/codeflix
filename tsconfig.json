@@ -35,7 +35,8 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "**/*.mjs"
-, "src/components/navBar/sideBar"  ],
+    "**/*.mjs",
+    "src/components/navBar/sideBar"
+  ],
   "exclude": ["node_modules"]
 }
