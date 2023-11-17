@@ -11,7 +11,6 @@ type VideosProps = {
 }
 
 export default function VideoList(props: VideosProps) {
-
   const getVideos = (videos: CategoryResponse) => {
     const array = []
 

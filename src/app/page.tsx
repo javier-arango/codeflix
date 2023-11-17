@@ -10,7 +10,6 @@ import {
 } from '@constants/videoCategories.constants'
 
 export default function HomePage() {
-
   const getRandomCategories = function (
     categories: Category2,
     count: number
@@ -31,7 +30,10 @@ export default function HomePage() {
     <main>
       <NavBar />
       <Banner />
-      <Categories allCategories={false} categories={getRandomCategories(VIDEO_CATEGORIES2, 4)}/>
+      <Categories
+        allCategories={false}
+        categories={getRandomCategories(VIDEO_CATEGORIES2, 4)}
+      />
       {/* <VideoList categoryTitle={"Test"} allVideos={true}/> */}
     </main>
   )
