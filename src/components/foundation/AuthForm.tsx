@@ -11,7 +11,23 @@ export const AuthForm = ({ type }: { type: 'login' | 'register' }) => {
   const [loading, setLoading] = useState(false)
   const [isPasswordVisible, setIsPasswordVisible] = useState(false)
   const router = useRouter()
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+  })
 
+  // Handle input change
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+    }))
+  }
+
+  // Toggle password visibility
   const togglePasswordVisibility = () =>
     setIsPasswordVisible(!isPasswordVisible)
 
@@ -27,8 +43,8 @@ export const AuthForm = ({ type }: { type: 'login' | 'register' }) => {
       )
       // Login onSubmit
       const res = await signIn('credentials', {
-        email: event.currentTarget.email.value,
-        password: event.currentTarget.password.value,
+        email: formData.email,
+        password: formData.password,
         redirect: false,
       })
 
@@ -46,12 +62,7 @@ export const AuthForm = ({ type }: { type: 'login' | 'register' }) => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          firstName: event.currentTarget.firstName.value,
-          lastName: event.currentTarget.lastName.value,
-          email: event.currentTarget.email.value,
-          password: event.currentTarget.password.value,
-        }),
+        body: JSON.stringify(formData),
       })
 
       setLoading(false)
@@ -85,6 +96,7 @@ export const AuthForm = ({ type }: { type: 'login' | 'register' }) => {
               placeholder="John"
               label="First Name"
               labelPlacement="outside"
+              onChange={handleInputChange}
             />
             <Input
               id="lastName"
@@ -97,6 +109,7 @@ export const AuthForm = ({ type }: { type: 'login' | 'register' }) => {
               placeholder="Doe"
               label="Last Name"
               labelPlacement="outside"
+              onChange={handleInputChange}
             />
           </>
         )}
@@ -113,6 +126,7 @@ export const AuthForm = ({ type }: { type: 'login' | 'register' }) => {
           placeholder="example@example.com"
           label="Email Address"
           labelPlacement="outside"
+          onChange={handleInputChange}
         />
         <Input
           id="password"
@@ -125,6 +139,7 @@ export const AuthForm = ({ type }: { type: 'login' | 'register' }) => {
           label="Password"
           labelPlacement="outside"
           description="Must be at least 8 characters long."
+          onChange={handleInputChange}
           endContent={
             <button
               className="focus:outline-none"

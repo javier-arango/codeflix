@@ -3,8 +3,8 @@ import Link from 'next/link'
 
 export default function Login() {
   return (
-    <section>
-      <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+    <section className="w-screen h-screen flex flex-col items-center justify-center">
+      <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen w-full lg:py-0">
         <Link
           href="/"
           color="foreground"

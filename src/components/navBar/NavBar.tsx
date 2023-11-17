@@ -20,10 +20,32 @@ import { FaRegCircleUser } from 'react-icons/fa6'
 export const AppNavBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
-  const menuItems = ['Profile', 'Playlist', 'History', 'Log Out']
+  const menuItems = [
+    {
+      name: 'Profile',
+      href: '/profile',
+    },
+    {
+      name: 'Playlist',
+      href: '/playlist',
+    },
+    {
+      name: 'History',
+      href: '/history',
+    },
+    {
+      name: 'Log Out',
+      href: '/auth/logout',
+    },
+  ]
 
   return (
-    <Navbar isBordered isMenuOpen={isMenuOpen} onMenuOpenChange={setIsMenuOpen}>
+    <Navbar
+      maxWidth="full"
+      isBordered
+      isMenuOpen={isMenuOpen}
+      onMenuOpenChange={setIsMenuOpen}
+    >
       {/* Logo */}
       <NavbarContent>
         <NavbarMenuToggle
@@ -76,8 +98,13 @@ export const AppNavBar = () => {
       <NavbarMenu>
         {menuItems.map((item, index) => (
           <NavbarMenuItem key={`${item}-${index}`}>
-            <Link className="w-full" color={'foreground'} href="#" size="lg">
-              {item}
+            <Link
+              className="w-full"
+              color={'foreground'}
+              href={item.href}
+              size="lg"
+            >
+              {item.name}
             </Link>
           </NavbarMenuItem>
         ))}
