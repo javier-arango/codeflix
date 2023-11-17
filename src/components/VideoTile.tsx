@@ -1,4 +1,4 @@
-import { Video } from '@prisma/client'
+import type { Video } from '@prisma/client'
 import Image from 'next/image'
 import styles from '../styles/VideoTile.module.scss'
 import Link from 'next/link'

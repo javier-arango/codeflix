@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import styles from '../styles/Categories.module.scss'
 import Category from './Category'
-import { CategoryInfo } from '@constants/videoCategories.constants'
+import type { CategoryInfo } from '@constants/videoCategories.constants'
 
 type CategoriesProps = {
   allCategories: boolean

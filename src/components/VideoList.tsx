@@ -1,8 +1,8 @@
 import Link from 'next/link'
 import styles from '../styles/VideoList.module.scss'
 import VideoTile from './VideoTile'
-import { Video } from '@prisma/client'
-import { CategoryResponse } from 'app/(pages)/categories/[category]/page'
+import type { Video } from '@prisma/client'
+import type { CategoryResponse } from 'app/(pages)/categories/[category]/page'
 
 type VideosProps = {
   categoryTitle: string

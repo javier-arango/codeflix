@@ -1,7 +1,7 @@
 import NavBar from '@components/NavBar'
 import Title from '@components/Title'
 import VideoList from '@components/VideoList'
-import { CategoryKey, VIDEO_CATEGORIES } from '@constants/videoCategories.constants'
+import { type CategoryKey, VIDEO_CATEGORIES } from '@constants/videoCategories.constants'
 
 export interface CategoryResponse {
   count: number

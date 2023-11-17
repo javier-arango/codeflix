@@ -1,4 +1,4 @@
-import { CategoryInfo } from '@constants/videoCategories.constants'
+import type { CategoryInfo } from '@constants/videoCategories.constants'
 import Link from 'next/link'
 import styles from '../styles/Category.module.scss'
 
