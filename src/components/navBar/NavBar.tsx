@@ -13,12 +13,14 @@ import {
   NavbarMenuItem,
   NavbarMenuToggle,
 } from '@nextui-org/react'
+import { usePathname } from 'next/navigation'
 import { useState } from 'react'
 import { AiOutlineSearch } from 'react-icons/ai'
 import { FaRegCircleUser } from 'react-icons/fa6'
 
 export const AppNavBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const currentPath = usePathname()
 
   const menuItems = [
     {
@@ -99,7 +101,10 @@ export const AppNavBar = () => {
         {menuItems.map((item, index) => (
           <NavbarMenuItem key={`${item}-${index}`}>
             <Link
+              isBlock
+              isDisabled={currentPath === item.href}
               className="w-full"
+              underline={currentPath === item.href ? 'always' : 'none'}
               color={'foreground'}
               href={item.href}
               size="lg"
