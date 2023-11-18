@@ -20,11 +20,8 @@ interface MetadataProps {
 
 export const Metadata = ({
   channelName,
-  // channelAvatar,
   subscribersCount,
-  // videoTitle,
-  videoDescription, // viewsCount,
-  // likesCount,
+  videoDescription,
 }: MetadataProps) => {
   const [isFollowed, setIsFollowed] = React.useState(false)
 
