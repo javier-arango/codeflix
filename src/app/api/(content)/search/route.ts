@@ -1,5 +1,6 @@
 import prisma from '@lib/prisma'
 import type { Video } from '@prisma/client'
+import type { SearchResponse } from 'types'
 
 interface RequestInput {
   query: string
@@ -29,7 +30,10 @@ export async function POST(request: Request) {
       return Response.json({ error: 'No videos found' }, { status: 404 })
     }
 
-    return Response.json({ count: videos.length, result: videos })
+    return Response.json({
+      count: videos.length,
+      result: videos,
+    } as SearchResponse)
   } catch (err) {
     console.error(err)
     return Response.json({ error: 'Internal Server Error' }, { status: 500 })

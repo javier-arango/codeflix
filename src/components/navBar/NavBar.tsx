@@ -1,9 +1,8 @@
 'use client'
 
-import { Logo } from '@components/foundation'
+import { Logo, SearchBar } from '@components/foundation'
 import {
   Button,
-  Input,
   Link,
   Navbar,
   NavbarBrand,
@@ -15,7 +14,6 @@ import {
 } from '@nextui-org/react'
 import { usePathname } from 'next/navigation'
 import { useState } from 'react'
-import { AiOutlineSearch } from 'react-icons/ai'
 import { FaRegCircleUser } from 'react-icons/fa6'
 
 export const AppNavBar = () => {
@@ -65,19 +63,7 @@ export const AppNavBar = () => {
       {/* Search Bar */}
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
         <NavbarItem>
-          <Input
-            classNames={{
-              base: 'max-w-full max-w-[30rem] h-10',
-              mainWrapper: 'h-full',
-              input: 'text-small',
-              inputWrapper:
-                'h-full font-normal text-default-500 bg-default-400/20 dark:bg-default-500/20',
-            }}
-            placeholder="Search"
-            size="sm"
-            startContent={<AiOutlineSearch size={18} />}
-            type="search"
-          />
+          <SearchBar />
         </NavbarItem>
       </NavbarContent>
 
