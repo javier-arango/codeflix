@@ -1,9 +1,9 @@
-#categorySection {
+#videosSection {
   padding-top: 50px;
   padding-bottom: 50px;
 }
 
-.allCategories {
+.allVideos {
   width: 100%;
   min-height: 100px;
   display: flex;
@@ -12,7 +12,7 @@
   padding-top: 20px;
 }
 
-.someCategories {
+.someVideos {
   width: 100%;
   min-height: 100px;
   display: flex;
@@ -30,7 +30,7 @@
   color: black;
 }
 
-#browseText {
+#categoryTitle {
   font-size: 25px;
   color: black;
 }

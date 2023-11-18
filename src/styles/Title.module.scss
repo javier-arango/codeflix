@@ -1,0 +1,18 @@
+@import 'base/variables.scss';
+
+#titleSection {
+  width: 100%;
+  height: 200px;
+  background-color: $color-blue;
+}
+
+#container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#title {
+  font-size: 40px;
+  color: white;
+}
