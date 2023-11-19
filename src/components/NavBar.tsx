@@ -2,9 +2,12 @@ import Image from 'next/image'
 import Link from 'next/link'
 import profileImg from '../../public/assets/account_circle.svg'
 import styles from '../styles/Navbar.module.scss'
+import { getServerSession } from 'next-auth'
+import { authOptions } from 'app/api/auth/[...nextauth]/route'
+import SearchBar from './SearchBar'
 
-export default function NavBar() {
-  const loggedIn = false
+export default async function NavBar() {
+  const session = await getServerSession(authOptions)
 
   return (
     <nav id={styles.nav}>
@@ -12,13 +15,13 @@ export default function NavBar() {
         <Link href="/">
           <h1 id={styles.logo}>Codeflix</h1>
         </Link>
-        <input id={styles.searchBar} type="search" placeholder="Search" />
+        <SearchBar />
         <ul id={styles.navItems}>
           <Link href="/categories">
             <li className={styles.navItem}>categories</li>
           </Link>
           <li className={styles.navItem}>
-            {loggedIn ? (
+            {session ? (
               <Link href={'/profile'}>
                 <Image
                   id={styles.profileImg}
