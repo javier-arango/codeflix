@@ -1,9 +1,9 @@
 'use client'
 
-import Image from 'next/image'
 import { useState } from 'react'
 import type { YouTubeProps } from 'react-youtube'
 import YouTube from 'react-youtube'
+import { Thumbnail } from './Thumbnail'
 
 export const VideoPlayer = ({
   id,
@@ -49,18 +49,16 @@ export const VideoPlayer = ({
 
   return (
     <>
-      <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
-        {!isPlayerReady && (
-          <Image
-            src={thumbnailUrl}
-            alt="Video Thumbnail"
-            className="absolute inset-0 opacity-100 transition-opacity duration-500 ease-in-out"
-            style={{ opacity: isPlayerReady ? 0 : 1 }}
-            priority
-            fill
-          />
-        )}
+      {!isPlayerReady && (
+        <Thumbnail
+          src={thumbnailUrl}
+          alt="Video Thumbnail Image"
+          style={{ opacity: isPlayerReady ? 0 : 1 }}
+          priority
+        />
+      )}
 
+      <div className="relative w-full aspect-video padding-top-16x9">
         <YouTube
           id={id}
           videoId={videoId}

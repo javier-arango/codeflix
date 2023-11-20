@@ -15,3 +15,6 @@ export default function Loading() {
     </div>
   )
 }
+
+// Display name
+Loading.displayName = 'ResultLoading'

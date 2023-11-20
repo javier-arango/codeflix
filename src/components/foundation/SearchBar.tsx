@@ -1,3 +1,5 @@
+'use client'
+
 import { Input } from '@nextui-org/react'
 import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'

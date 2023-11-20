@@ -1,3 +1,6 @@
+import { VideoPreview } from '@components/foundation'
+import { parseVideoPreviewData } from '@utils/index'
+import { AiFillWarning } from 'react-icons/ai'
 import type { SearchResponse } from 'types'
 
 // Fetch videos from search query
@@ -38,15 +41,31 @@ export default async function ResultsPage({
 
   // If no videos, return no videos message
   if (searchResponse.count === 0) {
-    return <div>No Videos</div>
+    return (
+      <div className="flex flex-col items-center justify-center w-screen h-screen">
+        <AiFillWarning className="text-6xl text-default-500" />
+        <h1 className="text-2xl font-bold">No videos found</h1>
+        <p className="text-default-500 text-sm">
+          Try searching for something else
+        </p>
+      </div>
+    )
   }
 
   return (
-    <div>
-      <h1>Results Page</h1>
-      <p>
-        Query: {query} and Video Count: {searchResponse.count}
-      </p>
+    <div className="lg:p-8 md:p-5 p-0 pb-9">
+      <h1 className="text-lg font-bold py-4 text-center md:text-left">
+        {`${searchResponse.count} results for ${query}`}
+      </h1>
+
+      <div className="flex flex-col lg:gap-4 gap-8">
+        {searchResponse.result.map((video) => (
+          <VideoPreview
+            key={video.videoId}
+            video={parseVideoPreviewData(video)}
+          />
+        ))}
+      </div>
     </div>
   )
 }
