@@ -23,11 +23,11 @@ export const VideoDetails = ({ videoId }: VideoDetailsProps) => {
 
   return (
     <div>
-      <VideoPlayer
+      {/* <VideoPlayer
         id="video-details-player"
         title={data.title}
         videoId={videoId}
-      />
+      /> */}
 
       <div>
         <h1>{data?.title}</h1>
