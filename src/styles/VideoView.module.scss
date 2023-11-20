@@ -1,0 +1,31 @@
+#videoView {
+  width: 100%;
+  min-height: 100vh;
+}
+
+#container {
+  display: flex;
+}
+
+#view {
+  width: 70%;
+  min-height: 20px;
+  padding-top: 20px;
+  padding-right: 20px;
+}
+
+#videosList {
+  width: 30%;
+  min-height: 100px;
+  padding-top: 20px;
+}
+
+#player {
+  width: 100%;
+  height: fit-content;
+  border: 2px solid red;
+}
+
+#infoActions {
+  margin-top: 20px;
+}
