@@ -1,0 +1,28 @@
+#profile {
+  width: 100%;
+  min-height: 300px;
+}
+
+#picAndName {
+  width: 100%;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #0a1045;
+}
+
+#pic {
+  width: 100px;
+  height: 100px;
+  background-image: url('');
+  background-position: center;
+  background-size: cover;
+  border-radius: 50%;
+}
+
+#name {
+  color: white;
+  margin-left: 10px;
+  font-size: 30px;
+}
