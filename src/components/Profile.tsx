@@ -21,7 +21,14 @@ async function getVideos(category: CategoryKey) {
   return data
 }
 
-export default function Profile () {
+export default async function Profile () {
+
+  const data: CategoryResponse | null = await getVideos("ai")
+
+  if (!data) {
+    return null
+  }
+  
   return (
     <section id={styles.profile}>
       <div id={styles.container} className="container">
@@ -35,7 +42,8 @@ export default function Profile () {
             content={
               <VideoList
                 categoryTitle=""
-                videos={{ count: 0, videos: [] }}
+                videos={data}
+                playlist
                 allVideos
               />
             }
@@ -45,7 +53,8 @@ export default function Profile () {
             content={
               <VideoList
                 categoryTitle=""
-                videos={{ count: 0, videos: [] }}
+                videos={data}
+                playlist
                 allVideos
               />
             }

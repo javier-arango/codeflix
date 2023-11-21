@@ -8,6 +8,7 @@ type VideosProps = {
   allVideos: boolean
   videos: CategoryResponse
   categoryTitle?: string
+  playlist: boolean
 }
 
 export default function VideoList(props: VideosProps) {
@@ -22,6 +23,7 @@ export default function VideoList(props: VideosProps) {
             key={i}
             applyMargin={videos.count == 4 ? false : true}
             video={video}
+            showRemoveIcon={props.playlist ? true : false}
           />
         )
       }
