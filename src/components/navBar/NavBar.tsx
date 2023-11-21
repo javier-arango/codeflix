@@ -11,16 +11,12 @@ import {
   NavbarBrand,
   NavbarContent,
   NavbarItem,
-  NavbarMenu,
-  NavbarMenuItem,
-  NavbarMenuToggle,
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from '@nextui-org/react'
 import type { Session } from 'next-auth'
 import { signOut } from 'next-auth/react'
-import { usePathname } from 'next/navigation'
 import { useState } from 'react'
 import { FaRegCircleUser } from 'react-icons/fa6'
 
@@ -30,26 +26,6 @@ interface AppNavBarProps {
 
 export const AppNavBar = ({ session }: AppNavBarProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const currentPath = usePathname()
-
-  const menuItems = [
-    {
-      name: 'Profile',
-      href: '/profile',
-    },
-    {
-      name: 'Playlist',
-      href: '/playlist',
-    },
-    {
-      name: 'History',
-      href: '/history',
-    },
-    {
-      name: 'Log Out',
-      href: '/auth/logout',
-    },
-  ]
 
   // Helper components
   const LoginButton = () => {
@@ -75,9 +51,6 @@ export const AppNavBar = ({ session }: AppNavBarProps) => {
     >
       {/* Logo */}
       <NavbarContent>
-        <NavbarMenuToggle
-          aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
-        />
         <NavbarBrand>
           <Link href="/" color="foreground">
             <Logo />
@@ -93,15 +66,16 @@ export const AppNavBar = ({ session }: AppNavBarProps) => {
         </NavbarItem>
       </NavbarContent>
 
-      {/* Sign In Button */}
+      {/* Sign In Button or User Profile */}
       <NavbarContent justify="end">
         <NavbarItem>
           {session && session.user ? (
-            <Popover showArrow backdrop="blur" placement="bottom">
+            <Popover backdrop="blur" placement="bottom">
               <PopoverTrigger>
                 <Avatar
                   isBordered
                   showFallback
+                  className="cursor-pointer"
                   src={session.user.image || ''}
                 />
               </PopoverTrigger>
@@ -116,16 +90,24 @@ export const AppNavBar = ({ session }: AppNavBarProps) => {
                       }
                     }}
                   >
-                    <ListboxItem key="profile">Profile</ListboxItem>
-                    <ListboxItem key="edit" showDivider>
+                    <ListboxItem key="profile" href="/user/profile">
+                      Profile
+                    </ListboxItem>
+                    <ListboxItem key="edit" href="/user/edit">
                       Edit Profile
+                    </ListboxItem>
+                    <ListboxItem key="playlist" href="/user/playlist">
+                      Playlist
+                    </ListboxItem>
+                    <ListboxItem key="history" showDivider href="/user/history">
+                      History
                     </ListboxItem>
                     <ListboxItem
                       key="logout"
                       className="text-danger"
                       color="danger"
                     >
-                      Logout
+                      Sign Out
                     </ListboxItem>
                   </Listbox>
                 </div>
@@ -136,25 +118,6 @@ export const AppNavBar = ({ session }: AppNavBarProps) => {
           )}
         </NavbarItem>
       </NavbarContent>
-
-      {/* Menu */}
-      <NavbarMenu>
-        {menuItems.map((item, index) => (
-          <NavbarMenuItem key={`${item}-${index}`}>
-            <Link
-              isBlock
-              isDisabled={currentPath === item.href}
-              className="w-full"
-              underline={currentPath === item.href ? 'always' : 'none'}
-              color={'foreground'}
-              href={item.href}
-              size="lg"
-            >
-              {item.name}
-            </Link>
-          </NavbarMenuItem>
-        ))}
-      </NavbarMenu>
     </Navbar>
   )
 }
