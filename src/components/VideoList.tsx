@@ -5,9 +5,9 @@ import type { Video } from '@prisma/client'
 import type { CategoryResponse } from 'app/(pages)/categories/[category]/page'
 
 type VideosProps = {
-  categoryTitle: string
   allVideos: boolean
   videos: CategoryResponse
+  categoryTitle?: string
 }
 
 export default function VideoList(props: VideosProps) {
