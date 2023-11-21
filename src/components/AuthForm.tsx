@@ -4,7 +4,6 @@ import { useState } from 'react'
 import styles from '../styles/AuthForm.module.scss'
 import toast from 'react-hot-toast'
 import { useRouter, useSearchParams } from 'next/navigation'
-// import Link from 'next/link'
 import { signIn } from 'next-auth/react'
 
 export default function AuthForm() {
