@@ -1,4 +1,5 @@
 import NavBar from '@components/NavBar'
+import SearchResults from '@components/SearchResults'
 
 // async function getResults(query: string) {
 //   const response = await fetch('/api/search', {
@@ -21,7 +22,7 @@ import NavBar from '@components/NavBar'
 // }
 
 export default async function ResultsPage({ params }: { params: { searchQuery: string } }) {
-  // const { searchQuery } = params
+  const { searchQuery } = params
   // const data = await getResults(searchQuery)
 
   // if (!data) {
@@ -32,6 +33,7 @@ export default async function ResultsPage({ params }: { params: { searchQuery: s
   return (
     <>
       <NavBar />
+      <SearchResults query={searchQuery}/>
     </>
   )
 }

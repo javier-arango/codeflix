@@ -1,10 +1,12 @@
 'use client'
 
+import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import styles from '../styles/Navbar.module.scss'
 
 export default function SearchBar() {
   const [searchTerm, setSearchTerm] = useState('')
+  const router = useRouter()
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     // Update searchTerm state to new value typed
@@ -14,7 +16,9 @@ export default function SearchBar() {
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
-      console.log(searchTerm)
+      if (searchTerm != '') {
+        router.push(`/results/${encodeURIComponent(searchTerm)}`)
+      }
     }
   }
 
