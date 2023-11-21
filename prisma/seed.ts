@@ -4,7 +4,7 @@ import { hash } from 'bcrypt'
 const prisma = new PrismaClient()
 
 async function main() {
-  const hashPassword = await hash('test', 12)
+  const hashPassword = await hash('test1234', 12)
 
   console.log(`Start seeding ...`)
 
@@ -28,8 +28,8 @@ async function main() {
     where: { id: '1' },
     update: {
       id: '1',
-      name: 'Artificial Intelligence',
-      description: 'A playlist about AI',
+      name: 'Watch Later',
+      description: 'A playlist for videos to watch later',
       user: {
         connect: {
           email: 'test@test.com',
@@ -51,8 +51,8 @@ async function main() {
     },
     create: {
       id: '1',
-      name: 'Artificial Intelligence',
-      description: 'A playlist about AI',
+      name: 'Watch Later',
+      description: 'A playlist for videos to watch later',
       user: {
         connect: {
           email: 'test@test.com',
