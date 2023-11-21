@@ -24,7 +24,13 @@ export default function VideoTile(props: videoTileProps) {
         >
           {showRemoveIcon && (
             <button className={styles.removeButton}>
-              <Image className={styles.removeIcon} src={removeIcon} width={30} height={40} alt={"remove icon"}/>
+              <Image
+                className={styles.removeIcon}
+                src={removeIcon}
+                width={30}
+                height={40}
+                alt={'remove icon'}
+              />
               {/* <img className={styles.removeIcon} src={removeIcon.src} /> */}
             </button>
           )}

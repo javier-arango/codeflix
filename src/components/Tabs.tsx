@@ -8,13 +8,12 @@ type Props = {
   labels: string[]
 }
 
-export default function Tabs({ children, labels } : Props) {
+export default function Tabs({ children, labels }: Props) {
   const [activeTab, setActiveTab] = useState(0)
 
   const handleTabClick = (index: number) => {
     setActiveTab(index)
   }
-
 
   return (
     <div id={styles.tab}>

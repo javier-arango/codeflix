@@ -39,7 +39,12 @@ export default async function CategoryPage({
     <>
       <NavBar />
       <Title title={VIDEO_CATEGORIES[category]} />
-      <VideoList allVideos={true} categoryTitle={''} videos={data} playlist={false}/>
+      <VideoList
+        allVideos={true}
+        categoryTitle={''}
+        videos={data}
+        playlist={false}
+      />
     </>
   )
 }

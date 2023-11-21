@@ -14,12 +14,12 @@
   background-position: center;
 }
 
-.removeButton{
+.removeButton {
   width: 40px;
   height: 40px;
   padding: 0;
   background-color: transparent;
-  cursor:pointer;
+  cursor: pointer;
   position: relative;
   left: 260px;
   z-index: 1;
@@ -28,7 +28,7 @@
   align-items: center;
 }
 
-.removeIcon{
+.removeIcon {
   width: 100%;
 }
 
@@ -38,6 +38,6 @@
   color: black;
 }
 
-.link{
+.link {
   z-index: 2;
 }
