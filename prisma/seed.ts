@@ -28,7 +28,7 @@ async function main() {
     where: { id: '1' },
     update: {
       id: '1',
-      name: 'Watch Later',
+      name: 'Watch List',
       description: 'A playlist for videos to watch later',
       user: {
         connect: {
@@ -51,7 +51,7 @@ async function main() {
     },
     create: {
       id: '1',
-      name: 'Watch Later',
+      name: 'Watch List',
       description: 'A playlist for videos to watch later',
       user: {
         connect: {
@@ -78,8 +78,8 @@ async function main() {
     where: { id: '2' },
     update: {
       id: '2',
-      name: 'Algorithm and Data Structures',
-      description: 'A playlist about algorithms and data structures',
+      name: 'Favorite',
+      description: 'A playlist for favorite videos',
       user: {
         connect: {
           email: 'test@test.com',
@@ -101,8 +101,8 @@ async function main() {
     },
     create: {
       id: '2',
-      name: 'Algorithm and Data Structures',
-      description: 'A playlist about algorithms and data structures',
+      name: 'Favorite',
+      description: 'A playlist for favorite videos',
       user: {
         connect: {
           email: 'test@test.com',
