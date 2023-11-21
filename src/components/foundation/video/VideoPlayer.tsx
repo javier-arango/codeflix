@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import type { YouTubeProps } from 'react-youtube'
 import YouTube from 'react-youtube'
-import { Thumbnail } from './Thumbnail'
+import { Thumbnail } from '../Thumbnail'
 
 export const VideoPlayer = ({
   id,

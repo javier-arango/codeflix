@@ -6,8 +6,8 @@ import { fetcher } from '@utils/fetcher.utils'
 import { useRouter } from 'next/navigation'
 import useSWR from 'swr'
 import type { VideoPreviewDetails } from 'types'
-import { Thumbnail } from './Thumbnail'
-import { ChannelProfileSkeleton } from './skeleton'
+import { Thumbnail } from '../Thumbnail'
+import { ChannelProfileSkeleton } from '../skeleton'
 
 interface VideoPreviewProps {
   video: VideoPreviewDetails
