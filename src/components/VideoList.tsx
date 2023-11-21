@@ -2,7 +2,7 @@ import Link from 'next/link'
 import styles from '../styles/VideoList.module.scss'
 import VideoTile from './VideoTile'
 import type { Video } from '@prisma/client'
-import type { CategoryResponse } from 'app/(pages)/categories/[category]/page'
+import type { CategoryResponse } from 'types'
 
 type VideosProps = {
   allVideos: boolean
