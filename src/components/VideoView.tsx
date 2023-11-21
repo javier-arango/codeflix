@@ -1,6 +1,6 @@
 'use client'
 
-import { Video } from '@prisma/client'
+import type { Video } from '@prisma/client'
 import styles from '@styles/VideoView.module.scss'
 import { fetcher } from '@utils/fetcher.utils'
 import useSWR from 'swr'

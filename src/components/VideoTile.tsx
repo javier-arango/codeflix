@@ -1,8 +1,8 @@
 import type { Video } from '@prisma/client'
-import Image from 'next/image'
 import styles from '../styles/VideoTile.module.scss'
 import Link from 'next/link'
 import removeIcon from '../../public/assets/remove.png'
+import Image from 'next/image'
 
 type videoTileProps = {
   applyMargin: boolean
@@ -24,7 +24,8 @@ export default function VideoTile(props: videoTileProps) {
         >
           {showRemoveIcon && (
             <button className={styles.removeButton}>
-              <img className={styles.removeIcon} src={removeIcon.src} />
+              <Image className={styles.removeIcon} src={removeIcon} width={30} height={40} alt={"remove icon"}/>
+              {/* <img className={styles.removeIcon} src={removeIcon.src} /> */}
             </button>
           )}
         </div>

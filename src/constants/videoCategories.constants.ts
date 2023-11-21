@@ -1,4 +1,4 @@
-import { StaticImageData } from 'next/image'
+import type { StaticImageData } from 'next/image'
 import algoImage from '../../public/assets/algorithms.jpg'
 import cyberImage from '../../public/assets/cybersecurity.jpg'
 import dbImage from '../../public/assets/database.png'

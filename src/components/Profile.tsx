@@ -2,8 +2,12 @@ import styles from '@styles/Profile.module.scss'
 import Tabs from './Tabs'
 import Tab from './Tab'
 import VideoList from './VideoList'
-import { CategoryKey } from '@constants/videoCategories.constants'
+import type { CategoryKey } from '@constants/videoCategories.constants'
 import type { CategoryResponse } from 'types'
+import { getServerSession } from 'next-auth'
+import { authOptions } from 'app/api/auth/[...nextauth]/route'
+import defaultProfileImage from '../../public/assets/defaultProfile.jpg'
+
 
 async function getVideos(category: CategoryKey) {
   const response = await fetch(
@@ -22,6 +26,8 @@ async function getVideos(category: CategoryKey) {
 }
 
 export default async function Profile () {
+  const session = await getServerSession(authOptions)
+  const user = session?.user
 
   const data: CategoryResponse | null = await getVideos("ai")
 
@@ -33,12 +39,11 @@ export default async function Profile () {
     <section id={styles.profile}>
       <div id={styles.container} className="container">
         <div id={styles.picAndName}>
-          <div id={styles.pic}></div>
-          <h1 id={styles.name}>John Peter</h1>
+          <div id={styles.pic} style={{backgroundImage: `url(${defaultProfileImage.src})`}}></div>
+          <h1 id={styles.name}>{user?.name}</h1>
         </div>
         <Tabs labels={['Watchlist', 'Favorite']}>
           <Tab
-            label="Watchlist"
             content={
               <VideoList
                 categoryTitle=""
@@ -49,7 +54,6 @@ export default async function Profile () {
             }
           />
           <Tab
-            label="Favorite"
             content={
               <VideoList
                 categoryTitle=""
