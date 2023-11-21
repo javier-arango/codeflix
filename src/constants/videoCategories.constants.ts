@@ -1,4 +1,5 @@
 export type CategoryKey =
+  | 'all'
   | 'algorithms'
   | 'ai'
   | 'db'
@@ -17,6 +18,7 @@ export type CategoryKey =
 export interface Category extends Record<CategoryKey, string> {}
 
 export const VIDEO_CATEGORIES: Category = {
+  all: 'All',
   algorithms: 'Algorithms and Data Structures',
   ai: 'Artificial Intelligence',
   db: 'Database Management',

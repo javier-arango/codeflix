@@ -9,6 +9,7 @@ import {
   CardBody,
   CardFooter,
   CardHeader,
+  Link,
   Tooltip,
 } from '@nextui-org/react'
 import {
@@ -20,6 +21,7 @@ import { useState } from 'react'
 import { AiOutlineMinusSquare, AiOutlinePlusSquare } from 'react-icons/ai'
 
 interface VideoMetadataProps {
+  channelId: string
   channelName: string
   channelAvatar: string
   subscribersCount: number
@@ -32,6 +34,7 @@ interface VideoMetadataProps {
 }
 
 export const VideoMetadata = ({
+  channelId,
   channelName,
   channelAvatar,
   subscribersCount,
@@ -54,12 +57,29 @@ export const VideoMetadata = ({
 
           {/* Channel info */}
           <div className="flex flex-row justify-between">
-            <div className="flex gap-5">
-              <Avatar radius="full" size="md" src={channelAvatar} />
+            <div className="flex gap-4">
+              {/* Channel avatar */}
+              <Link href={`/channel/${channelId}`}>
+                <Avatar showFallback size="md" src={channelAvatar} />
+              </Link>
+
+              {/* Channel name */}
               <div className="flex flex-col gap-1 items-start justify-center">
-                <h4 className="text-small font-semibold leading-none text-default-600">
-                  {channelName}
-                </h4>
+                <Tooltip
+                  color="foreground"
+                  offset={20}
+                  delay={0}
+                  closeDelay={0}
+                  content={channelName}
+                >
+                  <Link href={`/channel/${channelId}`}>
+                    <h4 className="text-small font-semibold leading-none text-default-600">
+                      {channelName}
+                    </h4>
+                  </Link>
+                </Tooltip>
+
+                {/* Channel subscribers */}
                 <h5 className="text-small tracking-tight text-default-400">
                   {formatToCompactNumber(subscribersCount)} subscribers
                 </h5>

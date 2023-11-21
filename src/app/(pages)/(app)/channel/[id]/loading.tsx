@@ -9,4 +9,4 @@ export default function Loading() {
 }
 
 // Display name
-Loading.displayName = 'VideoLoading'
+Loading.displayName = 'ChannelLoading'

@@ -2,8 +2,11 @@
 
 import { Logo, SearchBar } from '@components/foundation'
 import {
+  Avatar,
   Button,
   Link,
+  Listbox,
+  ListboxItem,
   Navbar,
   NavbarBrand,
   NavbarContent,
@@ -11,12 +14,21 @@ import {
   NavbarMenu,
   NavbarMenuItem,
   NavbarMenuToggle,
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
 } from '@nextui-org/react'
+import type { Session } from 'next-auth'
+import { signOut } from 'next-auth/react'
 import { usePathname } from 'next/navigation'
 import { useState } from 'react'
 import { FaRegCircleUser } from 'react-icons/fa6'
 
-export const AppNavBar = () => {
+interface AppNavBarProps {
+  session: Session | null
+}
+
+export const AppNavBar = ({ session }: AppNavBarProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const currentPath = usePathname()
 
@@ -39,6 +51,21 @@ export const AppNavBar = () => {
     },
   ]
 
+  // Helper components
+  const LoginButton = () => {
+    return (
+      <Button
+        as={Link}
+        color="primary"
+        href="/auth/login"
+        variant="flat"
+        startContent={<FaRegCircleUser />}
+      >
+        Sign In
+      </Button>
+    )
+  }
+
   return (
     <Navbar
       maxWidth="full"
@@ -50,7 +77,6 @@ export const AppNavBar = () => {
       <NavbarContent>
         <NavbarMenuToggle
           aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
-          // className="sm:hidden"
         />
         <NavbarBrand>
           <Link href="/" color="foreground">
@@ -70,15 +96,44 @@ export const AppNavBar = () => {
       {/* Sign In Button */}
       <NavbarContent justify="end">
         <NavbarItem>
-          <Button
-            as={Link}
-            color="primary"
-            href="/auth/login"
-            variant="flat"
-            startContent={<FaRegCircleUser />}
-          >
-            Sign In
-          </Button>
+          {session && session.user ? (
+            <Popover showArrow backdrop="blur" placement="bottom">
+              <PopoverTrigger>
+                <Avatar
+                  isBordered
+                  showFallback
+                  src={session.user.image || ''}
+                />
+              </PopoverTrigger>
+              <PopoverContent className="p-1">
+                <div className="px-1 py-2">
+                  <Listbox
+                    variant="faded"
+                    aria-label="Listbox menu"
+                    onAction={(key) => {
+                      if (key === 'logout') {
+                        signOut()
+                      }
+                    }}
+                  >
+                    <ListboxItem key="profile">Profile</ListboxItem>
+                    <ListboxItem key="edit" showDivider>
+                      Edit Profile
+                    </ListboxItem>
+                    <ListboxItem
+                      key="logout"
+                      className="text-danger"
+                      color="danger"
+                    >
+                      Logout
+                    </ListboxItem>
+                  </Listbox>
+                </div>
+              </PopoverContent>
+            </Popover>
+          ) : (
+            <LoginButton />
+          )}
         </NavbarItem>
       </NavbarContent>
 

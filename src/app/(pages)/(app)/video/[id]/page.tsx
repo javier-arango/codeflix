@@ -31,6 +31,7 @@ async function VideoDetails({ channelId, videoDetails }: VideoDetailsProps) {
 
   return (
     <VideoMetadata
+      channelId={channelId}
       channelAvatar={channelDetails.thumbnailUrl}
       commentCount={videoDetails.commentsCount}
       channelName={channelDetails.title}

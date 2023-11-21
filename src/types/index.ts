@@ -5,6 +5,11 @@ export interface SearchResponse {
   result: Video[]
 }
 
+export interface VideoListResponse {
+  count: number
+  videos: Video[]
+}
+
 export interface VideoPreviewDetails {
   videoId: string
   videoTitle: string
