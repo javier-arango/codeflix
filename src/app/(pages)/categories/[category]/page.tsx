@@ -5,11 +5,7 @@ import {
   type CategoryKey,
   VIDEO_CATEGORIES,
 } from '@constants/videoCategories.constants'
-
-export interface CategoryResponse {
-  count: number
-  videos: CategoryResponse
-}
+import type { CategoryResponse } from 'types'
 
 async function getVideos(category: CategoryKey) {
   const response = await fetch(
