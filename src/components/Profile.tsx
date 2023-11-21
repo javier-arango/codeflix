@@ -1,6 +1,7 @@
 import styles from '@styles/Profile.module.scss'
 import Tabs from './Tabs'
 import Tab from './Tab'
+import VideoList from './VideoList'
 
 export default function Profile () {
   return (
@@ -10,9 +11,27 @@ export default function Profile () {
           <div id={styles.pic}></div>
           <h1 id={styles.name}>John Peter</h1>
         </div>
-        <Tabs labels={["watchlist", "favorite"]}>
-          <Tab label="Watchlist" content={<p>Content for Tab 1 goes here.</p>} />
-          <Tab label="Favorite" content={<p>Content for Tab 2 goes here.</p>} />
+        <Tabs labels={['Watchlist', 'Favorite']}>
+          <Tab
+            label="Watchlist"
+            content={
+              <VideoList
+                categoryTitle=""
+                videos={{ count: 0, videos: null }}
+                allVideos
+              />
+            }
+          />
+          <Tab
+            label="Favorite"
+            content={
+              <VideoList
+                categoryTitle=""
+                videos={{ count: 0, videos: null }}
+                allVideos
+              />
+            }
+          />
         </Tabs>
       </div>
     </section>
