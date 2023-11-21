@@ -35,6 +35,13 @@ export default async function NavBar() {
               </Link>
             )}
           </li>
+          {session && (
+            <li className={styles.navItem}>
+              <Link href={'/logout'}>
+                <button id={styles.logoutButton}>Logout</button>
+              </Link>
+            </li>
+          )}
         </ul>
       </div>
     </nav>
