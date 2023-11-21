@@ -2,17 +2,17 @@ import Link from 'next/link'
 import styles from '../styles/VideoList.module.scss'
 import VideoTile from './VideoTile'
 import type { Video } from '@prisma/client'
-import type { CategoryResponse } from 'types'
+import type { VideosResponse } from 'types'
 
 type VideosProps = {
   allVideos: boolean
-  videos: CategoryResponse
+  videos: VideosResponse
   categoryTitle?: string
   playlist: boolean
 }
 
 export default function VideoList(props: VideosProps) {
-  const getVideos = (videos: CategoryResponse) => {
+  const getVideos = (videos: VideosResponse) => {
     const array = []
 
     if (Array.isArray(videos.videos)) {

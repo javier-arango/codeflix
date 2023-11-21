@@ -1,9 +1,9 @@
-import { Roboto } from 'next/font/google'
-import { Providers } from './providers'
-import type { Metadata } from 'next'
-import { Toaster } from 'react-hot-toast'
+import NavBar from '@components/NavBar'
 import '@styles/globals.scss'
-
+import type { Metadata } from 'next'
+import { Roboto } from 'next/font/google'
+import { Toaster } from 'react-hot-toast'
+import { Providers } from './providers'
 const roboto = Roboto({ weight: '400', style: 'normal', subsets: ['latin'] })
 
 export const metadata: Metadata = {
@@ -12,16 +12,21 @@ export const metadata: Metadata = {
     'Codeflix aims to be the ultimate destination for movie enthusiasts, providing a comprehensive and interactive platform to explore, review, and watch films.',
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+  // const session = await getServerSession(authOptions)
+
   return (
     <html lang="en">
       <body className={roboto.className}>
         <Toaster />
-        <Providers>{children}</Providers>
+        <Providers>
+          <NavBar />
+          {children}
+        </Providers>
       </body>
     </html>
   )

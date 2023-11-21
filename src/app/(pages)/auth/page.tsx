@@ -1,5 +1,4 @@
 import Auth from '@components/Auth'
-import NavBar from '@components/NavBar'
 // import { redirect } from 'next/navigation'
 // import { authOptions } from 'app/api/(auth)/auth/[...nextauth]/route'
 // import { getServerSession } from 'next-auth'
@@ -14,7 +13,6 @@ export default async function AuthPage() {
 
   return (
     <main>
-      <NavBar />
       <Auth />
     </main>
   )

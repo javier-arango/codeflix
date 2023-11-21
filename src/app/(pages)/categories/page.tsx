@@ -1,11 +1,7 @@
 import Categories from '@components/Categories'
-import NavBar from '@components/NavBar'
 import Title from '@components/Title'
-import {
-  type CategoryInfo,
-  type CategoryKey,
-  VIDEO_CATEGORIES2,
-} from '@constants/videoCategories.constants'
+import { VIDEO_CATEGORIES2 } from '@constants/videoCategories.constants'
+import type { CategoryInfo, CategoryKey } from 'types'
 
 export default function CategoriesPage() {
   const getCategories = function (): CategoryInfo[] {
@@ -24,7 +20,6 @@ export default function CategoriesPage() {
 
   return (
     <>
-      <NavBar />
       <Title title={'Browse by Categories'} />
       <Categories allCategories={true} categories={getCategories()} />
     </>

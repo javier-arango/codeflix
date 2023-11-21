@@ -1,5 +1,7 @@
 import prisma from '@lib/prisma'
 import type { Video } from '@prisma/client'
+import type { VideosResponse } from 'types'
+
 
 interface RequestInput {
   query: string
@@ -7,6 +9,7 @@ interface RequestInput {
 
 export async function POST(request: Request) {
   try {
+    console.log("Request for search")
     const res: RequestInput = await request.json()
     const query = res.query.split(' ').join(' & ') // This will search for videos with all the words in the query
 
@@ -29,7 +32,10 @@ export async function POST(request: Request) {
       return Response.json({ error: 'No videos found' }, { status: 404 })
     }
 
-    return Response.json({ count: videos.length, result: videos })
+    return Response.json({
+      count: videos.length,
+      videos: videos,
+    } as VideosResponse)
   } catch (err) {
     console.error(err)
     return Response.json({ error: 'Internal Server Error' }, { status: 500 })

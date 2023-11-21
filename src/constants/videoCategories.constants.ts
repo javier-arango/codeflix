@@ -1,4 +1,4 @@
-import type { StaticImageData } from 'next/image'
+import type { CategoryInfo, CategoryKey } from 'types'
 import algoImage from '../../public/assets/algorithms.jpg'
 import cyberImage from '../../public/assets/cybersecurity.jpg'
 import dbImage from '../../public/assets/database.png'
@@ -12,27 +12,6 @@ import mobileImage from '../../public/assets/mobile.png'
 import osImage from '../../public/assets/os.jpeg'
 import uiuxImage from '../../public/assets/uiux.jpg'
 
-export type CategoryKey =
-  | 'algorithms'
-  | 'ai'
-  | 'db'
-  | 'cybersecurity'
-  | 'datascience'
-  | 'database'
-  | 'frontend'
-  | 'fullstack'
-  | 'iot'
-  | 'ml'
-  | 'mobile'
-  | 'os'
-  | 'programming'
-  | 'uiux'
-
-export type CategoryInfo = {
-  key: CategoryKey
-  name: string
-  img: StaticImageData
-}
 
 export interface Category extends Record<CategoryKey, string> {}
 export interface Category2 extends Record<CategoryKey, CategoryInfo> {}
