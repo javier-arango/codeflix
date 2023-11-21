@@ -1,3 +1,17 @@
+import { StaticImageData } from 'next/image'
+import algoImage from '../../public/assets/algorithms.jpg'
+import cyberImage from '../../public/assets/cybersecurity.jpg'
+import dbImage from '../../public/assets/database.png'
+import dataScienceImage from '../../public/assets/datascience.webp'
+import frontImage from '../../public/assets/frontend.jpg'
+import fullImage from '../../public/assets/fullstack.jpg'
+import iotImage from '../../public/assets/iot.webp'
+import programmingImage from '../../public/assets/java.jpeg'
+import mlImage from '../../public/assets/ml.webp'
+import mobileImage from '../../public/assets/mobile.png'
+import osImage from '../../public/assets/os.jpeg'
+import uiuxImage from '../../public/assets/uiux.jpg'
+
 export type CategoryKey =
   | 'algorithms'
   | 'ai'
@@ -17,7 +31,7 @@ export type CategoryKey =
 export type CategoryInfo = {
   key: CategoryKey
   name: string
-  imgUrl: string
+  img: StaticImageData
 }
 
 export interface Category extends Record<CategoryKey, string> {}
@@ -44,23 +58,39 @@ export const VIDEO_CATEGORIES2: Category2 = {
   algorithms: {
     key: 'algorithms',
     name: 'Algorithms and Data Structures',
-    imgUrl: '',
+    img: algoImage,
   },
-  ai: { key: 'ai', name: 'Artificial Intelligence', imgUrl: '' },
-  db: { key: 'db', name: 'Database Management', imgUrl: '' },
-  cybersecurity: { key: 'cybersecurity', name: 'Cybersecurity', imgUrl: '' },
-  datascience: { key: 'datascience', name: 'Data Science', imgUrl: '' },
-  database: { key: 'database', name: 'Database Management', imgUrl: '' },
-  frontend: { key: 'frontend', name: 'React JS', imgUrl: '' },
-  fullstack: { key: 'fullstack', name: 'Full Stack Development', imgUrl: '' },
-  iot: { key: 'iot', name: 'Internet of Things (IoT)', imgUrl: '' },
-  ml: { key: 'ml', name: 'Machine Learning', imgUrl: '' },
-  mobile: { key: 'mobile', name: 'Mobile App Development', imgUrl: '' },
-  os: { key: 'os', name: 'Operating Systems', imgUrl: '' },
+  ai: { key: 'ai', name: 'Artificial Intelligence', img: algoImage },
+  db: { key: 'db', name: 'Database Management', img: dbImage },
+  cybersecurity: {
+    key: 'cybersecurity',
+    name: 'Cybersecurity',
+    img: cyberImage,
+  },
+  datascience: {
+    key: 'datascience',
+    name: 'Data Science',
+    img: dataScienceImage,
+  },
+  database: { key: 'database', name: 'Database Management', img: dbImage },
+  frontend: { key: 'frontend', name: 'React JS', img: frontImage },
+  fullstack: {
+    key: 'fullstack',
+    name: 'Full Stack Development',
+    img: fullImage,
+  },
+  iot: { key: 'iot', name: 'Internet of Things (IoT)', img: iotImage },
+  ml: { key: 'ml', name: 'Machine Learning', img: mlImage },
+  mobile: {
+    key: 'mobile',
+    name: 'Mobile App Development',
+    img: mobileImage,
+  },
+  os: { key: 'os', name: 'Operating Systems', img: osImage },
   programming: {
     key: 'programming',
     name: 'Java Programming Language',
-    imgUrl: '',
+    img: programmingImage,
   },
-  uiux: { key: 'uiux', name: 'Design Systems UX/UI', imgUrl: '' },
+  uiux: { key: 'uiux', name: 'Design Systems UX/UI', img: uiuxImage },
 }
