@@ -1,17 +1,17 @@
 import prisma from '@lib/prisma'
 import type { Channel, Video } from '@prisma/client'
-import type { SearchResponse } from 'types'
+import type { VideoListResponse } from 'types'
 
 export async function GET(
   request: Request,
-  { params: { id } }: { params: { id: string } }
+  { params: { channel_id } }: { params: { channel_id: string } }
 ) {
   try {
     // Find the channel and include the related videos
     const channelWithVideos: (Channel & { videos: Video[] }) | null =
       await prisma.channel.findUnique({
         where: {
-          channelId: id,
+          channelId: channel_id,
         },
         include: {
           videos: true,
@@ -25,8 +25,8 @@ export async function GET(
       // Otherwise, return the channel with its related videos
       return Response.json({
         count: channelWithVideos.videos.length,
-        result: channelWithVideos.videos,
-      } as SearchResponse)
+        videos: channelWithVideos.videos,
+      } as VideoListResponse)
     }
   } catch (err) {
     return Response.json({ error: 'Internal Server Error' }, { status: 500 })

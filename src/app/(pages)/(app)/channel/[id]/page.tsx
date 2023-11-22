@@ -5,7 +5,7 @@ import { getChannelDetails, getChannelVideos } from '@services/index'
 import { formatToCompactNumber } from '@utils/formatData.utils'
 import { Suspense } from 'react'
 import { AiFillWarning } from 'react-icons/ai'
-import type { SearchResponse } from 'types'
+import type { VideoListResponse } from 'types'
 
 interface VideoListGridProps {
   channelId: string
@@ -13,11 +13,11 @@ interface VideoListGridProps {
 
 async function VideoListGrid({ channelId }: VideoListGridProps) {
   // Get videos from search query
-  const channelVideoList: SearchResponse | null =
+  const channelVideoList: VideoListResponse | null =
     await getChannelVideos(channelId)
 
   // If no videos, return no videos message
-  if (!channelVideoList.result) {
+  if (!channelVideoList.videos) {
     return (
       <div className="flex flex-col items-center justify-center w-screen h-screen">
         <AiFillWarning className="text-6xl text-default-500" />
@@ -32,7 +32,7 @@ async function VideoListGrid({ channelId }: VideoListGridProps) {
       <h1 className="text-lg font-bold pb-4 text-center md:text-left">
         {`Total videos: ${formatToCompactNumber(channelVideoList.count)}`}
       </h1>
-      <VideoList videos={channelVideoList.result} />
+      <VideoList videos={channelVideoList.videos} />
     </div>
   )
 }
