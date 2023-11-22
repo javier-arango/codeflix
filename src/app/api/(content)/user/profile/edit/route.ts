@@ -1,34 +1,36 @@
 import prisma from '@lib/prisma'
-import { authOptions } from 'app/api/auth/[...nextauth]/route'
-import { getServerSession } from 'next-auth'
 
-interface UserProfile {
+interface UpdatedProfile {
   firstName?: string
   lastName?: string
   avatar?: string
   bio?: string
 }
 
+interface UserResponse {
+  email: string
+  newValues: UpdatedProfile
+}
+
 export async function PATCH(request: Request) {
   try {
-    // Get the current user's session
-    const session = await getServerSession(authOptions)
-    if (!session || !session.user || !session.user.email) {
-      return Response.json({ error: 'Unauthorized' }, { status: 400 })
+    // Get the values to update
+    const { email, newValues }: UserResponse = await request.json()
+
+    // Find the user
+    const user = await prisma.user.findUnique({
+      where: { email: email },
+    })
+
+    // Check if the user exists
+    if (!user) {
+      return Response.json({ error: 'User not found' }, { status: 404 })
     }
 
-    // Get the values to update
-    const newValues: UserProfile = await request.json()
-
-    // Find the user in the database
+    // Update the user
     const updatedUser = await prisma.user.update({
-      where: { email: session.user?.email },
-      data: {
-        firstName: newValues.firstName,
-        lastName: newValues.lastName,
-        avatar: newValues.avatar,
-        bio: newValues.bio,
-      },
+      where: { email: email },
+      data: newValues,
     })
 
     return Response.json(
