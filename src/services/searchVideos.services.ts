@@ -1,8 +1,9 @@
+import { baseURL } from '@lib/index'
 import type { SearchResponse } from 'types'
 
 export async function searchVideos(query?: string): Promise<SearchResponse> {
   try {
-    const res = await fetch('http://localhost:3000/api/search', {
+    const res = await fetch(`${baseURL}/api/search`, {
       method: 'POST',
       body: JSON.stringify({ query }),
     })

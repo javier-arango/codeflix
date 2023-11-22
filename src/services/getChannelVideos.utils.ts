@@ -1,12 +1,11 @@
+import { baseURL } from '@lib/index'
 import type { SearchResponse } from 'types'
 
 export async function getChannelVideos(
   channelId: string
 ): Promise<SearchResponse> {
   try {
-    const res = await fetch(
-      `http://localhost:3000/api/channel/videos/${channelId}`
-    )
+    const res = await fetch(`${baseURL}/api/channel/videos/${channelId}`)
 
     if (!res.ok) {
       return {
