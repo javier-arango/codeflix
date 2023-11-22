@@ -1,3 +1,4 @@
+import { Footer } from '@components/footer/Footer'
 import { AppNavBar } from '@components/navBar/NavBar'
 import '@styles/globals.css'
 import type { Metadata } from 'next'
@@ -31,6 +32,7 @@ export default async function RootLayout({
           <Toaster />
           <AppNavBar session={session} />
           {children}
+          <Footer />
         </Providers>
       </body>
     </html>

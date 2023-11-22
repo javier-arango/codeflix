@@ -52,10 +52,7 @@ export const AppNavBar = ({ session }: AppNavBarProps) => {
       {/* Logo */}
       <NavbarContent>
         <NavbarBrand>
-          <Link href="/" color="foreground">
-            <Logo />
-            <p className="font-bold text-inherit uppercase">Cinemify</p>
-          </Link>
+          <Logo />
         </NavbarBrand>
       </NavbarContent>
 

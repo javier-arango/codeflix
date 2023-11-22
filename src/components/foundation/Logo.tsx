@@ -1,4 +1,6 @@
-export const Logo = () => (
+import { Link } from '@nextui-org/react'
+
+export const LogoSVG = () => (
   <svg
     width="36"
     height="36"
@@ -52,6 +54,15 @@ export const Logo = () => (
     </g>
   </svg>
 )
+
+export const Logo = () => {
+  return (
+    <Link href="/" color="foreground">
+      <LogoSVG />
+      <p className="font-bold text-inherit uppercase">Cinemify</p>
+    </Link>
+  )
+}
 
 // Display name
 Logo.displayName = 'Logo'
