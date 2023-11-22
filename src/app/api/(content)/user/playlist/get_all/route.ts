@@ -1,4 +1,4 @@
-import prisma from '@lib/prisma'
+import { getAllUserPlaylists, getUser } from '@services/CRUD'
 import type { PlaylistListResponse } from 'types'
 
 interface UserRequest {
@@ -11,7 +11,7 @@ export async function POST(request: Request) {
     const { userEmail } = data
 
     // Find if the user exists
-    const user = await prisma.user.findUnique({ where: { email: userEmail } })
+    const user = await getUser(userEmail)
 
     // Check if the video exists
     if (!user) {
@@ -19,11 +19,7 @@ export async function POST(request: Request) {
     }
 
     // Find all the user's playlists
-    const playlists = await prisma.playlist.findMany({
-      where: {
-        userId: user.id,
-      },
-    })
+    const playlists = await getAllUserPlaylists(user.id)
 
     return Response.json({
       count: playlists.length,

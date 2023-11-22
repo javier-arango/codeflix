@@ -1,5 +1,4 @@
-import prisma from '@lib/prisma'
-import type { Channel } from '@prisma/client'
+import { getChannel } from '@services/CRUD'
 
 export async function GET(
   request: Request,
@@ -7,19 +6,15 @@ export async function GET(
 ) {
   try {
     // Find the video in the database
-    const channel: Channel | null = await prisma.channel.findUnique({
-      where: {
-        channelId: id,
-      },
-    })
+    const channel = await getChannel(id)
 
     // If the video doesn't exist, return a 404 error
     if (!channel) {
       return Response.json({ error: 'Channel not found' }, { status: 404 })
-    } else {
-      // Otherwise, return the video
-      return Response.json(channel)
     }
+
+    // Otherwise, return the video
+    return Response.json(channel)
   } catch (err) {
     return Response.json({ error: 'Internal Server Error' }, { status: 500 })
   }
