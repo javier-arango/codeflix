@@ -33,6 +33,7 @@
 }
 
 #title{
+  width: 100%;
   font-size: x-large;
 }
 
@@ -42,6 +43,7 @@
   justify-content: space-between;
   align-items: center;
   margin-left: 5px;
+  overflow: hidden;
 }
 
 .actionsIcons{
