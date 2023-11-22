@@ -1,5 +1,5 @@
 import { VideoPreview } from '@components/foundation'
-import { searchVideos } from '@services/index'
+import { searchVideos } from '@services/API'
 import { parseVideoPreviewData } from '@utils/index'
 import { AiFillWarning } from 'react-icons/ai'
 import type { SearchResponse } from 'types'

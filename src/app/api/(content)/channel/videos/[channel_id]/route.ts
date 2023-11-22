@@ -1,5 +1,4 @@
-import prisma from '@lib/prisma'
-import type { Channel, Video } from '@prisma/client'
+import { GetChannelVideos } from '@services/CRUD'
 import type { VideoListResponse } from 'types'
 
 export async function GET(
@@ -8,15 +7,7 @@ export async function GET(
 ) {
   try {
     // Find the channel and include the related videos
-    const channelWithVideos: (Channel & { videos: Video[] }) | null =
-      await prisma.channel.findUnique({
-        where: {
-          channelId: channel_id,
-        },
-        include: {
-          videos: true,
-        },
-      })
+    const channelWithVideos = await GetChannelVideos(channel_id)
 
     // If the channel doesn't exist, return a 404 error
     if (!channelWithVideos) {

@@ -1,6 +1,6 @@
 import { SelectList, VideoList } from '@components/foundation'
 import { VIDEO_CATEGORIES, type CategoryKey } from '@constants/index'
-import { getVideosByCategory } from '@services/getVideosByCategory.services'
+import { getVideosByCategory } from '@services/API'
 import { AiFillWarning } from 'react-icons/ai'
 import type { VideoListResponse } from 'types'
 

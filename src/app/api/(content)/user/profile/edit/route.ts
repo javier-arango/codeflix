@@ -1,11 +1,5 @@
-import prisma from '@lib/prisma'
-
-interface UpdatedProfile {
-  firstName?: string
-  lastName?: string
-  avatar?: string
-  bio?: string
-}
+import { GetUser, UpdateUser } from '@services/CRUD'
+import type { UpdatedProfile } from 'types'
 
 interface UserResponse {
   email: string
@@ -17,29 +11,19 @@ export async function PATCH(request: Request) {
     // Get the values to update
     const { email, newValues }: UserResponse = await request.json()
 
-    // Find the user
-    const user = await prisma.user.findUnique({
-      where: { email: email },
-    })
+    // Find the user in the database
+    const userExists = await GetUser(email)
 
     // Check if the user exists
-    if (!user) {
+    if (!userExists) {
       return Response.json({ error: 'User not found' }, { status: 404 })
     }
 
     // Update the user
-    const updatedUser = await prisma.user.update({
-      where: { email: email },
-      data: newValues,
-    })
+    await UpdateUser(email, newValues)
 
     return Response.json(
-      {
-        firstName: updatedUser.firstName,
-        lastName: updatedUser.lastName,
-        avatar: updatedUser.avatar,
-        bio: updatedUser.bio,
-      },
+      { message: 'User successfully updated' },
       { status: 200 }
     )
   } catch (err) {

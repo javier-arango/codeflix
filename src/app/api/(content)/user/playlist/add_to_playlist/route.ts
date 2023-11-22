@@ -1,4 +1,9 @@
-import prisma from '@lib/prisma'
+import {
+  GetPlaylist,
+  GetPlaylistVideo,
+  GetVideo,
+  UpdatePlaylist,
+} from '@services/CRUD'
 
 interface UserRequest {
   videoId: string
@@ -13,34 +18,34 @@ export async function POST(request: Request) {
     // Find if the video exists
     let video = null
     if (videoId) {
-      video = await prisma.video.findUnique({ where: { videoId: videoId } })
+      video = await GetVideo(videoId)
 
       // Check if the video exists
       if (!video)
         return Response.json({ error: 'Video do not exists' }, { status: 400 })
     }
 
-    // Find if the playlist exists
-    const playlist = await prisma.playlist.findUnique({
-      where: { id: playlistId },
-    })
+    // Find the playlist in the database
+    const playlistExists = await GetPlaylist(playlistId)
 
     // Check if the playlist exists
-    if (!playlist) {
+    if (!playlistExists) {
       return Response.json({ error: 'Playlist do not exists' }, { status: 400 })
     }
 
-    // Add the video to the playlist
-    await prisma.playlist.update({
-      where: { id: playlistId },
-      data: {
-        videos: {
-          connect: {
-            videoId: videoId,
-          },
-        },
-      },
-    })
+    // Find if the video already exist in the playlist
+    const videoExists = await GetPlaylistVideo(playlistId, videoId)
+
+    // Check if the video already exist in the playlist
+    if (videoExists && videoExists.videos.length > 0) {
+      return Response.json(
+        { error: 'Video already exists in the playlist' },
+        { status: 400 }
+      )
+    }
+
+    // Find if the playlist exists
+    await UpdatePlaylist(playlistId, videoId)
 
     return Response.json(
       { message: 'Video was added successfully' },

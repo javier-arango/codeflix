@@ -1,7 +1,7 @@
 import { ChannelMetadata, VideoList } from '@components/foundation'
 import { Divider, Spinner } from '@nextui-org/react'
 import type { Channel } from '@prisma/client'
-import { getChannelDetails, getChannelVideos } from '@services/index'
+import { getChannelDetails, getChannelVideos } from '@services/API'
 import { formatToCompactNumber } from '@utils/formatData.utils'
 import { Suspense } from 'react'
 import { AiFillWarning } from 'react-icons/ai'

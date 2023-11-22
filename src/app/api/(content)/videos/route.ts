@@ -2,8 +2,8 @@ import {
   VIDEO_CATEGORIES,
   type CategoryKey,
 } from '@constants/videoCategories.constants'
-import prisma from '@lib/prisma'
 import type { Video } from '@prisma/client'
+import { SearchVideosByCategory } from '@services/CRUD'
 
 export async function GET(request: Request) {
   try {
@@ -27,16 +27,8 @@ export async function GET(request: Request) {
       )
     }
 
-    // Find the videos with the category id passed
-    // Filter by viewsCount in descending order
-    const videos: Video[] = await prisma.video.findMany({
-      where: {
-        categoryId: categoryId,
-      },
-      orderBy: {
-        viewsCount: 'desc',
-      },
-    })
+    // Search videos by category
+    const videos: Video[] = await SearchVideosByCategory(categoryId)
 
     // If the category id is not inside the database, return an empty array
     if (!videos) {

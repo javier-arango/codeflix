@@ -1,4 +1,5 @@
 import prisma from '@lib/prisma'
+import { GetPlaylist } from '@services/CRUD'
 
 export async function POST(request: Request) {
   try {
@@ -15,9 +16,7 @@ export async function POST(request: Request) {
     }
 
     // Find if the playlist exists
-    const playlist = await prisma.playlist.findUnique({
-      where: { id: playlistId },
-    })
+    const playlist = await GetPlaylist(playlistId)
 
     // Check if the playlist exists
     if (!playlist) {

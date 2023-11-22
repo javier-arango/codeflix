@@ -1,5 +1,5 @@
-import prisma from '@lib/prisma'
 import type { Video } from '@prisma/client'
+import { GetVideo } from '@services/CRUD'
 
 export async function GET(
   request: Request,
@@ -7,11 +7,7 @@ export async function GET(
 ) {
   try {
     // Find the video in the database
-    const video: Video | null = await prisma.video.findUnique({
-      where: {
-        videoId: id,
-      },
-    })
+    const video: Video | null = await GetVideo(id)
 
     // If the video doesn't exist, return a 404 error
     if (!video) {

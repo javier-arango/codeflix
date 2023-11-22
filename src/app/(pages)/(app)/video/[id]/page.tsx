@@ -5,7 +5,7 @@ import {
 } from '@components/foundation'
 
 import type { Channel, Video } from '@prisma/client'
-import { getChannelDetails, getVideoDetails } from '@services/index'
+import { getChannelDetails, getVideoDetails } from '@services/API'
 import { Suspense } from 'react'
 import { AiFillWarning } from 'react-icons/ai'
 

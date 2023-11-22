@@ -15,6 +15,22 @@ export interface PlaylistListResponse {
   playlists: Playlist[]
 }
 
+export interface UpdatedProfile {
+  firstName?: string
+  lastName?: string
+  avatar?: string
+  bio?: string
+}
+
+export interface CreatePlaylistRequest {
+  userEmail: string
+  videoId?: string
+  playlist: {
+    name: string
+    description?: string
+  }
+}
+
 export interface VideoPreviewDetails {
   videoId: string
   videoTitle: string

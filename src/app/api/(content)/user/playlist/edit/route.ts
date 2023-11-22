@@ -1,4 +1,9 @@
-import prisma from '@lib/prisma'
+import {
+  GetPlaylist,
+  GetPlaylistVideo,
+  GetVideo,
+  RemoveVideoFromPlaylist,
+} from '@services/CRUD'
 
 interface UserRequest {
   videoId: string
@@ -13,7 +18,7 @@ export async function POST(request: Request) {
     // Find if the video exists
     let video = null
     if (videoId) {
-      video = await prisma.video.findUnique({ where: { videoId: videoId } })
+      video = await GetVideo(videoId)
 
       // Check if the video exists
       if (!video)
@@ -21,9 +26,7 @@ export async function POST(request: Request) {
     }
 
     // Find if the playlist exists
-    const playlist = await prisma.playlist.findUnique({
-      where: { id: playlistId },
-    })
+    const playlist = await GetPlaylist(playlistId)
 
     // Check if the playlist exists
     if (!playlist) {
@@ -31,10 +34,7 @@ export async function POST(request: Request) {
     }
 
     // Check if the video is already in the playlist
-    const videoInPlaylist = await prisma.playlist.findUnique({
-      where: { id: playlistId },
-      select: { videos: { where: { videoId: videoId } } },
-    })
+    const videoInPlaylist = await GetPlaylistVideo(playlistId, videoId)
 
     // Check if the video is not in the playlist
     if (videoInPlaylist && videoInPlaylist.videos.length === 0) {
@@ -45,13 +45,10 @@ export async function POST(request: Request) {
     }
 
     // Remove the video from the playlist
-    await prisma.playlist.update({
-      where: { id: playlistId },
-      data: { videos: { disconnect: { videoId: videoId } } },
-    })
+    await RemoveVideoFromPlaylist(playlistId, videoId)
 
     return Response.json(
-      { message: 'Video was removed successfully' },
+      { message: 'Video was successfully removed' },
       { status: 200 }
     )
   } catch (err) {
