@@ -1,6 +1,6 @@
 #videoView {
   width: 100%;
-  min-height: 100vh;
+  height: 100%;
 }
 
 #container {
@@ -27,4 +27,31 @@
 
 #infoActions {
   margin-top: 20px;
+  display: flex;
+  flex-direction: row;
+}
+
+#title{
+  font-size: x-large;
+}
+
+#action{
+  width: 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 5px;
+}
+
+.actionsIcons{
+  width: 30px;
+  height: auto;
+  cursor: pointer;
+  filter: invert(55%) sepia(35%) saturate(2770%) hue-rotate(144deg)
+    brightness(99%) contrast(101%);
+}
+
+.actionsIcons:hover{
+  position: relative;
+  top: -2px;
 }
