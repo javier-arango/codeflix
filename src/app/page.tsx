@@ -10,7 +10,10 @@ import {
 } from '@constants/videoCategories.constants'
 
 export default function HomePage() {
-  const getRandomNumber = function getRandomNumber(min: number, max: number): number {
+  const getRandomNumber = function getRandomNumber(
+    min: number,
+    max: number
+  ): number {
     // Use the crypto API to generate a secure random number
     const randomBuffer = new Uint32Array(1)
     crypto.getRandomValues(randomBuffer)
