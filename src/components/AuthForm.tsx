@@ -27,6 +27,16 @@ export default function AuthForm() {
     }))
   }
 
+  const switchForm = () => {
+    setIsSignup((prevIsSignup) => !prevIsSignup)
+    setFormData({
+      firstName: '',
+      lastName: '',
+      email: '',
+      password: '',
+    })
+  }
+
   const registerUser = async () => {
     // setLoading(true)
     const response = await fetch('/api/auth/register', {
@@ -139,14 +149,14 @@ export default function AuthForm() {
       {isSignup ? (
         <h2>
           Aleady have an account?{' '}
-          <span className={styles.switch} onClick={() => setIsSignup(false)}>
+          <span className={styles.switch} onClick={switchForm}>
             Login
           </span>
         </h2>
       ) : (
         <h2>
           Don&apos;t have an account?{' '}
-          <span className={styles.switch} onClick={() => setIsSignup(true)}>
+          <span className={styles.switch} onClick={switchForm}>
             Sign Up
           </span>
         </h2>
