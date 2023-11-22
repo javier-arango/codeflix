@@ -2,14 +2,13 @@ import prisma from '@lib/prisma'
 import type { Video } from '@prisma/client'
 import type { VideosResponse } from 'types'
 
-
 interface RequestInput {
   query: string
 }
 
 export async function POST(request: Request) {
   try {
-    console.log("Request for search")
+    console.log('Request for search')
     const res: RequestInput = await request.json()
     const query = res.query.split(' ').join(' & ') // This will search for videos with all the words in the query
 

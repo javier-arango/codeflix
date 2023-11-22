@@ -12,7 +12,6 @@ import mobileImage from '../../public/assets/mobile.png'
 import osImage from '../../public/assets/os.jpeg'
 import uiuxImage from '../../public/assets/uiux.jpg'
 
-
 export interface Category extends Record<CategoryKey, string> {}
 export interface Category2 extends Record<CategoryKey, CategoryInfo> {}
 

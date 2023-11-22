@@ -9,7 +9,7 @@ import type { VideosResponse } from 'types'
 //       'Content-Type': 'application/json',
 //     },
 //   })
-  
+
 //   if (!response || !response.ok) {
 //     return null
 //   }
@@ -45,7 +45,11 @@ export async function searchVideos(query?: string): Promise<VideosResponse> {
   }
 }
 
-export default async function ResultsPage({ params }: { params: { searchQuery: string } }) {
+export default async function ResultsPage({
+  params,
+}: {
+  params: { searchQuery: string }
+}) {
   const { searchQuery } = params
   const data: VideosResponse = await searchVideos(decodeURI(searchQuery))
 
@@ -55,7 +59,7 @@ export default async function ResultsPage({ params }: { params: { searchQuery: s
 
   return (
     <>
-      <SearchResults query={searchQuery} results={data}/>
+      <SearchResults query={searchQuery} results={data} />
     </>
   )
 }
