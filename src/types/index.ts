@@ -1,1 +1,6 @@
-// Export everything from the types folder here
+import type { Video } from '@prisma/client'
+
+export interface VideosResponse {
+  count: number
+  videos: Video[]
+}
