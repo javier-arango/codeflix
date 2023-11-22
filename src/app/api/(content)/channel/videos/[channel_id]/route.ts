@@ -1,6 +1,6 @@
 import prisma from '@lib/prisma'
 import type { Channel, Video } from '@prisma/client'
-import type { VideosResponse } from 'types'
+import type { VideoListResponse } from 'types'
 
 export async function GET(
   request: Request,
@@ -26,7 +26,7 @@ export async function GET(
       return Response.json({
         count: channelWithVideos.videos.length,
         videos: channelWithVideos.videos,
-      } as VideosResponse)
+      } as VideoListResponse)
     }
   } catch (err) {
     return Response.json({ error: 'Internal Server Error' }, { status: 500 })
