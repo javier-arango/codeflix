@@ -1,0 +1,44 @@
+#tabSection {
+  width: 100%;
+  min-height: 100px;
+  display: flex;
+  flex-direction: column;
+}
+
+#tabHeaderSection {
+  width: 100%;
+  min-height: 50px;
+  display: flex;
+  justify-content: center;
+}
+
+#tab {
+  width: 100%;
+  height: auto;
+  background-color: #0a1045;
+  display: flex;
+  justify-content: center;
+}
+
+#tabOptions {
+  width: 100%;
+  padding: 0;
+  list-style-type: none;
+  display: flex;
+  justify-content: flex-start;
+  background-color: #0a1045;
+}
+
+.tabOption {
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  padding: 20px;
+  cursor: pointer;
+}
+
+.active {
+  border-bottom: 5px solid #00c2d1;
+}

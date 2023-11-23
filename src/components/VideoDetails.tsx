@@ -4,7 +4,6 @@ import type { Video } from '@prisma/client'
 import { fetcher } from '@utils/fetcher.utils'
 import useSWR from 'swr'
 import { LoadingSpinner } from './LoadingSpinner'
-import { VideoPlayer } from './VideoPlayer'
 
 interface VideoDetailsProps {
   videoId: string
@@ -23,11 +22,11 @@ export const VideoDetails = ({ videoId }: VideoDetailsProps) => {
 
   return (
     <div>
-      <VideoPlayer
+      {/* <VideoPlayer
         id="video-details-player"
         title={data.title}
         videoId={videoId}
-      />
+      /> */}
 
       <div>
         <h1>{data?.title}</h1>

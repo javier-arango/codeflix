@@ -4,7 +4,6 @@ import { useState } from 'react'
 import styles from '../styles/AuthForm.module.scss'
 import toast from 'react-hot-toast'
 import { useRouter, useSearchParams } from 'next/navigation'
-// import Link from 'next/link'
 import { signIn } from 'next-auth/react'
 
 export default function AuthForm() {
@@ -28,9 +27,23 @@ export default function AuthForm() {
     }))
   }
 
+  const switchForm = () => {
+    setIsSignup((prevIsSignup) => !prevIsSignup)
+    setFormData({
+      firstName: '',
+      lastName: '',
+      email: '',
+      password: '',
+    })
+  }
+
+  const handleKeyDown = () => {
+    switchForm()
+  }
+
   const registerUser = async () => {
     // setLoading(true)
-    const response = await fetch('/api/register', {
+    const response = await fetch('/api/auth/register', {
       method: 'POST',
       body: JSON.stringify(formData),
       headers: {
@@ -140,14 +153,22 @@ export default function AuthForm() {
       {isSignup ? (
         <h2>
           Aleady have an account?{' '}
-          <span className={styles.switch} onClick={() => setIsSignup(false)}>
+          <span
+            className={styles.switch}
+            onClick={switchForm}
+            onKeyDown={handleKeyDown}
+          >
             Login
           </span>
         </h2>
       ) : (
         <h2>
           Don&apos;t have an account?{' '}
-          <span className={styles.switch} onClick={() => setIsSignup(true)}>
+          <span
+            className={styles.switch}
+            onClick={switchForm}
+            onKeyDown={handleKeyDown}
+          >
             Sign Up
           </span>
         </h2>

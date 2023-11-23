@@ -31,7 +31,7 @@
 }
 
 #navItems {
-  width: 200px;
+  width: auto;
   padding: 0;
   list-style-type: none;
   display: flex;
@@ -42,9 +42,11 @@
 .navItem {
   color: $color-green;
   cursor: pointer;
+  margin-left: 30px;
 }
 
-#authButton {
+#authButton,
+#logoutButton {
   padding: 10px 30px;
   color: white;
   background-color: $color-green;
@@ -54,7 +56,17 @@
   cursor: pointer;
 }
 
-#profileIMg {
+#profileImg {
   filter: invert(55%) sepia(35%) saturate(2770%) hue-rotate(144deg)
     brightness(99%) contrast(101%);
+}
+
+#logoutButton {
+  padding: 10px 30px;
+  color: white;
+  background-color: $color-red;
+  border-radius: 20px;
+  border: 1px solid $color-red;
+  outline: none;
+  cursor: pointer;
 }

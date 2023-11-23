@@ -1,5 +1,5 @@
 import { getChannelVideos } from '@services/CRUD'
-import type { VideoListResponse } from 'types'
+import type { VideosResponse } from 'types'
 
 export async function GET(
   request: Request,
@@ -17,7 +17,7 @@ export async function GET(
       return Response.json({
         count: channelWithVideos.videos.length,
         videos: channelWithVideos.videos,
-      } as VideoListResponse)
+      } as VideosResponse)
     }
   } catch (err) {
     return Response.json({ error: 'Internal Server Error' }, { status: 500 })

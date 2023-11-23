@@ -1,4 +1,4 @@
-import type { CategoryKey } from '@constants/videoCategories.constants'
+import type { CategoryKey } from 'types'
 import prisma from '@lib/prisma'
 import type { Channel, Playlist, Video } from '@prisma/client'
 

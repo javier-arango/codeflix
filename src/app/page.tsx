@@ -1,13 +1,11 @@
 import Banner from '@components/Banner'
 import Categories from '@components/Categories'
-import NavBar from '@components/NavBar'
 // import VideoList from '@components/VideoList'
 import {
   VIDEO_CATEGORIES2,
   type Category2,
-  type CategoryInfo,
-  type CategoryKey,
 } from '@constants/videoCategories.constants'
+import type { CategoryKey, CategoryInfo } from 'types'
 
 export default function HomePage() {
   const getRandomNumber = function getRandomNumber(
@@ -43,7 +41,6 @@ export default function HomePage() {
 
   return (
     <main>
-      <NavBar />
       <Banner />
       <Categories
         allCategories={false}

@@ -1,10 +1,18 @@
+'use client'
+
+import { signOut, useSession } from 'next-auth/react'
 import Image from 'next/image'
 import Link from 'next/link'
 import profileImg from '../../public/assets/account_circle.svg'
 import styles from '../styles/Navbar.module.scss'
+import SearchBar from './SearchBar'
 
 export default function NavBar() {
-  const loggedIn = false
+  const { status } = useSession()
+
+  const logout = () => {
+    signOut({ redirect: false, callbackUrl: '/' })
+  }
 
   return (
     <nav id={styles.nav}>
@@ -12,13 +20,13 @@ export default function NavBar() {
         <Link href="/">
           <h1 id={styles.logo}>Codeflix</h1>
         </Link>
-        <input id={styles.searchBar} type="search" placeholder="Search" />
+        <SearchBar />
         <ul id={styles.navItems}>
           <Link href="/categories">
             <li className={styles.navItem}>categories</li>
           </Link>
           <li className={styles.navItem}>
-            {loggedIn ? (
+            {status === 'authenticated' ? (
               <Link href={'/profile'}>
                 <Image
                   id={styles.profileImg}
@@ -32,6 +40,13 @@ export default function NavBar() {
               </Link>
             )}
           </li>
+          {status === 'authenticated' && (
+            <li className={styles.navItem}>
+              <button id={styles.logoutButton} onClick={logout}>
+                Logout
+              </button>
+            </li>
+          )}
         </ul>
       </div>
     </nav>

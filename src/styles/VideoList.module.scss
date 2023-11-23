@@ -7,9 +7,15 @@
   width: 100%;
   min-height: 100px;
   display: flex;
-  flex-wrap: wrap;
+  flex-flow: row wrap;
   justify-content: space-between;
   padding-top: 20px;
+  column-gap: 55px;
+
+  &:after {
+    content: '';
+    flex: auto;
+  }
 }
 
 .someVideos {

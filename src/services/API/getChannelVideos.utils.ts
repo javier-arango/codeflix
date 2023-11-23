@@ -1,9 +1,9 @@
 import { baseURL } from '@lib/index'
-import type { VideoListResponse } from 'types'
+import type { VideosResponse } from 'types'
 
 export async function GetChannelVideos(
   channelId: string
-): Promise<VideoListResponse> {
+): Promise<VideosResponse> {
   try {
     const res = await fetch(`${baseURL}/api/channel/videos/${channelId}`)
 
@@ -14,7 +14,7 @@ export async function GetChannelVideos(
       }
     }
 
-    return (await res.json()) as VideoListResponse
+    return (await res.json()) as VideosResponse
   } catch (err) {
     console.error(err)
     return {
