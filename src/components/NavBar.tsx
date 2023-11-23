@@ -1,20 +1,18 @@
 'use client'
 
-import { useSession } from 'next-auth/react'
+import { signOut, useSession } from 'next-auth/react'
 import Image from 'next/image'
 import Link from 'next/link'
 import profileImg from '../../public/assets/account_circle.svg'
 import styles from '../styles/Navbar.module.scss'
-import LogoutButton from './LogoutButton'
 import SearchBar from './SearchBar'
 
 export default function NavBar() {
-  // const [loggedIn, setIsLoggedIn] = useState(false)
   const { status } = useSession()
 
-  // if (status === 'authenticated') {
-  //   setIsLoggedIn(true)
-  // }
+  const logout = () => {
+    signOut({ redirect: false, callbackUrl: '/' })
+  }
 
   return (
     <nav id={styles.nav}>
@@ -42,7 +40,13 @@ export default function NavBar() {
               </Link>
             )}
           </li>
-          {status === 'authenticated' && <LogoutButton />}
+          {status === 'authenticated' && (
+            <li className={styles.navItem}>
+              <button id={styles.logoutButton} onClick={logout}>
+                Logout
+              </button>
+            </li>
+          )}
         </ul>
       </div>
     </nav>
