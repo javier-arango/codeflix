@@ -1,7 +1,7 @@
 import { baseURL } from '@lib/index'
-import type { SearchResponse } from 'types'
+import type { VideosResponse } from 'types'
 
-export async function SearchVideos(query?: string): Promise<SearchResponse> {
+export async function SearchVideos(query?: string): Promise<VideosResponse> {
   try {
     const res = await fetch(`${baseURL}/api/search`, {
       method: 'POST',
@@ -11,7 +11,7 @@ export async function SearchVideos(query?: string): Promise<SearchResponse> {
     if (!res.ok) {
       return {
         count: 0,
-        result: [],
+        videos: [],
       }
     }
 
@@ -20,7 +20,7 @@ export async function SearchVideos(query?: string): Promise<SearchResponse> {
     console.error(err)
     return {
       count: 0,
-      result: [],
+      videos: [],
     }
   }
 }
