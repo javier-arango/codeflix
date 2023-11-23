@@ -14,6 +14,7 @@ import uiuxImage from '../../public/assets/uiux.jpg'
 
 export interface Category extends Record<CategoryKey, string> {}
 export interface Category2 extends Record<CategoryKey, CategoryInfo> {}
+export interface Category2 extends Record<CategoryKey, CategoryInfo> {}
 
 export const VIDEO_CATEGORIES: Category = {
   algorithms: 'Algorithms and Data Structures',
@@ -70,5 +71,5 @@ export const VIDEO_CATEGORIES2: Category2 = {
     name: 'Java Programming Language',
     img: programmingImage,
   },
-  uiux: { key: 'uiux', name: 'Design Systems UX/UI', img: uiuxImage },
+  uiux: { key: 'uiux', name: 'Design Systems UX/UI', img: uiuxImage }
 }

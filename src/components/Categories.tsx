@@ -25,6 +25,8 @@ export default function Categories(props: CategoriesProps) {
     return array
   }
 
+  // console.log(props.categories)
+
   return (
     <section id={styles.categorySection}>
       <div className="container">
