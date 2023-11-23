@@ -1,6 +1,5 @@
-import type { CategoryKey } from 'types'
+import type { CategoryKey, VideosResponse } from 'types'
 import { baseURL } from '@lib/index'
-import type { VideosResponse } from 'types'
 
 export async function GetVideosByCategory(
   categoryId: CategoryKey
