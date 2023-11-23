@@ -8,6 +8,7 @@ type videoTileProps = {
   applyMargin: boolean
   video: Video
   showRemoveIcon: boolean
+  vertical?: boolean
 }
 
 export default function VideoTile(props: videoTileProps) {
@@ -17,7 +18,11 @@ export default function VideoTile(props: videoTileProps) {
 
   return (
     <Link className={styles.link} href={`/video/${props.video.videoId}`}>
-      <div className={`${styles.tile} ${props.applyMargin && styles.margin}`}>
+      <div
+        className={`${styles.tile} ${props.applyMargin && styles.margin} ${
+          props.vertical && styles.verticalMargin
+        }`}
+      >
         <div
           className={styles.videoCont}
           style={{ backgroundImage: `url(${source})` }}

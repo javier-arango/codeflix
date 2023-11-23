@@ -16,7 +16,7 @@ export default function VideoList(props: VideosProps) {
     const array = []
 
     if (Array.isArray(videos.videos)) {
-      for (let i = 1; i < videos.count; i++) {
+      for (let i = 0; i < videos.count; i++) {
         const video = videos.videos[i] as Video
         array.push(
           <VideoTile

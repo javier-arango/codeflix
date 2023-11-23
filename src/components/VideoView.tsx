@@ -5,13 +5,81 @@ import styles from '@styles/VideoView.module.scss'
 import { fetcher } from '@utils/fetcher.utils'
 import Image from 'next/image'
 import useSWR from 'swr'
+import type { VideosResponse } from 'types'
 import bookmark from '../../public/assets/bookmark.svg'
 import star from '../../public/assets/star.svg'
 import { LoadingSpinner } from './LoadingSpinner'
 import { VideoPlayer } from './VideoPlayer'
+import VideoListVertical from './VideoListVertical'
 
 interface VideoViewProps {
   videoId: string
+}
+
+const responseTemp: VideosResponse = {
+  count: 4,
+  videos: [
+    {
+      videoId: 'string',
+      url: 'string',
+      title: 'string',
+      duration: 'string',
+      categoryId: 'string',
+      description: 'string',
+      publishedAt: new Date(),
+      channelTitle: 'string',
+      thumbnailUrl: 'string',
+      viewsCount: 12,
+      likesCount: 45,
+      commentsCount: 45,
+      channelId: 'string',
+    },
+    {
+      videoId: 'string',
+      url: 'string',
+      title: 'string',
+      duration: 'string',
+      categoryId: 'string',
+      description: 'string',
+      publishedAt: new Date(),
+      channelTitle: 'string',
+      thumbnailUrl: 'string',
+      viewsCount: 12,
+      likesCount: 45,
+      commentsCount: 45,
+      channelId: 'string',
+    },
+    {
+      videoId: 'string',
+      url: 'string',
+      title: 'string',
+      duration: 'string',
+      categoryId: 'string',
+      description: 'string',
+      publishedAt: new Date(),
+      channelTitle: 'string',
+      thumbnailUrl: 'string',
+      viewsCount: 12,
+      likesCount: 45,
+      commentsCount: 45,
+      channelId: 'string',
+    },
+    {
+      videoId: 'string',
+      url: 'string',
+      title: 'string',
+      duration: 'string',
+      categoryId: 'string',
+      description: 'string',
+      publishedAt: new Date(),
+      channelTitle: 'string',
+      thumbnailUrl: 'string',
+      viewsCount: 12,
+      likesCount: 45,
+      commentsCount: 45,
+      channelId: 'string',
+    }
+  ],
 }
 
 export default function VideoView({ videoId }: VideoViewProps) {
@@ -52,7 +120,9 @@ export default function VideoView({ videoId }: VideoViewProps) {
             </div>
           </div>
         </div>
-        <div id={styles.videosList}></div>
+        <div id={styles.videosList}>
+          <VideoListVertical videos={responseTemp}/>
+        </div>
       </div>
     </section>
   )
