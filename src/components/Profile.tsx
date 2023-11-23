@@ -47,7 +47,14 @@ export default async function Profile() {
             <h1 id={styles.name}>{user?.name}</h1>
           </div>
           <div id={styles.actions}>
-            <button id={styles.edit}><Image id={styles.editIcon} src={editProfile} alt='edit profile'/> Edit profile</button>
+            <button id={styles.edit}>
+              <Image
+                id={styles.editIcon}
+                src={editProfile}
+                alt="edit profile"
+              />{' '}
+              Edit profile
+            </button>
           </div>
         </div>
       </section>

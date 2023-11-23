@@ -29,7 +29,7 @@ export default async function VideoListVertical(props: VerticalListProps) {
   if (!data) {
     return null
   }
-  
+
   const createVideoTiles = (videos: VideosResponse) => {
     const array = []
 

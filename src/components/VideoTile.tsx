@@ -32,7 +32,10 @@ export default function VideoTile(props: videoTileProps) {
         <h2 className={styles.title}>{title}</h2>
       </Link>
       {showRemoveIcon && (
-        <button className={styles.removeButton} onClick={() => console.log("clicked")}>
+        <button
+          className={styles.removeButton}
+          onClick={() => console.log('clicked')}
+        >
           <Image
             className={styles.removeIcon}
             src={removeIcon}
