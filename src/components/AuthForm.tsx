@@ -37,6 +37,10 @@ export default function AuthForm() {
     })
   }
 
+  const handleKeyDown = () => {
+    switchForm()
+  }
+
   const registerUser = async () => {
     // setLoading(true)
     const response = await fetch('/api/auth/register', {
@@ -149,14 +153,22 @@ export default function AuthForm() {
       {isSignup ? (
         <h2>
           Aleady have an account?{' '}
-          <span className={styles.switch} onClick={switchForm}>
+          <span
+            className={styles.switch}
+            onClick={switchForm}
+            onKeyDown={handleKeyDown}
+          >
             Login
           </span>
         </h2>
       ) : (
         <h2>
           Don&apos;t have an account?{' '}
-          <span className={styles.switch} onClick={switchForm}>
+          <span
+            className={styles.switch}
+            onClick={switchForm}
+            onKeyDown={handleKeyDown}
+          >
             Sign Up
           </span>
         </h2>

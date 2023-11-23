@@ -15,6 +15,10 @@ export default function Tabs({ children, labels }: Props) {
     setActiveTab(index)
   }
 
+  const handleKeyDown = (index: number) => {
+    handleTabClick(index)
+  }
+
   return (
     <section id={styles.tabSection}>
       <section id={styles.tabHeaderSection}>
@@ -29,6 +33,7 @@ export default function Tabs({ children, labels }: Props) {
                       index === activeTab && styles.active
                     }`}
                     onClick={() => handleTabClick(index)}
+                    onKeyDown={() => handleKeyDown(index)}
                   >
                     {labels[index]}
                   </li>
