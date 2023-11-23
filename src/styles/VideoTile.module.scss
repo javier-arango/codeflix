@@ -3,8 +3,13 @@
   height: 300px;
 }
 
+.tile:hover{
+  position: relative;
+  top: -5px;
+}
+
 .margin {
-  margin-bottom: 30px;
+  margin-bottom: 10px;
 }
 
 .videoCont {
@@ -33,9 +38,10 @@
 }
 
 .title {
-  font-size: 20px;
+  font-size: medium;
+  font-weight: bold;
   margin-top: 10px;
-  color: black;
+  color: $color-blue;
 }
 
 .link {

@@ -2,8 +2,7 @@ import styles from '@styles/Profile.module.scss'
 import Tabs from './Tabs'
 import Tab from './Tab'
 import VideoList from './VideoList'
-import type { CategoryKey } from '@constants/videoCategories.constants'
-import type { CategoryResponse } from 'types'
+import type { CategoryKey, VideosResponse } from 'types'
 import { getServerSession } from 'next-auth'
 import { authOptions } from 'app/api/auth/[...nextauth]/route'
 import defaultProfileImage from '../../public/assets/defaultProfile.jpg'
@@ -19,7 +18,7 @@ async function getVideos(category: CategoryKey) {
     return null
   }
 
-  const data: CategoryResponse = await response.json()
+  const data: VideosResponse = await response.json()
 
   return data
 }
@@ -28,7 +27,7 @@ export default async function Profile() {
   const session = await getServerSession(authOptions)
   const user = session?.user
 
-  const data: CategoryResponse | null = await getVideos('ai')
+  const data: VideosResponse | null = await getVideos('ai')
 
   if (!data) {
     return null

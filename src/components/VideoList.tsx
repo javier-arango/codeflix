@@ -1,8 +1,8 @@
+import type { Video } from '@prisma/client'
 import Link from 'next/link'
+import type { VideosResponse } from 'types'
 import styles from '../styles/VideoList.module.scss'
 import VideoTile from './VideoTile'
-import type { Video } from '@prisma/client'
-import type { VideosResponse } from 'types'
 
 type VideosProps = {
   allVideos: boolean
