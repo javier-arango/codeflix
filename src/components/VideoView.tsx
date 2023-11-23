@@ -21,6 +21,11 @@ interface VideoViewProps {
 export default function VideoView({ videoId }: VideoViewProps) {
   const [isFavorite, setIsFavorite] = useState(false)
   const [isBookmark, setIsBookmark] = useState(false)
+  // const [isLoading, setIsLoading] = useState(false)
+  // const [error, setError] = useState(false)
+  // const [data, setData] = useState(false)
+
+  // useEffect( () => {  }, [])
 
   // Fetch video details
   const { data, error, isLoading } = useSWR<Video>(
