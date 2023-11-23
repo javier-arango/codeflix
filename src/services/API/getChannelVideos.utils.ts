@@ -1,7 +1,9 @@
 import { baseURL } from '@lib/index'
 import type { VideosResponse } from 'types'
 
-export async function GetChannelVideos(channelId: string): Promise<VideosResponse> {
+export async function GetChannelVideos(
+  channelId: string
+): Promise<VideosResponse> {
   try {
     const res = await fetch(`${baseURL}/api/channel/videos/${channelId}`)
 
