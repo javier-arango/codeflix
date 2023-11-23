@@ -71,5 +71,5 @@ export const VIDEO_CATEGORIES2: Category2 = {
     name: 'Java Programming Language',
     img: programmingImage,
   },
-  uiux: { key: 'uiux', name: 'Design Systems UX/UI', img: uiuxImage }
+  uiux: { key: 'uiux', name: 'Design Systems UX/UI', img: uiuxImage },
 }
