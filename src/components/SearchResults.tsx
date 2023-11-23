@@ -9,7 +9,9 @@ export default function SearchResults({ query, results }: Props) {
   return (
     <section>
       <div className="container">
-        <h1 style={{ marginTop: '20px' }}>Results for {decodeURI(query)}</h1>
+        <h1 style={{ marginTop: '20px' }}>
+          Results for &quot;{decodeURI(query)}&quot;
+        </h1>
         <VideoList allVideos={true} playlist={false} videos={results} />
       </div>
     </section>
