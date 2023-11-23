@@ -3,9 +3,11 @@ import { authOptions } from 'app/api/auth/[...nextauth]/route'
 import { getServerSession } from 'next-auth'
 import type { CategoryKey, VideosResponse } from 'types'
 import defaultProfileImage from '../../public/assets/defaultProfile.jpg'
+import editProfile from '../../public/assets/edit_profile.svg'
 import Tab from './Tab'
 import Tabs from './Tabs'
 import VideoList from './VideoList'
+import Image from 'next/image'
 
 async function getVideos(category: CategoryKey) {
   const response = await fetch(
@@ -43,6 +45,9 @@ export default async function Profile() {
               style={{ backgroundImage: `url(${defaultProfileImage.src})` }}
             ></div>
             <h1 id={styles.name}>{user?.name}</h1>
+          </div>
+          <div id={styles.actions}>
+            <button id={styles.edit}><Image id={styles.editIcon} src={editProfile} alt='edit profile'/> Edit profile</button>
           </div>
         </div>
       </section>

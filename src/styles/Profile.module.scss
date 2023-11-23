@@ -26,3 +26,21 @@
   margin-left: 10px;
   font-size: 30px;
 }
+
+#actions{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#edit{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+#editIcon{
+  margin-right: 5px;
+}
