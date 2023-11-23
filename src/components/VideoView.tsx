@@ -78,7 +78,7 @@ const responseTemp: VideosResponse = {
       likesCount: 45,
       commentsCount: 45,
       channelId: 'string',
-    }
+    },
   ],
 }
 
@@ -121,7 +121,7 @@ export default function VideoView({ videoId }: VideoViewProps) {
           </div>
         </div>
         <div id={styles.videosList}>
-          <VideoListVertical videos={responseTemp}/>
+          <VideoListVertical videos={responseTemp} />
         </div>
       </div>
     </section>

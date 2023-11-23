@@ -1,26 +1,6 @@
 import SearchResults from '@components/SearchResults'
 import type { VideosResponse } from 'types'
 
-// async function getResults(query: string) {
-//   const response = await fetch('http://localhost:3000/api/search', {
-//     method: 'POST',
-//     body: JSON.stringify({ query: query }),
-//     headers: {
-//       'Content-Type': 'application/json',
-//     },
-//   })
-
-//   if (!response || !response.ok) {
-//     return null
-//   }
-
-//   const data = await response.json()
-
-//   console.log(data)
-
-//   return data
-// }
-
 export async function searchVideos(query?: string): Promise<VideosResponse> {
   try {
     const res = await fetch('http://localhost:3000/api/search', {

@@ -32,12 +32,12 @@
   flex-direction: row;
 }
 
-#title{
+#title {
   width: 100%;
   font-size: x-large;
 }
 
-#action{
+#action {
   width: 100px;
   display: flex;
   justify-content: space-between;
@@ -46,7 +46,7 @@
   overflow: hidden;
 }
 
-.actionsIcons{
+.actionsIcons {
   width: 30px;
   height: auto;
   cursor: pointer;
@@ -54,7 +54,7 @@
     brightness(99%) contrast(101%);
 }
 
-.actionsIcons:hover{
+.actionsIcons:hover {
   position: relative;
   top: -2px;
 }

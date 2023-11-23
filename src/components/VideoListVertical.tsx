@@ -28,7 +28,5 @@ export default function VideoListVertical(props: VerticalListProps) {
     return array
   }
 
-  return (
-    <div id={styles.cont}>{getVideos(props.videos)}</div>
-  )
+  return <div id={styles.cont}>{getVideos(props.videos)}</div>
 }
