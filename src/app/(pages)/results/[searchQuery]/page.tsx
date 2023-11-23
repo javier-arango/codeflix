@@ -1,7 +1,7 @@
 import SearchResults from '@components/SearchResults'
 import type { VideosResponse } from 'types'
 
-export async function searchVideos(query?: string): Promise<VideosResponse> {
+async function searchVideos(query?: string): Promise<VideosResponse> {
   try {
     const res = await fetch('http://localhost:3000/api/search', {
       method: 'POST',
@@ -37,9 +37,8 @@ export default async function ResultsPage({
     return null
   }
 
-  return (
-    <>
-      <SearchResults query={searchQuery} results={data} />
-    </>
-  )
+  return <SearchResults query={searchQuery} results={data} />
 }
+
+// Display name
+ResultsPage.displayName = 'Results Page'
