@@ -1,6 +1,4 @@
-import {
-  VIDEO_CATEGORIES,
-} from '@constants/videoCategories.constants'
+import { VIDEO_CATEGORIES } from '@constants/videoCategories.constants'
 import type { Video } from '@prisma/client'
 import { searchVideosByCategory } from '@services/CRUD'
 import type { CategoryKey } from 'types'
