@@ -1,6 +1,23 @@
+#tabSection{
+  width: 100%;
+  min-height: 100px;
+  display: flex;
+  flex-direction: column;
+}
+
+#tabHeaderSection{
+  width: 100%;
+  min-height: 50px;
+  display: flex;
+  justify-content: center;
+}
+
 #tab {
   width: 100%;
   height: auto;
+  background-color: #0a1045;
+  display: flex;
+  justify-content: center;
 }
 
 #tabOptions {

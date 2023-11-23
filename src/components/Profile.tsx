@@ -1,11 +1,11 @@
 import styles from '@styles/Profile.module.scss'
-import Tabs from './Tabs'
-import Tab from './Tab'
-import VideoList from './VideoList'
-import type { CategoryKey, VideosResponse } from 'types'
-import { getServerSession } from 'next-auth'
 import { authOptions } from 'app/api/auth/[...nextauth]/route'
+import { getServerSession } from 'next-auth'
+import type { CategoryKey, VideosResponse } from 'types'
 import defaultProfileImage from '../../public/assets/defaultProfile.jpg'
+import Tab from './Tab'
+import Tabs from './Tabs'
+import VideoList from './VideoList'
 
 async function getVideos(category: CategoryKey) {
   const response = await fetch(
@@ -34,28 +34,30 @@ export default async function Profile() {
   }
 
   return (
-    <section id={styles.profile}>
-      <div id={styles.container} className="container">
-        <div id={styles.picAndName}>
-          <div
-            id={styles.pic}
-            style={{ backgroundImage: `url(${defaultProfileImage.src})` }}
-          ></div>
-          <h1 id={styles.name}>{user?.name}</h1>
+    <>
+      <section id={styles.profile}>
+        <div id={styles.container} className="container">
+          <div id={styles.picAndName}>
+            <div
+              id={styles.pic}
+              style={{ backgroundImage: `url(${defaultProfileImage.src})` }}
+            ></div>
+            <h1 id={styles.name}>{user?.name}</h1>
+          </div>
         </div>
-        <Tabs labels={['Watchlist', 'Favorite']}>
-          <Tab
-            content={
-              <VideoList categoryTitle="" videos={data} playlist allVideos />
-            }
-          />
-          <Tab
-            content={
-              <VideoList categoryTitle="" videos={data} playlist allVideos />
-            }
-          />
-        </Tabs>
-      </div>
-    </section>
+      </section>
+      <Tabs labels={['Watchlist', 'Favorite']}>
+        <Tab
+          content={
+            <VideoList categoryTitle="" videos={data} playlist allVideos />
+          }
+        />
+        <Tab
+          content={
+            <VideoList categoryTitle="" videos={data} playlist allVideos />
+          }
+        />
+      </Tabs>
+    </>
   )
 }

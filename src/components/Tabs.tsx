@@ -16,22 +16,29 @@ export default function Tabs({ children, labels }: Props) {
   }
 
   return (
-    <div id={styles.tab}>
-      <div id={styles.tabHeader}>
-        <ul id={styles.tabOptions}>
-          {React.Children.map(children, (child, index: number) => (
-            <li
-              className={`${styles.tabOption} ${
-                index === activeTab && styles.active
-              }`}
-              onClick={() => handleTabClick(index)}
-            >
-              {labels[index]}
-            </li>
-          ))}
-        </ul>
-      </div>
+    <section id={styles.tabSection}>
+      <section id={styles.tabHeaderSection}>
+        <div id={styles.tab}>
+          <div id={styles.tabHeader}>
+            {' '}
+            <div className="container">
+              <ul id={styles.tabOptions}>
+                {React.Children.map(children, (child, index: number) => (
+                  <li
+                    className={`${styles.tabOption} ${
+                      index === activeTab && styles.active
+                    }`}
+                    onClick={() => handleTabClick(index)}
+                  >
+                    {labels[index]}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
       <div>{children[activeTab]}</div>
-    </div>
+    </section>
   )
 }
