@@ -5,6 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import profileImg from '../../public/assets/account_circle.svg'
 import styles from '../styles/Navbar.module.scss'
+import { Logo } from './Logo'
 import SearchBar from './SearchBar'
 
 export default function NavBar() {
@@ -17,9 +18,7 @@ export default function NavBar() {
   return (
     <nav id={styles.nav}>
       <div id={styles.container} className="container">
-        <Link href="/">
-          <h1 id={styles.logo}>Codeflix</h1>
-        </Link>
+        <Logo />
         <SearchBar />
         <ul id={styles.navItems}>
           <Link href="/categories">
