@@ -25,11 +25,38 @@ async function getVideos(category: CategoryKey) {
   return data
 }
 
+async function getPlaylists(userEmail: string | undefined | null) {
+  try {
+    const res = await fetch('http://localhost:3000/api/user/playlist/get_all', {
+      method: 'POST',
+      body: JSON.stringify({ userEmail }),
+    })
+
+    if (!res.ok) {
+      return {
+        count: 0,
+        playlists: [],
+      }
+    }
+
+    return await res.json()
+  } catch (err) {
+    console.error(err)
+    return {
+      count: 0,
+      playlists: [],
+    }
+  }
+}
+
 export default async function Profile() {
   const session = await getServerSession(authOptions)
   const user = session?.user
 
   const data: VideosResponse | null = await getVideos('ai')
+  const playlistRes = await getPlaylists("test@test.com")
+
+  console.log(playlistRes)
 
   if (!data) {
     return null
