@@ -15,8 +15,6 @@ async function getVideos(category: CategoryKey) {
     `http://localhost:3000/api/videos?category=${category}`
   )
 
-  console.log(response)
-
   if (!response || !response.ok) {
     return null
   }
@@ -78,7 +76,6 @@ async function getUser(email: string | undefined | null) {
 
     return await res.json()
   } catch (err) {
-    console.error(err)
     return {
       error: true,
       message: 'Error getting user info',
@@ -122,11 +119,17 @@ export default async function Profile() {
                 })`,
               }}
             ></div>
-            <h1 id={styles.name}>{user.firstName} {user.lastName}</h1>
+            <h1 id={styles.name}>
+              {user.firstName} {user.lastName}
+            </h1>
           </div>
-          <div id={styles.bio}>{user.bio ? user.bio : "No Bio ('edit your profile to add a bio)"}</div>
+          <div id={styles.bio}>
+            {user.bio ? user.bio : "No Bio ('edit your profile to add a bio)"}
+          </div>
           <div id={styles.actions}>
-            <Link href={'/profile/edit'} >
+            <Link
+              href={`/profile/edit/${user.id}?email=${user.email}`}
+            >
               <button id={styles.edit} onClick={editProfile}>
                 <Image
                   id={styles.editIcon}

@@ -2,14 +2,14 @@
 
 import styles from '@styles/ProfileForm.module.scss'
 import { useState } from 'react'
+import type { UserDetails } from 'types'
 
-export default function EditProfilePage () {
-  const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    password: '',
-  })
+type Props = {
+  user: UserDetails
+}
+
+export default function EditProfile(props: Props) {
+  const [formData, setFormData] = useState(props.user)
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target
@@ -19,18 +19,13 @@ export default function EditProfilePage () {
     }))
   }
 
-  const onSubmit = () => {
-
-  }
-
+  const onSubmit = () => {}
+  
   return (
     <section>
       <div id={styles.container} className="container">
         <h1 id={styles.title}>Edit Profile</h1>
-        <form
-          id={styles.form}
-          onSubmit={onSubmit}
-        >
+        <form id={styles.form} onSubmit={onSubmit}>
           <input
             required
             className={styles.input}
@@ -58,25 +53,10 @@ export default function EditProfilePage () {
             value={formData.email}
             onChange={handleInputChange}
           />
-          <input
-            required
-            className={styles.input}
-            type="password"
-            placeholder="Password"
-            name="password"
-            value={formData.password}
-            onChange={handleInputChange}
-          />
-          <input
-            id={styles.submit}
-            type="submit"
-            value={'Save'}
-          />
+          <textarea value={formData.bio} placeholder='(Bio)'></textarea>
+          <input id={styles.submit} type="submit" value={'Save'} />
         </form>
       </div>
     </section>
   )
 }
-
-// Display name
-EditProfilePage.displayName = 'Edit Profile'
