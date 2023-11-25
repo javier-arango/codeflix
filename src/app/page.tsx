@@ -46,7 +46,7 @@ export default function HomePage() {
         allCategories={false}
         categories={getRandomCategories(VIDEO_CATEGORIES2, 4)}
       />
-      {/* <VideoList categoryTitle={"Test"} allVideos={true}/> */}
+      <VideoList categoryTitle={"Test"} allVideos={true}/>
     </main>
   )
 }
