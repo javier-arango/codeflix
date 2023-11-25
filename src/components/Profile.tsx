@@ -8,6 +8,7 @@ import Tab from './Tab'
 import Tabs from './Tabs'
 import VideoList from './VideoList'
 import Image from 'next/image'
+import Link from 'next/link'
 
 async function getVideos(category: CategoryKey) {
   const response = await fetch(
@@ -74,14 +75,16 @@ export default async function Profile() {
             <h1 id={styles.name}>{user?.name}</h1>
           </div>
           <div id={styles.actions}>
-            <button id={styles.edit}>
-              <Image
-                id={styles.editIcon}
-                src={editProfile}
-                alt="edit profile"
-              />{' '}
-              Edit profile
-            </button>
+            <Link href={'/profile/edit'} >
+              <button id={styles.edit} onClick={editProfile}>
+                <Image
+                  id={styles.editIcon}
+                  src={editProfile}
+                  alt="edit profile"
+                />{' '}
+                Edit profile
+              </button>
+            </Link>
           </div>
         </div>
       </section>
