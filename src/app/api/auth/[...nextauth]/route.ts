@@ -1,12 +1,12 @@
 import { prisma } from '@lib/index'
+import type { User } from '@prisma/client'
 import { compare } from 'bcrypt'
 import NextAuth, { type NextAuthOptions } from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
-import type { User } from '@prisma/client'
 
 export const authOptions: NextAuthOptions = {
   pages: {
-    signIn: '/auth',
+    signIn: '/auth/login',
     signOut: '/logout',
   },
   session: {
@@ -56,6 +56,7 @@ export const authOptions: NextAuthOptions = {
 
         return {
           id: user.id,
+          image: user.avatar,
           email: user.email,
           name: user.firstName + ' ' + user.lastName,
         }

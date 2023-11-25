@@ -1,13 +1,13 @@
 import styles from '@styles/Profile.module.scss'
 import { authOptions } from 'app/api/auth/[...nextauth]/route'
 import { getServerSession } from 'next-auth'
+import Image from 'next/image'
 import type { CategoryKey, VideosResponse } from 'types'
 import defaultProfileImage from '../../public/assets/defaultProfile.jpg'
 import editProfile from '../../public/assets/edit_profile.svg'
 import Tab from './Tab'
 import Tabs from './Tabs'
 import VideoList from './VideoList'
-import Image from 'next/image'
 import Link from 'next/link'
 
 async function getVideos(category: CategoryKey) {
@@ -70,7 +70,11 @@ export default async function Profile() {
           <div id={styles.picAndName}>
             <div
               id={styles.pic}
-              style={{ backgroundImage: `url(${defaultProfileImage.src})` }}
+              style={{
+                backgroundImage: `url(${
+                  user?.image || defaultProfileImage.src
+                })`,
+              }}
             ></div>
             <h1 id={styles.name}>{user?.name}</h1>
           </div>

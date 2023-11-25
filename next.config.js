@@ -19,6 +19,11 @@ const nextConfig = {
         hostname: 'i.ytimg.com',
         pathname: '/vi/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'res.cloudinary.com',
+        pathname: '/dp28illl8/**', // Adjust the pathname according to your use case
+      },
     ],
   },
 }
