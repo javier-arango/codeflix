@@ -3,6 +3,7 @@
 import styles from '@styles/ProfileForm.module.scss'
 import { useState } from 'react'
 import type { UserDetails } from 'types'
+import defaultProfileImage from '../../public/assets/defaultProfile.jpg'
 
 type Props = {
   user: UserDetails
@@ -20,11 +21,19 @@ export default function EditProfile(props: Props) {
   }
 
   const onSubmit = () => {}
-  
+
   return (
     <section>
       <div id={styles.container} className="container">
         <h1 id={styles.title}>Edit Profile</h1>
+        <div
+          id={styles.pic}
+          style={{
+            backgroundImage: `url(${
+              formData.avatar || defaultProfileImage.src
+            })`,
+          }}
+        ></div>
         <form id={styles.form} onSubmit={onSubmit}>
           <input
             required
@@ -53,7 +62,11 @@ export default function EditProfile(props: Props) {
             value={formData.email}
             onChange={handleInputChange}
           />
-          <textarea value={formData.bio} placeholder='(Bio)'></textarea>
+          <textarea
+            id={styles.bio}
+            value={formData.bio}
+            placeholder="(Bio)"
+          ></textarea>
           <input id={styles.submit} type="submit" value={'Save'} />
         </form>
       </div>
