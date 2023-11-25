@@ -23,8 +23,8 @@ export default async function ProfileLayout({
     <div className="p-8">
       {user ? (
         <>
-        <UserProfile user={user} />
-        {children}
+          <UserProfile user={user} />
+          {children}
         </>
       ) : (
         // User is not login yet send the user to login page

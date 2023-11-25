@@ -63,7 +63,7 @@ export default async function ChannelPage({
     <div className="p-8">
       <ChannelMetadata {...channelDetails} />
 
-      <Divider  />
+      <Divider />
 
       <Suspense
         fallback={
