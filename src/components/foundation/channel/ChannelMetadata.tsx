@@ -50,7 +50,7 @@ export const ChannelMetadata = ({
               </h1>
 
               {/* Channel subscribers */}
-              <h5 className="text-small tracking-tight text-default-400">
+              <h5 className="text-small lg:text-base tracking-tight text-default-400">
                 {`${formatToCompactNumber(subscribersCount)} subscribers`}
               </h5>
             </div>
@@ -58,8 +58,8 @@ export const ChannelMetadata = ({
         </div>
       </CardHeader>
 
-      <CardBody className="px-3 py-0 text-small text-default-400">
-        <Accordion fullWidth defaultExpandedKeys={['2']}>
+      <CardBody className="px-3 text-small text-default-400">
+        <Accordion fullWidth defaultExpandedKeys={['2']} variant="shadow">
           <AccordionItem
             key="1"
             aria-label={`${formatToCompactNumber(

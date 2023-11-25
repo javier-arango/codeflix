@@ -1,13 +1,22 @@
 'use client'
 
-import { Card, CardBody, Tab, Tabs } from '@nextui-org/react'
+import { Tab, Tabs } from '@nextui-org/react'
 import { useState } from 'react'
 
-export const ProfileContent = () => {
-  const [selected, setSelected] = useState('playlists')
+interface ProfileContentProps {
+  children?: React.ReactNode
+}
+
+export const ProfileContent = ({ children }: ProfileContentProps) => {
+  const [selected, setSelected] = useState<string>('playlists')
+
+  const handleSelectionChange = (key: string | number) => {
+    setSelected(key.toString())
+  }
 
   return (
     <Tabs
+      size="lg"
       aria-label="User profile tabs"
       variant="underlined"
       classNames={{
@@ -17,25 +26,13 @@ export const ProfileContent = () => {
         tab: 'max-w-fit px-0 h-12',
       }}
       selectedKey={selected}
-      onSelectionChange={setSelected}
+      onSelectionChange={handleSelectionChange}
     >
-      <Tab key="playlists" title="Playlists">
-        <Card>
-          <CardBody>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat.
-          </CardBody>
-        </Card>
+      <Tab key="playlists" title="Playlists" href="/user/profile/playlists">
+        {children}
       </Tab>
-      <Tab key="history" title="History">
-        <Card>
-          <CardBody>
-            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-            officia deserunt mollit anim id est laborum.
-          </CardBody>
-        </Card>
+      <Tab key="history" title="History" href="/user/profile/history">
+        {children}
       </Tab>
     </Tabs>
   )
