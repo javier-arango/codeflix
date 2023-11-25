@@ -8,7 +8,6 @@ export default async function ProfilePage() {
   const session = await getServerSession(authOptions)
 
   // Fetch user data
-  
 
   return (
     <div className="p-8">

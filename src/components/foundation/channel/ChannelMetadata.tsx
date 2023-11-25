@@ -35,7 +35,13 @@ export const ChannelMetadata = ({
         <div className="flex flex-row justify-between">
           <div className="flex gap-4">
             {/* Channel avatar */}
-            <Avatar showFallback className='lg:w-32 lg:h-32' radius="full" size="lg" src={thumbnailUrl} />
+            <Avatar
+              showFallback
+              className="lg:w-32 lg:h-32"
+              radius="full"
+              size="lg"
+              src={thumbnailUrl}
+            />
 
             {/* Channel info */}
             <div className="flex flex-col gap-1 items-start justify-center">
