@@ -46,7 +46,7 @@ export const VideoPreview = ({
   return (
     <>
       <Card
-        shadow="sm"
+        shadow="none"
         fullWidth
         isPressable
         radius="none"
@@ -117,7 +117,7 @@ export const VideoPreview = ({
                       content={data.title}
                     >
                       <Link href={`/channel/${channelId}`}>
-                        <h4 className="text-sm font-semibold leading-none text-default-500 hover:text-white">
+                        <h4 className="text-sm font-semibold leading-none text-default-500">
                           {data.title}
                         </h4>
                       </Link>

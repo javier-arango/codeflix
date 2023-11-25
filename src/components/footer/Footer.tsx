@@ -1,4 +1,4 @@
-import { Logo } from '@components/foundation'
+import { Logo, ThemeSwitcher } from '@components/foundation'
 import { Link } from '@nextui-org/react'
 
 export const Footer = () => {
@@ -8,28 +8,9 @@ export const Footer = () => {
         <div className="sm:flex sm:items-center sm:justify-between">
           <Logo />
 
-          <ul className="flex flex-wrap items-center mb-6 text-sm font-medium sm:mb-0">
-            <li>
-              <a href="#" className="hover:underline me-4 md:me-6">
-                About
-              </a>
-            </li>
-            <li>
-              <a href="#" className="hover:underline me-4 md:me-6">
-                Privacy Policy
-              </a>
-            </li>
-            <li>
-              <a href="#" className="hover:underline me-4 md:me-6">
-                Licensing
-              </a>
-            </li>
-            <li>
-              <a href="#" className="hover:underline">
-                Contact
-              </a>
-            </li>
-          </ul>
+          <div className="mb-6 mt-6 sm:mb-0 sm:mt-0">
+            <ThemeSwitcher />
+          </div>
         </div>
 
         <span className="block text-default-400 sm:text-center my-6 sm:mx-auto lg:my-8">

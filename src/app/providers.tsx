@@ -2,6 +2,8 @@
 
 import { NextUIProvider } from '@nextui-org/react'
 import { SessionProvider } from 'next-auth/react'
+import { ThemeProvider as NextThemesProvider } from 'next-themes'
+
 interface Props {
   children?: React.ReactNode
 }
@@ -9,7 +11,11 @@ interface Props {
 export function Providers({ children }: Props) {
   return (
     <SessionProvider>
-      <NextUIProvider>{children}</NextUIProvider>
+      <NextUIProvider>
+        <NextThemesProvider attribute="class" defaultTheme="dark">
+          {children}
+        </NextThemesProvider>
+      </NextUIProvider>
     </SessionProvider>
   )
 }

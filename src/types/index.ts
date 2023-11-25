@@ -40,3 +40,14 @@ export interface VideoPreviewDetails {
   videoDescription: string
   channelId: string
 }
+
+export interface UserDetails {
+  id: string
+  firstName: string
+  lastName: string
+  email: string
+  avatar: string
+  bio: string
+  createdAt: Date
+  updatedAt: Date
+}

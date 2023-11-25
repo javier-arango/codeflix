@@ -26,7 +26,7 @@ export default async function RootLayout({
   const session: Session | null = await getServerSession(authOptions)
 
   return (
-    <html lang="en" className="dark">
+    <html lang="en" suppressHydrationWarning>
       <body className={roboto.className}>
         <Providers>
           <Toaster />
