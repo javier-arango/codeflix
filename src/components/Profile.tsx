@@ -1,28 +1,15 @@
 import styles from '@styles/Profile.module.scss'
+import { getUser } from '@utils/fetcher.utils'
 import { authOptions } from 'app/api/auth/[...nextauth]/route'
 import { getServerSession } from 'next-auth'
 import Image from 'next/image'
-import type { CategoryKey, UserDetails, VideosResponse } from 'types'
+import Link from 'next/link'
+import type { UserDetails, VideosResponse } from 'types'
 import defaultProfileImage from '../../public/assets/defaultProfile.jpg'
 import editProfile from '../../public/assets/edit_profile.svg'
 import Tab from './Tab'
 import Tabs from './Tabs'
 import VideoList from './VideoList'
-import Link from 'next/link'
-
-async function getVideos(category: CategoryKey) {
-  const response = await fetch(
-    `http://localhost:3000/api/videos?category=${category}`
-  )
-
-  if (!response || !response.ok) {
-    return null
-  }
-
-  const data: VideosResponse = await response.json()
-
-  return data
-}
 
 async function getPlaylists(userEmail: string | undefined | null) {
   try {
@@ -50,7 +37,7 @@ async function getPlaylists(userEmail: string | undefined | null) {
 
 async function getVideosOfPlaylists(playlistId: number) {
   const response = await fetch(
-    `http://localhost:3000/api/user/playlist/${playlistId}`
+    `http://localhost:3000/api/user/playlist/videos/${playlistId}`
   )
 
   if (!response || !response.ok) {
@@ -60,51 +47,18 @@ async function getVideosOfPlaylists(playlistId: number) {
   return await response.json()
 }
 
-async function getUser(email: string | undefined | null) {
-  try {
-    const res = await fetch('http://localhost:3000/api/user/get_user', {
-      method: 'POST',
-      body: JSON.stringify({ email }),
-    })
-
-    if (!res.ok) {
-      return {
-        error: true,
-        message: "Error getting user info"
-      }
-    }
-
-    return await res.json()
-  } catch (err) {
-    return {
-      error: true,
-      message: 'Error getting user info',
-    }
-  }
-}
-
 export default async function Profile() {
   const session = await getServerSession(authOptions)
-  const user : UserDetails = await getUser(session?.user?.email)
-  const data: VideosResponse | null = await getVideos('ai')
-  // const playlistRes = await getPlaylists("test@test.com")
+  const user: UserDetails = await getUser(session?.user?.email)
+  const playlistRes = await getPlaylists('test@test.com')
+  let watchlistVideos: VideosResponse
+  let favoriteVideos: VideosResponse
 
-  // console.log(playlistRes)
-  // if(playlistRes) {
-  //   console.log("Getting videos of Playlists")
-  //   // Get videos of playlists
-  //   const watchlistVideos = await getVideosOfPlaylists(playlistRes.playlists[0].id)
-  //   const favoriteVideos = await getVideosOfPlaylists(playlistRes.playlists[1].id)
-
-  //   // print results
-  //   console.log(watchlistVideos)
-  //   console.log(favoriteVideos)
-
-  // }
-
-  if (!data) {
-    return null
-  }
+  if (playlistRes) {
+    // Get videos of playlists
+    watchlistVideos = await getVideosOfPlaylists(playlistRes.playlists[0].id)
+    favoriteVideos = await getVideosOfPlaylists(playlistRes.playlists[1].id)
+  } else return null
 
   return (
     <>
@@ -127,9 +81,7 @@ export default async function Profile() {
             {user.bio ? user.bio : "No Bio ('edit your profile to add a bio)"}
           </div>
           <div id={styles.actions}>
-            <Link
-              href={`/profile/edit/${user.id}?email=${user.email}`}
-            >
+            <Link href={`/profile/edit/${user.id}?email=${user.email}`}>
               <button id={styles.edit} onClick={editProfile}>
                 <Image
                   id={styles.editIcon}
@@ -145,12 +97,22 @@ export default async function Profile() {
       <Tabs labels={['Watchlist', 'Favorite']}>
         <Tab
           content={
-            <VideoList categoryTitle="" videos={data} playlist allVideos />
+            <VideoList
+              categoryTitle=""
+              videos={watchlistVideos}
+              playlist
+              allVideos
+            />
           }
         />
         <Tab
           content={
-            <VideoList categoryTitle="" videos={data} playlist allVideos />
+            <VideoList
+              categoryTitle=""
+              videos={favoriteVideos}
+              playlist
+              allVideos
+            />
           }
         />
       </Tabs>

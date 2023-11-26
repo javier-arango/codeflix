@@ -24,3 +24,26 @@ export async function getVideos(category: CategoryKey) {
 
   return await response.json() as VideosResponse
 }
+
+export async function getUser(email: string | undefined | null) {
+  try {
+    const res = await fetch('http://localhost:3000/api/user/get_user', {
+      method: 'POST',
+      body: JSON.stringify({ email }),
+    })
+
+    if (!res.ok) {
+      return {
+        error: true,
+        message: 'Error getting user info',
+      }
+    }
+
+    return await res.json()
+  } catch (err) {
+    return {
+      error: true,
+      message: 'Error getting user info',
+    }
+  }
+}
