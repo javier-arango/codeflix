@@ -100,6 +100,7 @@ export default async function Profile() {
             <VideoList
               categoryTitle=""
               videos={watchlistVideos}
+              playlistId={playlistRes.playlists[0].id}
               playlist
               allVideos
             />
@@ -110,6 +111,7 @@ export default async function Profile() {
             <VideoList
               categoryTitle=""
               videos={favoriteVideos}
+              playlistId={playlistRes.playlists[1].id}
               playlist
               allVideos
             />

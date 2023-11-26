@@ -11,12 +11,20 @@ type videoTileProps = {
   video: Video
   showRemoveIcon: boolean
   vertical?: boolean
+  deleteHandler?: (videoId: string) => void
 }
 
 export default function VideoTile(props: videoTileProps) {
+  const id = props.video.videoId
   const title = props.video.title
   const source = props.video.thumbnailUrl
   const showRemoveIcon = props.showRemoveIcon
+
+  const removeVideoFromPlaylist = (videoId: string) => {
+    if(props.deleteHandler) {
+      props.deleteHandler(videoId)
+    }
+  }
 
   return (
     <div
@@ -34,7 +42,7 @@ export default function VideoTile(props: videoTileProps) {
       {showRemoveIcon && (
         <button
           className={styles.removeButton}
-          onClick={() => console.log('clicked')}
+          onClick={() => removeVideoFromPlaylist(id)}
         >
           <Image
             className={styles.removeIcon}

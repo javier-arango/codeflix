@@ -1,8 +1,11 @@
+'use client'
+
 import type { Video } from '@prisma/client'
 import Link from 'next/link'
 import type { CategoryKey, VideosResponse } from 'types'
 import styles from '../styles/VideoList.module.scss'
 import VideoTile from './VideoTile'
+import { removeVideoFromPlaylist } from '@utils/fetcher.utils'
 
 type VideosProps = {
   allVideos: boolean
@@ -10,9 +13,20 @@ type VideosProps = {
   categoryTitle?: string
   categoryKey?: CategoryKey
   playlist: boolean
+  playlistId?: string
 }
 
 export default function VideoList(props: VideosProps) {
+  // Remove a video from the playlist
+  const handleDeleteVideo = async (videoId: string) => {
+    console.log(videoId)
+    if(props.playlistId) {
+      const res = await removeVideoFromPlaylist(videoId, props.playlistId)
+
+      console.log(res)
+    }
+  }
+
   const getVideos = (videos: VideosResponse) => {
     const array = []
 
@@ -27,6 +41,7 @@ export default function VideoList(props: VideosProps) {
             applyMargin={videos.count == 4 ? false : true}
             video={video}
             showRemoveIcon={props.playlist ? true : false}
+            deleteHandler={handleDeleteVideo}
           />
         )
       }

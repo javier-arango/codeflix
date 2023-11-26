@@ -13,8 +13,6 @@ export async function getVideos(category: CategoryKey) {
     `http://localhost:3000/api/videos?category=${category}`
   )
 
-  console.log(response)
-
   if (!response || !response.ok) {
     return {
       count: 0,
@@ -46,4 +44,20 @@ export async function getUser(email: string | undefined | null) {
       message: 'Error getting user info',
     }
   }
+}
+
+export async function removeVideoFromPlaylist(videoId : string, playlistId : string) {
+  console.log("removing video")
+  const response = await fetch('http://localhost:3000/api/user/playlist/edit', {
+    method: 'POST',
+    body: JSON.stringify({ videoId, playlistId }),
+  })
+
+  console.log
+
+  if (!response || !response.ok) {
+    throw new Error("Error deleting video")
+  }
+
+  return await response.json()
 }
