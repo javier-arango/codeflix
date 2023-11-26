@@ -5,11 +5,7 @@ import { getServerSession } from 'next-auth'
 import { AiFillWarning } from 'react-icons/ai'
 import type { UserDetails } from 'types'
 
-export default async function ProfileLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default async function ProfileLayout() {
   // User session
   const session = await getServerSession(authOptions)
 
@@ -22,10 +18,7 @@ export default async function ProfileLayout({
   return (
     <div className="p-8">
       {user ? (
-        <>
-          <UserProfile user={user} />
-          {children}
-        </>
+        <UserProfile user={user} />
       ) : (
         // User is not login yet send the user to login page
         <div className="flex flex-col items-center justify-center w-screen h-screen">

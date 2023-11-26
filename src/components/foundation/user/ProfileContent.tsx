@@ -3,11 +3,7 @@
 import { Tab, Tabs } from '@nextui-org/react'
 import { useState } from 'react'
 
-interface ProfileContentProps {
-  children?: React.ReactNode
-}
-
-export const ProfileContent = ({ children }: ProfileContentProps) => {
+export const ProfileContent = () => {
   const [selected, setSelected] = useState<string>('playlists')
 
   const handleSelectionChange = (key: string | number) => {
@@ -28,11 +24,11 @@ export const ProfileContent = ({ children }: ProfileContentProps) => {
       selectedKey={selected}
       onSelectionChange={handleSelectionChange}
     >
-      <Tab key="playlists" title="Playlists" href="/user/profile/playlists">
-        {children}
+      <Tab key="playlists" title="Playlists">
+        <div>Playlists</div>
       </Tab>
-      <Tab key="history" title="History" href="/user/profile/history">
-        {children}
+      <Tab key="history" title="History">
+        <div>History</div>
       </Tab>
     </Tabs>
   )
