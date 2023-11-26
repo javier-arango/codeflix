@@ -61,3 +61,58 @@ export async function removeVideoFromPlaylist(videoId : string, playlistId : str
 
   return await response.json()
 }
+
+export async function getPlaylists(userEmail: string | undefined | null) {
+  try {
+    const res = await fetch('http://localhost:3000/api/user/playlist/get_all', {
+      method: 'POST',
+      body: JSON.stringify({ userEmail }),
+    })
+
+    if (!res.ok) {
+      return {
+        count: 0,
+        playlists: [],
+      }
+    }
+
+    return await res.json()
+  } catch (err) {
+    console.error(err)
+    return {
+      count: 0,
+      playlists: [],
+    }
+  }
+}
+
+export async function getVideosOfPlaylists(playlistId: number) {
+  const response = await fetch(
+    `http://localhost:3000/api/user/playlist/videos/${playlistId}`
+  )
+
+  if (!response || !response.ok) {
+    return null
+  }
+
+  return await response.json()
+}
+
+export async function addVideoToPlaylist(
+  videoId: string,
+  playlistId: string
+) {
+  console.log('removing video')
+  const response = await fetch('http://localhost:3000/api/user/playlist/add_to_playlist', {
+    method: 'POST',
+    body: JSON.stringify({ videoId, playlistId }),
+  })
+
+  console.log
+
+  if (!response || !response.ok) {
+    throw new Error('Error deleting video')
+  }
+
+  return await response.json()
+}

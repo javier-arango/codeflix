@@ -12,8 +12,6 @@ async function getVideos(category: CategoryKey) {
     `http://localhost:3000/api/videos?category=${category}`
   )
 
-  console.log(response)
-
   if (!response || !response.ok) {
     return null
   }

@@ -1,5 +1,5 @@
 import styles from '@styles/Profile.module.scss'
-import { getUser } from '@utils/fetcher.utils'
+import { getPlaylists, getUser, getVideosOfPlaylists } from '@utils/fetcher.utils'
 import { authOptions } from 'app/api/auth/[...nextauth]/route'
 import { getServerSession } from 'next-auth'
 import Image from 'next/image'
@@ -10,42 +10,6 @@ import editProfile from '../../public/assets/edit_profile.svg'
 import Tab from './Tab'
 import Tabs from './Tabs'
 import VideoList from './VideoList'
-
-async function getPlaylists(userEmail: string | undefined | null) {
-  try {
-    const res = await fetch('http://localhost:3000/api/user/playlist/get_all', {
-      method: 'POST',
-      body: JSON.stringify({ userEmail }),
-    })
-
-    if (!res.ok) {
-      return {
-        count: 0,
-        playlists: [],
-      }
-    }
-
-    return await res.json()
-  } catch (err) {
-    console.error(err)
-    return {
-      count: 0,
-      playlists: [],
-    }
-  }
-}
-
-async function getVideosOfPlaylists(playlistId: number) {
-  const response = await fetch(
-    `http://localhost:3000/api/user/playlist/videos/${playlistId}`
-  )
-
-  if (!response || !response.ok) {
-    return null
-  }
-
-  return await response.json()
-}
 
 export default async function Profile() {
   const session = await getServerSession(authOptions)
