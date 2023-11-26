@@ -55,15 +55,26 @@ const getRandomCategories = function (
 export default async function HomePage() {
   const randomCategories = getRandomCategories(VIDEO_CATEGORIES2, 4)
   const data: VideosResponse | null = await getVideos(randomCategories[0].key)
+  const data2: VideosResponse | null = await getVideos(randomCategories[1].key)
 
   return (
     <main>
       <Banner />
-      <Categories
-        allCategories={false}
-        categories={randomCategories}
+      <Categories allCategories={false} categories={randomCategories} />
+      <VideoList
+        categoryTitle={randomCategories[0].name}
+        allVideos={false}
+        videos={data}
+        playlist={false}
+        categoryKey={randomCategories[0].key}
       />
-      <VideoList categoryTitle={randomCategories[0].name} allVideos={false} videos={data} playlist={false} />
+      <VideoList
+        categoryTitle={randomCategories[1].name}
+        allVideos={false}
+        videos={data2}
+        playlist={false}
+        categoryKey={randomCategories[1].key}
+      />
     </main>
   )
 }

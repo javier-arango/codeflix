@@ -1,6 +1,6 @@
 import type { Video } from '@prisma/client'
 import Link from 'next/link'
-import type { VideosResponse } from 'types'
+import type { CategoryKey, VideosResponse } from 'types'
 import styles from '../styles/VideoList.module.scss'
 import VideoTile from './VideoTile'
 
@@ -8,6 +8,7 @@ type VideosProps = {
   allVideos: boolean
   videos: VideosResponse
   categoryTitle?: string
+  categoryKey?: CategoryKey
   playlist: boolean
 }
 
@@ -16,7 +17,9 @@ export default function VideoList(props: VideosProps) {
     const array = []
 
     if (Array.isArray(videos.videos)) {
-      for (let i = 0; i < videos.count; i++) {
+      const quantity = props.allVideos ? videos.count : 4
+
+      for (let i = 0; i < quantity; i++) {
         const video = videos.videos[i] as Video
         array.push(
           <VideoTile
@@ -38,7 +41,7 @@ export default function VideoList(props: VideosProps) {
           {!props.allVideos && (
             <div id={styles.header}>
               <h1 id={styles.categoryTitle}>{props.categoryTitle}</h1>
-              <Link href={''}>
+              <Link href={`/categories/${props.categoryKey || ''}`}>
                 <h2 id={styles.viewAll}>View all</h2>
               </Link>
             </div>
