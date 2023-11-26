@@ -21,7 +21,7 @@ export default function VideoTile(props: videoTileProps) {
   const showRemoveIcon = props.showRemoveIcon
 
   const removeVideoFromPlaylist = (videoId: string) => {
-    if(props.deleteHandler) {
+    if (props.deleteHandler) {
       props.deleteHandler(videoId)
     }
   }

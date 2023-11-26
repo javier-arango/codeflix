@@ -1,6 +1,11 @@
 import type { Video } from '@prisma/client'
 import styles from '@styles/VideoView.module.scss'
-import { addVideoToPlaylist, getPlaylists, getVideosOfPlaylists, removeVideoFromPlaylist } from '@utils/fetcher.utils'
+import {
+  addVideoToPlaylist,
+  getPlaylists,
+  getVideosOfPlaylists,
+  removeVideoFromPlaylist,
+} from '@utils/fetcher.utils'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import type { VideosResponse } from 'types'
@@ -21,13 +26,13 @@ export default function VideoActions(props: Props) {
 
   useEffect(() => {
     async function fetchData() {
-      const { bookmarkState, favoriteState } = await check();
-      setIsBookmark(bookmarkState);
-      setIsFavorite(favoriteState);
+      const { bookmarkState, favoriteState } = await check()
+      setIsBookmark(bookmarkState)
+      setIsFavorite(favoriteState)
     }
 
-    fetchData();
-  }, [props.videoId]);
+    fetchData()
+  }, [props.videoId])
 
   const check = async () => {
     const playlistRes = await getPlaylists('test@test.com')
@@ -54,12 +59,12 @@ export default function VideoActions(props: Props) {
 
     // If the previous condition is not met, return some default values or handle the case accordingly
     return { bookmarkState: false, favoriteState: false }
-  };
+  }
 
   const handleActionsClick = async (action: string) => {
     if (action === 'favorite') {
-      if(isFavorite) {
-        await removeVideoFromPlaylist(props.videoId, "0").then(() => {
+      if (isFavorite) {
+        await removeVideoFromPlaylist(props.videoId, '0').then(() => {
           setIsFavorite((prevIsFavorite) => !prevIsFavorite)
         })
       } else {
@@ -97,4 +102,3 @@ export default function VideoActions(props: Props) {
     </div>
   )
 }
-

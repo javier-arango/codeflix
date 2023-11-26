@@ -1,5 +1,5 @@
-import EditProfile from "@components/EditProfile"
-import type { UserDetails } from "types"
+import EditProfile from '@components/EditProfile'
+import type { UserDetails } from 'types'
 
 async function getUser(email: string | undefined | null) {
   try {
@@ -24,7 +24,6 @@ async function getUser(email: string | undefined | null) {
   }
 }
 
-
 export default async function EditProfilePage({
   searchParams,
 }: {
@@ -34,9 +33,8 @@ export default async function EditProfilePage({
   const user: UserDetails = await getUser(email)
 
   console.log(user)
-  
-  return <EditProfile user={user}/>
-  
+
+  return <EditProfile user={user} />
 }
 
 // Display name

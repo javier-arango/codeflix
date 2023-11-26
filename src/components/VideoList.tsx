@@ -20,7 +20,7 @@ export default function VideoList(props: VideosProps) {
   // Remove a video from the playlist
   const handleDeleteVideo = async (videoId: string) => {
     console.log(videoId)
-    if(props.playlistId) {
+    if (props.playlistId) {
       const res = await removeVideoFromPlaylist(videoId, props.playlistId)
 
       console.log(res)

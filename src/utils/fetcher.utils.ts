@@ -16,11 +16,11 @@ export async function getVideos(category: CategoryKey) {
   if (!response || !response.ok) {
     return {
       count: 0,
-      videos: []
+      videos: [],
     } as VideosResponse
   }
 
-  return await response.json() as VideosResponse
+  return (await response.json()) as VideosResponse
 }
 
 export async function getUser(email: string | undefined | null) {
@@ -46,8 +46,11 @@ export async function getUser(email: string | undefined | null) {
   }
 }
 
-export async function removeVideoFromPlaylist(videoId : string, playlistId : string) {
-  console.log("removing video")
+export async function removeVideoFromPlaylist(
+  videoId: string,
+  playlistId: string
+) {
+  console.log('removing video')
   const response = await fetch('http://localhost:3000/api/user/playlist/edit', {
     method: 'POST',
     body: JSON.stringify({ videoId, playlistId }),
@@ -56,7 +59,7 @@ export async function removeVideoFromPlaylist(videoId : string, playlistId : str
   console.log
 
   if (!response || !response.ok) {
-    throw new Error("Error deleting video")
+    throw new Error('Error deleting video')
   }
 
   return await response.json()
@@ -98,15 +101,15 @@ export async function getVideosOfPlaylists(playlistId: number) {
   return await response.json()
 }
 
-export async function addVideoToPlaylist(
-  videoId: string,
-  playlistId: string
-) {
+export async function addVideoToPlaylist(videoId: string, playlistId: string) {
   console.log('removing video')
-  const response = await fetch('http://localhost:3000/api/user/playlist/add_to_playlist', {
-    method: 'POST',
-    body: JSON.stringify({ videoId, playlistId }),
-  })
+  const response = await fetch(
+    'http://localhost:3000/api/user/playlist/add_to_playlist',
+    {
+      method: 'POST',
+      body: JSON.stringify({ videoId, playlistId }),
+    }
+  )
 
   console.log
 

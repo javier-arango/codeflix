@@ -41,7 +41,7 @@ export default function VideoView({ videoId }: VideoViewProps) {
           </div>
           <div id={styles.infoActions}>
             <h1 id={styles.title}>{data.title}</h1>
-            <VideoActions videoId={videoId}/>
+            <VideoActions videoId={videoId} />
           </div>
         </div>
         <div id={styles.videosList}>
