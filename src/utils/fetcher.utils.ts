@@ -56,8 +56,6 @@ export async function removeVideoFromPlaylist(
     body: JSON.stringify({ videoId, playlistId }),
   })
 
-  console.log
-
   if (!response || !response.ok) {
     throw new Error('Error deleting video')
   }
@@ -110,8 +108,6 @@ export async function addVideoToPlaylist(videoId: string, playlistId: string) {
       body: JSON.stringify({ videoId, playlistId }),
     }
   )
-
-  console.log
 
   if (!response || !response.ok) {
     throw new Error('Error deleting video')

@@ -24,16 +24,6 @@ export default function VideoActions(props: Props) {
   // const [favId, setFavID] = useState(0)
   // const [bookId, setBookID] = useState(0)
 
-  useEffect(() => {
-    async function fetchData() {
-      const { bookmarkState, favoriteState } = await check()
-      setIsBookmark(bookmarkState)
-      setIsFavorite(favoriteState)
-    }
-
-    fetchData()
-  }, [props.videoId])
-
   const check = async () => {
     const playlistRes = await getPlaylists('test@test.com')
     // Get videos of Watchlist and Favorite
@@ -60,6 +50,16 @@ export default function VideoActions(props: Props) {
     // If the previous condition is not met, return some default values or handle the case accordingly
     return { bookmarkState: false, favoriteState: false }
   }
+
+  useEffect(() => {
+    async function fetchData() {
+      const { bookmarkState, favoriteState } = await check()
+      setIsBookmark(bookmarkState)
+      setIsFavorite(favoriteState)
+    }
+
+    fetchData()
+  },)
 
   const handleActionsClick = async (action: string) => {
     if (action === 'favorite') {
