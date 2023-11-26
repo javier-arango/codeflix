@@ -16,10 +16,11 @@ export async function getVideos(category: CategoryKey) {
   console.log(response)
 
   if (!response || !response.ok) {
-    return null
+    return {
+      count: 0,
+      videos: []
+    } as VideosResponse
   }
 
-  const data: VideosResponse = await response.json()
-
-  return data
+  return await response.json() as VideosResponse
 }
