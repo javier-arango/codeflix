@@ -59,7 +59,7 @@ export default function VideoActions(props: Props) {
     }
 
     fetchData()
-  },)
+  })
 
   const handleActionsClick = async (action: string) => {
     if (action === 'favorite') {
