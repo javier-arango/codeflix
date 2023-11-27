@@ -89,6 +89,23 @@ export async function createUser(user: User): Promise<boolean> {
       },
     })
 
+    // Create an empty playlist for the user
+    await prisma.playlist.create({
+      data: {
+        name: 'Favorites',
+        description: 'A playlist for your favorite videos',
+        user: { connect: { email: user.email } },
+      },
+    })
+
+    await prisma.playlist.create({
+      data: {
+        name: 'Watch List',
+        description: 'A playlist for your watch list',
+        user: { connect: { email: user.email } },
+      },
+    })
+
     return true
   } catch (err) {
     console.error(`Error creating user: ${err}`)
