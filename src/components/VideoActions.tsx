@@ -73,10 +73,10 @@ export default function VideoActions(props: Props) {
       toast.error('Login to perform this action')
     } else {
       // User has a session, add or remove video to corresponding playlist
-      if(action === 'favorite') {
+      if (action === 'favorite') {
         if (isFavorite) {
           await removeVideoFromPlaylist(props.videoId, '0').then((res) => {
-            if(res.error) {
+            if (res.error) {
               toast.error(res.error)
             } else {
               toast.success(res.message)
