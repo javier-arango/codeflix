@@ -5,9 +5,9 @@ import styles from '@styles/VideoView.module.scss'
 import { fetcher } from '@utils/fetcher.utils'
 import useSWR from 'swr'
 import { LoadingSpinner } from './LoadingSpinner'
+import VideoActions from './VideoActions'
 import VideoListVertical from './VideoListVertical'
 import { VideoPlayer } from './VideoPlayer'
-import VideoActions from './VideoActions'
 
 interface VideoViewProps {
   videoId: string

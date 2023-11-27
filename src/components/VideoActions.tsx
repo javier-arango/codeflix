@@ -1,3 +1,5 @@
+'use client'
+
 import type { Video } from '@prisma/client'
 import styles from '@styles/VideoView.module.scss'
 import {
@@ -6,8 +8,10 @@ import {
   getVideosOfPlaylists,
   removeVideoFromPlaylist,
 } from '@utils/fetcher.utils'
+import { useSession } from 'next-auth/react'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
+import toast from 'react-hot-toast'
 import type { VideosResponse } from 'types'
 import bookmark from '../../public/assets/bookmark.svg'
 import removeBookmark from '../../public/assets/bookmark_minus.svg'
@@ -19,6 +23,7 @@ type Props = {
 }
 
 export default function VideoActions(props: Props) {
+  const { status } = useSession()
   const [isFavorite, setIsFavorite] = useState(false)
   const [isBookmark, setIsBookmark] = useState(false)
   // const [favId, setFavID] = useState(0)
@@ -62,25 +67,52 @@ export default function VideoActions(props: Props) {
   })
 
   const handleActionsClick = async (action: string) => {
-    if (action === 'favorite') {
-      if (isFavorite) {
-        await removeVideoFromPlaylist(props.videoId, '0').then(() => {
-          setIsFavorite((prevIsFavorite) => !prevIsFavorite)
-        })
-      } else {
-        await addVideoToPlaylist(props.videoId, '0').then(() => {
-          setIsFavorite((prevIsFavorite) => !prevIsFavorite)
-        })
-      }
-    } else if (action === 'bookmark') {
-      if (isBookmark) {
-        await removeVideoFromPlaylist(props.videoId, '1').then(() => {
-          setIsFavorite((prevIsFavorite) => !prevIsFavorite)
-        })
-      } else {
-        await addVideoToPlaylist(props.videoId, '1').then(() => {
-          setIsFavorite((prevIsFavorite) => !prevIsFavorite)
-        })
+    // First check if the user has a session
+    if (status != 'authenticated') {
+      // Show message for user to login
+      toast.error('Login to perform this action')
+    } else {
+      // User has a session, add or remove video to corresponding playlist
+      if(action === 'favorite') {
+        if (isFavorite) {
+          await removeVideoFromPlaylist(props.videoId, '0').then((res) => {
+            if(res.error) {
+              toast.error(res.error)
+            } else {
+              toast.success(res.message)
+              setIsFavorite((prevIsFavorite) => !prevIsFavorite)
+            }
+          })
+        } else {
+          await addVideoToPlaylist(props.videoId, '0').then((res) => {
+            if (res.error) {
+              toast.error(res.error)
+            } else {
+              toast.success(res.message)
+              setIsFavorite((prevIsFavorite) => !prevIsFavorite)
+            }
+          })
+        }
+      } else if (action === 'bookmark') {
+        if (isBookmark) {
+          await removeVideoFromPlaylist(props.videoId, '1').then((res) => {
+            if (res.error) {
+              toast.error(res.error)
+            } else {
+              toast.success(res.message)
+              setIsBookmark((prevIsBookmark) => !prevIsBookmark)
+            }
+          })
+        } else {
+          await addVideoToPlaylist(props.videoId, '1').then((res) => {
+            if (res.error) {
+              toast.error(res.error)
+            } else {
+              toast.success(res.message)
+              setIsBookmark((prevIsBookmark) => !prevIsBookmark)
+            }
+          })
+        }
       }
     }
   }

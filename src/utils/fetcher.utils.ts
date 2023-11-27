@@ -50,7 +50,6 @@ export async function removeVideoFromPlaylist(
   videoId: string,
   playlistId: string
 ) {
-  console.log('removing video')
   const response = await fetch('http://localhost:3000/api/user/playlist/edit', {
     method: 'POST',
     body: JSON.stringify({ videoId, playlistId }),
