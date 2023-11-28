@@ -17,7 +17,10 @@ type VideosProps = {
 }
 
 export default function VideoList(props: VideosProps) {
-  // Remove a video from the playlist
+  /**
+   * Remove a video from a playlist
+   * @param videoId The video ID that you want to remove
+   */
   const handleDeleteVideo = async (videoId: string) => {
     console.log(videoId)
     if (props.playlistId) {
@@ -27,7 +30,12 @@ export default function VideoList(props: VideosProps) {
     }
   }
 
-  const getVideos = (videos: VideosResponse) => {
+  /**
+   * Create the tile component for each video
+   * @param videos the array of the videos response
+   * @returns An array of VideoTile component
+   */
+  const createVideosTile = (videos: VideosResponse) => {
     const array = []
 
     if (Array.isArray(videos.videos)) {
@@ -49,6 +57,9 @@ export default function VideoList(props: VideosProps) {
     return array
   }
 
+  // If no videos and it is a playlist, display that message
+  return <div id={styles.noVideos}>No videos in this playlist</div>
+
   return (
     <section id={styles.videosSection}>
       <div className="container">
@@ -64,7 +75,7 @@ export default function VideoList(props: VideosProps) {
           <div
             className={props.allVideos ? styles.allVideos : styles.someVideos}
           >
-            {getVideos(props.videos)}
+            {createVideosTile(props.videos)}
           </div>
         </div>
       </div>
