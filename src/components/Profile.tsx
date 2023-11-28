@@ -18,7 +18,7 @@ import VideoList from './VideoList'
 export default async function Profile() {
   const session = await getServerSession(authOptions)
   const user: UserDetails = await getUser(session?.user?.email)
-  const playlistRes = await getPlaylists('test@test.com')
+  const playlistRes = await getPlaylists(user.email)
   let watchlistVideos: VideosResponse
   let favoriteVideos: VideosResponse
 
