@@ -64,7 +64,7 @@ export default function EditProfile(props: Props) {
           />
           <textarea
             id={styles.bio}
-            value={formData.bio}
+            value={formData.bio ? formData.bio : ""}
             placeholder="(Bio)"
           ></textarea>
           <input id={styles.submit} type="submit" value={'Save'} />

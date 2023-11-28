@@ -8,8 +8,6 @@ export default function LogoutButton() {
   // const router = useRouter()
 
   const logout = () => {
-    console.log('clicked')
-    // router.push('/')
     signOut({ redirect: false, callbackUrl: '/' })
   }
 

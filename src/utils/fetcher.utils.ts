@@ -86,7 +86,7 @@ export async function getPlaylists(userEmail: string | undefined | null) {
   }
 }
 
-export async function getVideosOfPlaylists(playlistId: number) {
+export async function getVideosOfPlaylists(playlistId: string) {
   const response = await fetch(
     `http://localhost:3000/api/user/playlist/videos/${playlistId}`
   )
@@ -99,7 +99,6 @@ export async function getVideosOfPlaylists(playlistId: number) {
 }
 
 export async function addVideoToPlaylist(videoId: string, playlistId: string) {
-  console.log('removing video')
   const response = await fetch(
     'http://localhost:3000/api/user/playlist/add_to_playlist',
     {

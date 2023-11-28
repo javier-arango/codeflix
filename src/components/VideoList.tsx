@@ -6,6 +6,7 @@ import type { CategoryKey, VideosResponse } from 'types'
 import styles from '../styles/VideoList.module.scss'
 import VideoTile from './VideoTile'
 import { removeVideoFromPlaylist } from '@utils/fetcher.utils'
+import toast from 'react-hot-toast'
 
 type VideosProps = {
   allVideos: boolean
@@ -22,11 +23,15 @@ export default function VideoList(props: VideosProps) {
    * @param videoId The video ID that you want to remove
    */
   const handleDeleteVideo = async (videoId: string) => {
-    console.log(videoId)
     if (props.playlistId) {
       const res = await removeVideoFromPlaylist(videoId, props.playlistId)
 
-      console.log(res)
+      // Display error message or success if video was removed or not
+      if(res.error) {
+        toast.error(res.error)
+      } else {
+        toast.success(res.message)
+      }
     }
   }
 

@@ -14,6 +14,7 @@ import editProfile from '../../public/assets/edit_profile.svg'
 import Tab from './Tab'
 import Tabs from './Tabs'
 import VideoList from './VideoList'
+import { getPlaylistId } from '@utils/helper.utils'
 
 export default async function Profile() {
   const session = await getServerSession(authOptions)
@@ -24,8 +25,12 @@ export default async function Profile() {
 
   if (playlistRes) {
     // Get videos of playlists
-    watchlistVideos = await getVideosOfPlaylists(playlistRes.playlists[0].id)
-    favoriteVideos = await getVideosOfPlaylists(playlistRes.playlists[1].id)
+    watchlistVideos = await getVideosOfPlaylists(
+      getPlaylistId(playlistRes.playlists, 'Watch List')
+    )
+    favoriteVideos = await getVideosOfPlaylists(
+      getPlaylistId(playlistRes.playlists, 'Favorites')
+    )
   } else return null
 
   return (
@@ -49,7 +54,7 @@ export default async function Profile() {
             {user.bio ? user.bio : "No Bio ('edit your profile to add a bio)"}
           </div>
           <div id={styles.actions}>
-            <Link href={`/profile/edit/${user.id}?email=${user.email}`}>
+            <Link href={'/profile/edit/'}>
               <button id={styles.edit} onClick={editProfile}>
                 <Image
                   id={styles.editIcon}
@@ -62,13 +67,13 @@ export default async function Profile() {
           </div>
         </div>
       </section>
-      <Tabs labels={['Watchlist', 'Favorite']}>
+      <Tabs labels={['Watchlist', 'Favorites']}>
         <Tab
           content={
             <VideoList
               categoryTitle=""
               videos={watchlistVideos}
-              playlistId={playlistRes.playlists[0].id}
+              playlistId={getPlaylistId(playlistRes.playlists, 'Watch List')}
               playlist
               allVideos
             />
@@ -79,7 +84,7 @@ export default async function Profile() {
             <VideoList
               categoryTitle=""
               videos={favoriteVideos}
-              playlistId={playlistRes.playlists[1].id}
+              playlistId={getPlaylistId(playlistRes.playlists, 'Favorites')}
               playlist
               allVideos
             />

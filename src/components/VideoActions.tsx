@@ -1,6 +1,6 @@
 'use client'
 
-import type { Video } from '@prisma/client'
+import type { Playlist, Video } from '@prisma/client'
 import styles from '@styles/VideoView.module.scss'
 import {
   addVideoToPlaylist,
@@ -17,30 +17,35 @@ import bookmark from '../../public/assets/bookmark.svg'
 import removeBookmark from '../../public/assets/bookmark_minus.svg'
 import star from '../../public/assets/star.svg'
 import starFill from '../../public/assets/star_fill.svg'
+import { getPlaylistId } from '@utils/helper.utils'
 
 type Props = {
   videoId: string
 }
 
 export default function VideoActions(props: Props) {
-  const { status } = useSession()
+  const { data, status } = useSession()
   const [isFavorite, setIsFavorite] = useState(false)
   const [isBookmark, setIsBookmark] = useState(false)
-  // const [favId, setFavID] = useState(0)
-  // const [bookId, setBookID] = useState(0)
+  const [playlists, setPlaylsits] = useState([] as Playlist[])
 
   const check = async () => {
-    const playlistRes = await getPlaylists('test@test.com')
+    // Get the user Playlists
+    const playlistRes = await getPlaylists(data?.user?.email)
+
     // Get videos of Watchlist and Favorite
     const watchlistVideosRes: VideosResponse = await getVideosOfPlaylists(
-      playlistRes.playlists[0].id
+      getPlaylistId(playlistRes.playlists, 'Watch List')
     )
     const favoriteVideosRes: VideosResponse = await getVideosOfPlaylists(
-      playlistRes.playlists[1].id
+      getPlaylistId(playlistRes.playlists, 'Favorites')
     )
+
+    // Get the videos array of each playlist
     const watchlistVideos: Video[] = watchlistVideosRes?.videos ?? []
     const favoriteVideos: Video[] = favoriteVideosRes?.videos ?? []
 
+    // Check if current video is in each playlist
     if (watchlistVideos && favoriteVideos) {
       const bookmarkState = watchlistVideos.some((video) => {
         return video.videoId === props.videoId
@@ -49,7 +54,7 @@ export default function VideoActions(props: Props) {
         return video.videoId === props.videoId
       })
 
-      return { bookmarkState, favoriteState }
+      return { bookmarkState, favoriteState, playlistRes }
     }
 
     // If the previous condition is not met, return some default values or handle the case accordingly
@@ -58,9 +63,10 @@ export default function VideoActions(props: Props) {
 
   useEffect(() => {
     async function fetchData() {
-      const { bookmarkState, favoriteState } = await check()
+      const { bookmarkState, favoriteState, playlistRes } = await check()
       setIsBookmark(bookmarkState)
       setIsFavorite(favoriteState)
+      setPlaylsits(playlistRes.playlists)
     }
 
     fetchData()
@@ -74,8 +80,15 @@ export default function VideoActions(props: Props) {
     } else {
       // User has a session, add or remove video to corresponding playlist
       if (action === 'favorite') {
+        // Get the playlist id
+        const favoritesPlaylistId = getPlaylistId(playlists, 'Favorites')
+
+        // add or remove from playlist based on state
         if (isFavorite) {
-          await removeVideoFromPlaylist(props.videoId, '0').then((res) => {
+          await removeVideoFromPlaylist(
+            props.videoId,
+            getPlaylistId(playlists, favoritesPlaylistId)
+          ).then((res) => {
             if (res.error) {
               toast.error(res.error)
             } else {
@@ -84,34 +97,44 @@ export default function VideoActions(props: Props) {
             }
           })
         } else {
-          await addVideoToPlaylist(props.videoId, '0').then((res) => {
-            if (res.error) {
-              toast.error(res.error)
-            } else {
-              toast.success(res.message)
-              setIsFavorite((prevIsFavorite) => !prevIsFavorite)
+          await addVideoToPlaylist(props.videoId, favoritesPlaylistId).then(
+            (res) => {
+              if (res.error) {
+                toast.error(res.error)
+              } else {
+                toast.success(res.message)
+                setIsFavorite((prevIsFavorite) => !prevIsFavorite)
+              }
             }
-          })
+          )
         }
       } else if (action === 'bookmark') {
+        // Get the playlist id
+        const bookmarkPlaylistId = getPlaylistId(playlists, 'Watch List')
+
+        // add or remove from playlist based on state
         if (isBookmark) {
-          await removeVideoFromPlaylist(props.videoId, '1').then((res) => {
-            if (res.error) {
-              toast.error(res.error)
-            } else {
-              toast.success(res.message)
-              setIsBookmark((prevIsBookmark) => !prevIsBookmark)
+          await removeVideoFromPlaylist(props.videoId, bookmarkPlaylistId).then(
+            (res) => {
+              if (res.error) {
+                toast.error(res.error)
+              } else {
+                toast.success(res.message)
+                setIsBookmark((prevIsBookmark) => !prevIsBookmark)
+              }
             }
-          })
+          )
         } else {
-          await addVideoToPlaylist(props.videoId, '1').then((res) => {
-            if (res.error) {
-              toast.error(res.error)
-            } else {
-              toast.success(res.message)
-              setIsBookmark((prevIsBookmark) => !prevIsBookmark)
+          await addVideoToPlaylist(props.videoId, bookmarkPlaylistId).then(
+            (res) => {
+              if (res.error) {
+                toast.error(res.error)
+              } else {
+                toast.success(res.message)
+                setIsBookmark((prevIsBookmark) => !prevIsBookmark)
+              }
             }
-          })
+          )
         }
       }
     }
