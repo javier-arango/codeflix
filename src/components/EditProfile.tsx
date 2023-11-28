@@ -4,12 +4,15 @@ import styles from '@styles/ProfileForm.module.scss'
 import { useState } from 'react'
 import type { UserDetails } from 'types'
 import defaultProfileImage from '../../public/assets/defaultProfile.jpg'
+import toast from 'react-hot-toast'
+import { ThreeDots } from 'react-loader-spinner'
 
 type Props = {
   user: UserDetails
 }
 
 export default function EditProfile(props: Props) {
+  const [loading, setLoading] = useState(false)
   const [formData, setFormData] = useState(props.user)
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -20,7 +23,48 @@ export default function EditProfile(props: Props) {
     }))
   }
 
-  const onSubmit = () => {}
+  /**
+   * Make request to server to save user updates
+   * @returns response with message if successful or not
+   */
+  const saveUpdates = async () => {
+    setLoading(true)
+    const response = await fetch('/api/user/profile/edit', {
+      method: 'POST',
+      body: JSON.stringify({ email: props.user.email, newValues: formData }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+    setLoading(false)
+    return await response.json()
+  }
+
+  /**
+   * Handle when the form is submitted
+   */
+  const onSubmit = async () => {
+    const response = await saveUpdates()
+
+    if (response.error) {
+      toast.error(response.error)
+    } else {
+      toast.success(response.message)
+    }
+  }
+
+  // Loading three dots component
+  const threeDots = (
+    <ThreeDots
+      height="20"
+      width="20"
+      radius="9"
+      color="white"
+      ariaLabel="three-dots-loading"
+      wrapperStyle={{}}
+      visible={true}
+    />
+  )
 
   return (
     <section>
@@ -64,10 +108,12 @@ export default function EditProfile(props: Props) {
           />
           <textarea
             id={styles.bio}
-            value={formData.bio ? formData.bio : ""}
+            value={formData.bio ? formData.bio : ''}
             placeholder="(Bio)"
           ></textarea>
-          <input id={styles.submit} type="submit" value={'Save'} />
+          <button id={styles.submit} type="submit">
+            {loading ? threeDots : 'Save'}
+          </button>
         </form>
       </div>
     </section>
