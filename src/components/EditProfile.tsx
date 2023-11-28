@@ -15,7 +15,23 @@ export default function EditProfile(props: Props) {
   const [loading, setLoading] = useState(false)
   const [formData, setFormData] = useState(props.user)
 
+  /**
+   * Handle when a value of the inputs has changed
+   * @param event 
+   */
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+    }))
+  }
+
+  /**
+   * Handle when the value of text area of the bio has changed
+   * @param event 
+   */
+  const handleTextAreaChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     const { name, value } = event.target
     setFormData((prevFormData) => ({
       ...prevFormData,
@@ -30,20 +46,22 @@ export default function EditProfile(props: Props) {
   const saveUpdates = async () => {
     setLoading(true)
     const response = await fetch('/api/user/profile/edit', {
-      method: 'POST',
+      method: 'PATCH',
       body: JSON.stringify({ email: props.user.email, newValues: formData }),
       headers: {
         'Content-Type': 'application/json',
       },
     })
     setLoading(false)
+
     return await response.json()
   }
 
   /**
    * Handle when the form is submitted
    */
-  const onSubmit = async () => {
+  const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
     const response = await saveUpdates()
 
     if (response.error) {
@@ -110,6 +128,8 @@ export default function EditProfile(props: Props) {
             id={styles.bio}
             value={formData.bio ? formData.bio : ''}
             placeholder="(Bio)"
+            name="bio"
+            onChange={handleTextAreaChange}
           ></textarea>
           <button id={styles.submit} type="submit">
             {loading ? threeDots : 'Save'}
