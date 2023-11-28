@@ -58,7 +58,7 @@ export default function VideoList(props: VideosProps) {
   }
 
   // If no videos and it is a playlist, display that message
-  return <div id={styles.noVideos}>No videos in this playlist</div>
+  if(props.videos.count == 0) return <div id={styles.noVideos}>No videos in this playlist</div>
 
   return (
     <section id={styles.videosSection}>
