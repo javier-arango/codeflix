@@ -1,6 +1,7 @@
 import type { CategoryKey } from '@constants/videoCategories.constants'
 import prisma from '@lib/prisma'
 import type { Channel, Playlist, Video } from '@prisma/client'
+import type { PlaylistDetails } from 'types'
 
 // Read services for Channels
 export async function GetChannel(id: string) {
@@ -75,15 +76,33 @@ export async function SearchVideosByQuery(query: string) {
 }
 
 // Read services for Playlists
-export async function GetPlaylist(id: string) {
+export async function GetPlaylist(id: string): Promise<PlaylistDetails | null> {
   // Find the playlist in the database
-  const playlist: Playlist | null = await prisma.playlist.findUnique({
+  const playlist = await prisma.playlist.findUnique({
     where: {
       id: id,
     },
+    include: {
+      _count: {
+        select: {
+          videos: true,
+        },
+      },
+    },
   })
 
-  return playlist
+  // If the playlist doesn't exist, return null
+  if (!playlist) {
+    return null
+  }
+
+  return {
+    id: playlist.id,
+    name: playlist.name,
+    description: playlist.description,
+    userId: playlist.userId,
+    videoCount: playlist._count.videos,
+  } as PlaylistDetails
 }
 
 /**
@@ -138,13 +157,31 @@ export async function GetUser(email: string) {
   return user
 }
 
-export async function GetAllUserPlaylists(userId: string) {
+export async function GetAllUserPlaylists(
+  userId: string
+): Promise<PlaylistDetails[]> {
   // Find all the user's playlists
   const playlists = await prisma.playlist.findMany({
     where: {
       userId: userId,
     },
+    include: {
+      _count: {
+        select: {
+          videos: true,
+        },
+      },
+    },
   })
 
-  return playlists
+  return playlists.map(
+    (playlist) =>
+      ({
+        id: playlist.id,
+        name: playlist.name,
+        description: playlist.description,
+        userId: playlist.userId,
+        videoCount: playlist._count.videos,
+      }) as PlaylistDetails
+  )
 }

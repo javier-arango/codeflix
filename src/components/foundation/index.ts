@@ -4,6 +4,7 @@ export * from './SearchBar'
 export * from './SelectList'
 export * from './ThemeSwitcher'
 export * from './Thumbnail'
+export * from './WarningMessage'
 
 export * from './channel'
 export * from './skeleton'

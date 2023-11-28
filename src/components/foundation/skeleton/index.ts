@@ -1,2 +1,4 @@
 export * from './ChannelProfileSkeleton'
-export * from './VideoDeetailsSkeleton'
+export * from './PlaylistPreviewSkeleton'
+export * from './VideoDetailsSkeleton'
+

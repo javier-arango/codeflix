@@ -5,7 +5,10 @@ export async function GetPlaylistVideos(
   playlistId: string
 ): Promise<VideoListResponse> {
   try {
-    const res = await fetch(`${baseURL}/api/user/playlist/videos/${playlistId}`)
+    const res = await fetch(
+      `${baseURL}/api/user/playlist/videos/${playlistId}`,
+      { cache: 'no-cache' }
+    )
 
     if (!res.ok) {
       return {

@@ -40,6 +40,7 @@
   "dependencies": {
     "@nextui-org/react": "^2.2.9",
     "@prisma/client": "^5.5.2",
+    "@supabase/supabase-js": "^2.38.5",
     "bcrypt": "^5.1.1",
     "date-fns": "^2.30.0",
     "dotenv-cli": "^7.3.0",

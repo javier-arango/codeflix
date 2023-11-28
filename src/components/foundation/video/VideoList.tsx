@@ -27,7 +27,7 @@ export const VideoList = ({ videos }: VideoListProps) => {
       {videos.map((video) => (
         <VideoPreview
           alignment="vertical"
-          showDescription={false}
+          hideDescription
           key={video.videoId}
           video={parseVideoPreviewData(video)}
         />

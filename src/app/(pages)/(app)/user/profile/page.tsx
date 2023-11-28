@@ -1,11 +1,56 @@
-import { UserProfile } from '@components/foundation'
+import {
+  PlaylistPreviewSkeleton,
+  ProfileContent,
+  UserProfile,
+  WarningMessage,
+} from '@components/foundation'
+import {
+  PlaylistPreview,
+  type PlaylistPreviewProps,
+} from '@components/foundation/playlist'
 import { getUserDetails } from '@services/API'
+import { GetUserPlaylists } from '@services/API/getUserPlaylists.services'
 import { authOptions } from 'app/api/auth/[...nextauth]/route'
 import { getServerSession } from 'next-auth'
-import { AiFillWarning } from 'react-icons/ai'
-import type { UserDetails } from 'types'
+import { Suspense } from 'react'
+import type { PlaylistListResponse, UserDetails } from 'types'
 
-export default async function ProfileLayout() {
+async function UserPlaylists({ userEmail }: { userEmail: string }) {
+  // Get user playlists
+  const userPlaylists: PlaylistListResponse = await GetUserPlaylists(userEmail)
+
+  if (!userPlaylists) {
+    return (
+      <WarningMessage title="An error occurred" subtitle="Please try again" />
+    )
+  }
+
+  return (
+    <>
+      {userPlaylists.count === 0 ? (
+        <WarningMessage
+          title="No Playlists were Found"
+          subtitle="Please create a playlist to view it here"
+        />
+      ) : (
+        <div className="flex flex-row flex-wrap gap-2 lg:gap-4">
+          {userPlaylists.playlists.map((playlist: PlaylistPreviewProps) => (
+            <PlaylistPreview
+              key={playlist.id}
+              id={playlist.id}
+              name={playlist.name}
+              thumbnail={playlist.thumbnail}
+              description={playlist.description}
+              videoCount={playlist.videoCount}
+            />
+          ))}
+        </div>
+      )}
+    </>
+  )
+}
+
+export default async function ProfilePage() {
   // User session
   const session = await getServerSession(authOptions)
 
@@ -18,20 +63,32 @@ export default async function ProfileLayout() {
   return (
     <div className="p-8">
       {user ? (
-        <UserProfile user={user} />
+        <UserProfile user={user}>
+          {/* User playlists */}
+          <Suspense
+            fallback={
+              <div className="flex flex-row flex-wrap gap-2 lg:gap-4">
+                {Array.from({ length: 2 }, (_, i) => (
+                  <PlaylistPreviewSkeleton key={i} />
+                ))}
+              </div>
+            }
+          >
+            <ProfileContent
+              playlists={<UserPlaylists userEmail={user.email} />}
+            />
+          </Suspense>
+        </UserProfile>
       ) : (
         // User is not login yet send the user to login page
-        <div className="flex flex-col items-center justify-center w-screen h-screen">
-          <AiFillWarning className="text-6xl text-default-500" />
-          <h1 className="text-2xl font-bold">User not sign in</h1>
-          <p className="text-default-500 text-sm">
-            Please sign in to view your profile
-          </p>
-        </div>
+        <WarningMessage
+          title="User not sign in"
+          subtitle="Please sign in to view your profile"
+        />
       )}
     </div>
   )
 }
 
 // Display name
-ProfileLayout.displayName = 'ProfileLayout'
+ProfilePage.displayName = 'ProfilePage'

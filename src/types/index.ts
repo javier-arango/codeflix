@@ -1,4 +1,4 @@
-import type { Playlist, Video } from '@prisma/client'
+import type { Video } from '@prisma/client'
 
 export interface SearchResponse {
   count: number
@@ -10,9 +10,18 @@ export interface VideoListResponse {
   videos: Video[]
 }
 
+export interface PlaylistDetails {
+  id: string
+  name: string
+  description?: string
+  thumbnail?: string
+  userId: string
+  videoCount: number
+}
+
 export interface PlaylistListResponse {
   count: number
-  playlists: Playlist[]
+  playlists: PlaylistDetails[]
 }
 
 export interface UpdatedProfile {

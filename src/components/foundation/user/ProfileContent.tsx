@@ -1,9 +1,13 @@
 'use client'
 
 import { Tab, Tabs } from '@nextui-org/react'
-import { useState } from 'react'
+import React, { useState } from 'react'
 
-export const ProfileContent = () => {
+interface ProfileContentProps {
+  playlists: React.ReactNode | React.ReactNode[]
+}
+
+export const ProfileContent = ({ playlists }: ProfileContentProps) => {
   const [selected, setSelected] = useState<string>('playlists')
 
   const handleSelectionChange = (key: string | number) => {
@@ -25,10 +29,13 @@ export const ProfileContent = () => {
       onSelectionChange={handleSelectionChange}
     >
       <Tab key="playlists" title="Playlists">
-        <div>Playlists</div>
+        <>{playlists}</>
       </Tab>
-      <Tab key="history" title="History">
-        <div>History</div>
+      <Tab key="favorite" title="Favorite">
+        <div>Favorite</div>
+      </Tab>
+      <Tab key="watchLater" title="Watch Later">
+        <div>Watch Later</div>
       </Tab>
     </Tabs>
   )

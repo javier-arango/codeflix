@@ -12,12 +12,16 @@ import { ChannelProfileSkeleton } from '../skeleton'
 interface VideoPreviewProps {
   video: VideoPreviewDetails
   alignment?: 'horizontal' | 'vertical'
-  showDescription?: boolean
+  hideAvatar?: boolean
+  hideDescription?: boolean
+  fullWidth?: boolean
 }
 
 export const VideoPreview = ({
   video,
-  showDescription = true,
+  hideAvatar = false,
+  fullWidth = true,
+  hideDescription = false,
   alignment = 'horizontal',
 }: VideoPreviewProps) => {
   const {
@@ -47,7 +51,7 @@ export const VideoPreview = ({
     <>
       <Card
         shadow="none"
-        fullWidth
+        fullWidth={fullWidth}
         isPressable
         radius="none"
         allowTextSelectionOnPress
@@ -96,9 +100,11 @@ export const VideoPreview = ({
                   }`}
                 >
                   {/* Channel Avatar */}
-                  <Link href={`/channel/${channelId}`}>
-                    <Avatar showFallback size="md" src={data.thumbnailUrl} />
-                  </Link>
+                  {!hideAvatar && (
+                    <Link href={`/channel/${channelId}`}>
+                      <Avatar showFallback size="md" src={data.thumbnailUrl} />
+                    </Link>
+                  )}
 
                   {/* Channel Info */}
                   <div className="flex flex-col gap-1 items-start justify-center">
@@ -126,7 +132,7 @@ export const VideoPreview = ({
                     {/* Video stats (only vertical) */}
                     {alignment === 'vertical' && (
                       <p className="text-default-500 text-sm">
-                        {videoViewsCount} • {videoPublishedAt}
+                        {videoViewsCount} views • {videoPublishedAt}
                       </p>
                     )}
                   </div>
@@ -134,7 +140,7 @@ export const VideoPreview = ({
               )}
 
               {/* Video Description */}
-              {showDescription && (
+              {!hideDescription && (
                 <p className="text-default-500 text-sm">{videoDescription}</p>
               )}
             </div>

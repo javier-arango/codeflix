@@ -9,14 +9,15 @@ import {
   CardHeader,
   Spacer,
 } from '@nextui-org/react'
+import React from 'react'
 import type { UserDetails } from 'types'
-import { ProfileContent } from './ProfileContent'
 
 interface UserProfileProps {
   user: UserDetails
+  children?: React.ReactNode
 }
 
-export const UserProfile = ({ user }: UserProfileProps) => {
+export const UserProfile = ({ user, children }: UserProfileProps) => {
   return (
     <Card
       shadow="none"
@@ -75,7 +76,7 @@ export const UserProfile = ({ user }: UserProfileProps) => {
         <Spacer y={4} />
 
         {/* User profile content (playlist) */}
-        <ProfileContent />
+        {children}
       </CardBody>
     </Card>
   )
