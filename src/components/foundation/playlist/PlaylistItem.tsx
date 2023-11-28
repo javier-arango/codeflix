@@ -11,12 +11,14 @@ import { VideoPreview } from '../video/VideoPreview'
 interface PlaylistItemProps {
   video: Video
   playlistId: string
+  onRemoveVideo: (videoId: string) => void
   itemIndex: number
 }
 
 export const PlaylistItem = ({
   video,
   playlistId,
+  onRemoveVideo,
   itemIndex,
 }: PlaylistItemProps) => {
   const handleRemoveVideo = async () => {
@@ -25,18 +27,19 @@ export const PlaylistItem = ({
       video.videoId
     )
 
-    if (videoRemoved.ok) {
-      toast.success(videoRemoved)
-      // router.refresh()
+    if (videoRemoved) {
+      onRemoveVideo(video.videoId)
+      toast.success('Video removed successfully.')
     } else {
-      toast.error(videoRemoved.error)
+      toast.error('Failed to remove video from playlist.')
     }
   }
 
   return (
     <div className="flex flex-row justify-between items-center hover:bg-content2 p-4 rounded-large">
-      <div className="flex flex-row items-center gap-5 relative">
+      <div className="flex flex-row items-center gap-5 w-4/5">
         <h3 className="font-extrabold">{itemIndex}</h3>
+
         <VideoPreview
           hideDescription
           hideAvatar

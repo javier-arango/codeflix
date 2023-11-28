@@ -1,6 +1,23 @@
 import { WarningMessage } from '@components/foundation'
-import { PlaylistItem } from '@components/foundation/playlist'
-import { GetPlaylistVideos } from '@services/API'
+import { PlaylistList } from '@components/foundation/playlist'
+import { ScrollShadow, Spinner } from '@nextui-org/react'
+import { GetPlaylistVideos, getPlaylistDetails } from '@services/API'
+import { Suspense } from 'react'
+
+async function PlaylistVideos({ id }: { id: string }) {
+  const playlistVideos = await GetPlaylistVideos(id)
+
+  if (!playlistVideos) {
+    return (
+      <WarningMessage
+        title="Failed to load playlist videos"
+        subtitle="Please try again later."
+      />
+    )
+  }
+
+  return <PlaylistList playlistId={id} playlistVideos={playlistVideos} />
+}
 
 export default async function PlaylistPage({
   params,
@@ -9,30 +26,38 @@ export default async function PlaylistPage({
 }) {
   const { id } = params
 
-  // Fetch playlist videos
-  const playlistVideos = await GetPlaylistVideos(id)
+  // Fetch playlist details
+  const playlist = await getPlaylistDetails(id)
+
+  if (!playlist) {
+    return (
+      <WarningMessage
+        title="Playlist not found"
+        subtitle="The playlist you are looking for does not exist."
+      />
+    )
+  }
 
   return (
     <div className="px-0 py-4 lg:p-8 md:p-4">
-      <h1>Playlist: {id}</h1>
+      <div className="flex flex-col items-center gap-2 pb-8">
+        <h1 className="text-5xl">{playlist.name}</h1>
+        {playlist.description && (
+          <p className="text-base">{playlist.description}</p>
+        )}
+      </div>
 
-      {playlistVideos.count > 0 ? (
-        <div className="w-full">
-          {playlistVideos.videos.map((video, index) => (
-            <PlaylistItem
-              key={video.videoId}
-              playlistId={id}
-              video={video}
-              itemIndex={(index += 1)}
-            />
-          ))}
-        </div>
-      ) : (
-        <WarningMessage
-          title="This playlist is empty."
-          subtitle="Please add videos to it."
-        />
-      )}
+      <Suspense
+        fallback={
+          <div className="flex justify-center align-center w-screen h-screen">
+            <Spinner size="lg" />
+          </div>
+        }
+      >
+        <ScrollShadow hideScrollBar className="h-screen">
+          <PlaylistVideos id={id} />
+        </ScrollShadow>
+      </Suspense>
     </div>
   )
 }

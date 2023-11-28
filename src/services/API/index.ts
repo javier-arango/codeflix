@@ -1,5 +1,6 @@
 export * from './getChannelDetails.services'
 export * from './getChannelVideos.utils'
+export * from './getPlaylistDetails.services'
 export * from './getPlaylistVideos.services'
 export * from './getUserDetails.services'
 export * from './getVideoDetails.services'
