@@ -55,7 +55,7 @@ export default async function Profile() {
           </div>
           <div id={styles.actions}>
             <Link href={'/profile/edit/'}>
-              <button id={styles.edit} onClick={editProfile}>
+              <button id={styles.edit}>
                 <Image
                   id={styles.editIcon}
                   src={editProfile}
