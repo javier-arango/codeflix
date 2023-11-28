@@ -11,26 +11,26 @@ import { VideoPreview } from '../video/VideoPreview'
 interface PlaylistItemProps {
   video: Video
   playlistId: string
-  onRemoveVideo: (videoId: string) => void
   itemIndex: number
+  onRemoveVideo: (videoId: string) => void
+  rollback: () => void
 }
 
 export const PlaylistItem = ({
   video,
   playlistId,
-  onRemoveVideo,
   itemIndex,
+  onRemoveVideo,
+  rollback,
 }: PlaylistItemProps) => {
   const handleRemoveVideo = async () => {
-    const videoRemoved = await removeVideoFromPlaylist(
-      playlistId,
-      video.videoId
-    )
+    onRemoveVideo(video.videoId) // Optimistically remove the video
 
-    if (videoRemoved) {
-      onRemoveVideo(video.videoId)
+    try {
+      await removeVideoFromPlaylist(playlistId, video.videoId)
       toast.success('Video removed successfully.')
-    } else {
+    } catch (error) {
+      rollback() // Rollback if the removal fails
       toast.error('Failed to remove video from playlist.')
     }
   }

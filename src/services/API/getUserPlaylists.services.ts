@@ -11,6 +11,7 @@ export async function GetUserPlaylists(
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ userEmail }),
+      cache: 'no-cache',
     })
 
     if (!res.ok) {

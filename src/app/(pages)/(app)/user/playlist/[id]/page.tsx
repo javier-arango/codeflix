@@ -16,7 +16,11 @@ async function PlaylistVideos({ id }: { id: string }) {
     )
   }
 
-  return <PlaylistList playlistId={id} playlistVideos={playlistVideos} />
+  return (
+    <ScrollShadow hideScrollBar className="h-screen">
+      <PlaylistList playlistId={id} playlistVideos={playlistVideos} />
+    </ScrollShadow>
+  )
 }
 
 export default async function PlaylistPage({
@@ -54,9 +58,7 @@ export default async function PlaylistPage({
           </div>
         }
       >
-        <ScrollShadow hideScrollBar className="h-screen">
-          <PlaylistVideos id={id} />
-        </ScrollShadow>
+        <PlaylistVideos id={id} />
       </Suspense>
     </div>
   )

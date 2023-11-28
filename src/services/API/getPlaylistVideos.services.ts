@@ -7,7 +7,7 @@ export async function GetPlaylistVideos(
   try {
     const res = await fetch(
       `${baseURL}/api/user/playlist/videos/${playlistId}`,
-      { next: { revalidate: 5 } }
+      { cache: 'no-cache' }
     )
 
     if (!res.ok) {
