@@ -13,6 +13,16 @@ interface VideoViewProps {
   videoId: string
 }
 
+// export function formatDescription(description: string): JSX.Element[] {
+//   return description.split('\n').map((line, index) => (
+//     <React.Fragment key={index}>
+//       {line}
+
+//       <br />
+//     </React.Fragment>
+//   ))
+// }
+
 export default function VideoView({ videoId }: VideoViewProps) {
   // const [isLoading, setIsLoading] = useState(false)
   // const [error, setError] = useState(false)
