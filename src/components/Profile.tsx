@@ -32,9 +32,8 @@ export default async function Profile() {
       getPlaylistId(playlistRes.playlists, 'Favorites')
     )
 
-    console.log("watchlist" , watchlistVideos.count)
-    console.log("favorite" , favoriteVideos.count)
-
+    console.log('watchlist', watchlistVideos.count)
+    console.log('favorite', favoriteVideos.count)
   } else return null
 
   return (

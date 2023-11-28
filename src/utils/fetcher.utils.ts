@@ -2,10 +2,9 @@ import { baseURL } from '@lib/baseUrl'
 import type { CategoryKey, VideosResponse } from 'types'
 
 export async function getVideos(category: CategoryKey) {
-  const response = await fetch(
-    `${baseURL}/api/videos?category=${category}`,
-    { cache: 'no-cache' }
-  )
+  const response = await fetch(`${baseURL}/api/videos?category=${category}`, {
+    cache: 'no-cache',
+  })
 
   if (!response || !response.ok) {
     return {
@@ -48,7 +47,7 @@ export async function removeVideoFromPlaylist(
   const response = await fetch(`${baseURL}/api/user/playlist/edit`, {
     method: 'POST',
     body: JSON.stringify({ videoId, playlistId }),
-    cache: 'no-cache'
+    cache: 'no-cache',
   })
 
   if (!response || !response.ok) {

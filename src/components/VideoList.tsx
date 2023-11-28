@@ -39,7 +39,9 @@ export default function VideoList(props: VideosProps) {
       }
 
       // Delete the component from the list
-      setVideos((prevVideos) => prevVideos?.filter((video) => video.videoId !== videoId))
+      setVideos(
+        (prevVideos) => prevVideos?.filter((video) => video.videoId !== videoId)
+      )
     }
   }
 
