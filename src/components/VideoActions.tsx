@@ -8,6 +8,7 @@ import {
   getVideosOfPlaylists,
   removeVideoFromPlaylist,
 } from '@utils/fetcher.utils'
+import { getPlaylistId } from '@utils/helper.utils'
 import { useSession } from 'next-auth/react'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
@@ -17,7 +18,6 @@ import bookmark from '../../public/assets/bookmark.svg'
 import removeBookmark from '../../public/assets/bookmark_minus.svg'
 import star from '../../public/assets/star.svg'
 import starFill from '../../public/assets/star_fill.svg'
-import { getPlaylistId } from '@utils/helper.utils'
 
 type Props = {
   videoId: string
@@ -29,48 +29,56 @@ export default function VideoActions(props: Props) {
   const [isBookmark, setIsBookmark] = useState(false)
   const [playlists, setPlaylsits] = useState([] as Playlist[])
 
-  const check = async () => {
-    // Get the user Playlists
-    const playlistRes = await getPlaylists(data?.user?.email)
-
-    // Get videos of Watchlist and Favorite
-    const watchlistVideosRes: VideosResponse = await getVideosOfPlaylists(
-      getPlaylistId(playlistRes.playlists, 'Watch List')
-    )
-    const favoriteVideosRes: VideosResponse = await getVideosOfPlaylists(
-      getPlaylistId(playlistRes.playlists, 'Favorites')
-    )
-
-    // Get the videos array of each playlist
-    const watchlistVideos: Video[] = watchlistVideosRes?.videos ?? []
-    const favoriteVideos: Video[] = favoriteVideosRes?.videos ?? []
-
-    // Check if current video is in each playlist
-    if (watchlistVideos && favoriteVideos) {
-      const bookmarkState = watchlistVideos.some((video) => {
-        return video.videoId === props.videoId
-      })
-      const favoriteState = favoriteVideos.some((video) => {
-        return video.videoId === props.videoId
-      })
-
-      return { bookmarkState, favoriteState, playlistRes }
-    }
-
-    // If the previous condition is not met, return some default values or handle the case accordingly
-    return { bookmarkState: false, favoriteState: false }
-  }
-
   useEffect(() => {
+    const check = async () => {
+      // Get the user Playlists
+      const playlistRes = await getPlaylists(data?.user?.email)
+
+      // Get videos of Watchlist and Favorite
+      const watchlistVideosRes: VideosResponse = await getVideosOfPlaylists(
+        getPlaylistId(playlistRes.playlists, 'Watch List')
+      )
+      const favoriteVideosRes: VideosResponse = await getVideosOfPlaylists(
+        getPlaylistId(playlistRes.playlists, 'Favorites')
+      )
+
+      // Get the videos array of each playlist
+      const watchlistVideos: Video[] = watchlistVideosRes?.videos ?? []
+      const favoriteVideos: Video[] = favoriteVideosRes?.videos ?? []
+
+      // Check if current video is in each playlist
+      if (watchlistVideos && favoriteVideos) {
+        const bookmarkState = watchlistVideos.some((video) => {
+          return video.videoId === props.videoId
+        })
+        const favoriteState = favoriteVideos.some((video) => {
+          return video.videoId === props.videoId
+        })
+
+        return { bookmarkState, favoriteState, playlistRes }
+      }
+
+      // If the previous condition is not met, return some default values or handle the case accordingly
+      return { bookmarkState: false, favoriteState: false }
+    }
     async function fetchData() {
+      console.log('Fetching for bookmark or favorite state')
       const { bookmarkState, favoriteState, playlistRes } = await check()
+      console.log(
+        'book: ' +
+          bookmarkState +
+          ', fav: ' +
+          favoriteState +
+          ', playlist: ' +
+          playlistRes
+      )
       setIsBookmark(bookmarkState)
       setIsFavorite(favoriteState)
       setPlaylsits(playlistRes.playlists)
     }
 
     fetchData()
-  })
+  }, [data?.user?.email, props.videoId])
 
   const handleActionsClick = async (action: string) => {
     // First check if the user has a session
@@ -87,7 +95,7 @@ export default function VideoActions(props: Props) {
         if (isFavorite) {
           await removeVideoFromPlaylist(
             props.videoId,
-            getPlaylistId(playlists, favoritesPlaylistId)
+            favoritesPlaylistId
           ).then((res) => {
             if (res.error) {
               toast.error(res.error)

@@ -31,6 +31,10 @@ export default async function Profile() {
     favoriteVideos = await getVideosOfPlaylists(
       getPlaylistId(playlistRes.playlists, 'Favorites')
     )
+
+    console.log("watchlist" , watchlistVideos.count)
+    console.log("favorite" , favoriteVideos.count)
+
   } else return null
 
   return (
@@ -71,7 +75,7 @@ export default async function Profile() {
         <Tab
           content={
             <VideoList
-              categoryTitle=""
+              categoryTitle="Watchlist"
               videos={watchlistVideos}
               playlistId={getPlaylistId(playlistRes.playlists, 'Watch List')}
               playlist
@@ -82,7 +86,7 @@ export default async function Profile() {
         <Tab
           content={
             <VideoList
-              categoryTitle=""
+              categoryTitle="Favorites"
               videos={favoriteVideos}
               playlistId={getPlaylistId(playlistRes.playlists, 'Favorites')}
               playlist

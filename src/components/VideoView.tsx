@@ -2,7 +2,7 @@
 
 import type { Video } from '@prisma/client'
 import styles from '@styles/VideoView.module.scss'
-import { fetcher } from '@utils/fetcher.utils'
+import { fetcher } from '@utils/fetcherHelper.utils'
 import useSWR from 'swr'
 import { LoadingSpinner } from './LoadingSpinner'
 import VideoActions from './VideoActions'

@@ -7,6 +7,7 @@ import styles from '../styles/VideoList.module.scss'
 import VideoTile from './VideoTile'
 import { removeVideoFromPlaylist } from '@utils/fetcher.utils'
 import toast from 'react-hot-toast'
+import { useState } from 'react'
 
 type VideosProps = {
   allVideos: boolean
@@ -18,6 +19,10 @@ type VideosProps = {
 }
 
 export default function VideoList(props: VideosProps) {
+  const [videos, setVideos] = useState(props.videos.videos)
+
+  console.log(props.categoryTitle, props.videos.count)
+
   /**
    * Remove a video from a playlist
    * @param videoId The video ID that you want to remove
@@ -34,6 +39,7 @@ export default function VideoList(props: VideosProps) {
       }
 
       // Delete the component from the list
+      setVideos((prevVideos) => prevVideos?.filter((video) => video.videoId !== videoId))
     }
   }
 
@@ -42,18 +48,18 @@ export default function VideoList(props: VideosProps) {
    * @param videos the array of the videos response
    * @returns An array of VideoTile component
    */
-  const createVideosTile = (videos: VideosResponse) => {
-    const array = []
+  const createVideosTile = (videos: Video[]) => {
+    const videoTiles = []
 
-    if (Array.isArray(videos.videos)) {
-      const quantity = props.allVideos ? videos.count : 4
+    if (videos) {
+      const quantity = props.allVideos ? videos.length : 4
 
       for (let i = 0; i < quantity; i++) {
-        const video = videos.videos[i] as Video
-        array.push(
+        const video = videos[i]
+        videoTiles.push(
           <VideoTile
-            key={i}
-            applyMargin={videos.count == 4 ? false : true}
+            key={video.videoId}
+            applyMargin={videos.length == 4 ? false : true}
             video={video}
             showRemoveIcon={props.playlist ? true : false}
             deleteHandler={handleDeleteVideo}
@@ -61,11 +67,11 @@ export default function VideoList(props: VideosProps) {
         )
       }
     }
-    return array
+    return videoTiles
   }
 
   // If no videos and it is a playlist, display that message
-  if (props.videos.count == 0)
+  if (videos.length == 0)
     return <div id={styles.noVideos}>No videos in this playlist</div>
 
   return (
@@ -83,7 +89,7 @@ export default function VideoList(props: VideosProps) {
           <div
             className={props.allVideos ? styles.allVideos : styles.someVideos}
           >
-            {createVideosTile(props.videos)}
+            {createVideosTile(videos)}
           </div>
         </div>
       </div>

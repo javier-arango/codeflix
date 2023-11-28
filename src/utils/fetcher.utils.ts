@@ -1,16 +1,10 @@
+import { baseURL } from '@lib/baseUrl'
 import type { CategoryKey, VideosResponse } from 'types'
-
-export const fetcher = (url: string, options?: RequestInit) =>
-  fetch(url, options).then((res) => {
-    if (!res.ok) {
-      throw new Error('An error occurred while fetching the data.')
-    }
-    return res.json()
-  })
 
 export async function getVideos(category: CategoryKey) {
   const response = await fetch(
-    `http://localhost:3000/api/videos?category=${category}`
+    `${baseURL}/api/videos?category=${category}`,
+    { cache: 'no-cache' }
   )
 
   if (!response || !response.ok) {
@@ -25,9 +19,10 @@ export async function getVideos(category: CategoryKey) {
 
 export async function getUser(email: string | undefined | null) {
   try {
-    const res = await fetch('http://localhost:3000/api/user/get_user', {
+    const res = await fetch(`${baseURL}/api/user/get_user`, {
       method: 'POST',
       body: JSON.stringify({ email }),
+      cache: 'no-cache',
     })
 
     if (!res.ok) {
@@ -50,9 +45,10 @@ export async function removeVideoFromPlaylist(
   videoId: string,
   playlistId: string
 ) {
-  const response = await fetch('http://localhost:3000/api/user/playlist/edit', {
+  const response = await fetch(`${baseURL}/api/user/playlist/edit`, {
     method: 'POST',
     body: JSON.stringify({ videoId, playlistId }),
+    cache: 'no-cache'
   })
 
   if (!response || !response.ok) {
@@ -64,9 +60,10 @@ export async function removeVideoFromPlaylist(
 
 export async function getPlaylists(userEmail: string | undefined | null) {
   try {
-    const res = await fetch('http://localhost:3000/api/user/playlist/get_all', {
+    const res = await fetch(`${baseURL}/api/user/playlist/get_all`, {
       method: 'POST',
       body: JSON.stringify({ userEmail }),
+      cache: 'no-cache',
     })
 
     if (!res.ok) {
@@ -88,7 +85,8 @@ export async function getPlaylists(userEmail: string | undefined | null) {
 
 export async function getVideosOfPlaylists(playlistId: string) {
   const response = await fetch(
-    `http://localhost:3000/api/user/playlist/videos/${playlistId}`
+    `${baseURL}/api/user/playlist/videos/${playlistId}`,
+    { cache: 'no-cache' }
   )
 
   if (!response || !response.ok) {
@@ -99,17 +97,38 @@ export async function getVideosOfPlaylists(playlistId: string) {
 }
 
 export async function addVideoToPlaylist(videoId: string, playlistId: string) {
-  const response = await fetch(
-    'http://localhost:3000/api/user/playlist/add_to_playlist',
-    {
-      method: 'POST',
-      body: JSON.stringify({ videoId, playlistId }),
-    }
-  )
+  const response = await fetch(`${baseURL}/api/user/playlist/add_to_playlist`, {
+    method: 'POST',
+    body: JSON.stringify({ videoId, playlistId }),
+  })
 
   if (!response || !response.ok) {
     throw new Error('Error deleting video')
   }
 
   return await response.json()
+}
+
+export async function searchVideos(query?: string): Promise<VideosResponse> {
+  try {
+    const res = await fetch(`${baseURL}:3000/api/search`, {
+      method: 'POST',
+      body: JSON.stringify({ query }),
+    })
+
+    if (!res.ok) {
+      return {
+        count: 0,
+        videos: [],
+      }
+    }
+
+    return await res.json()
+  } catch (err) {
+    console.error(err)
+    return {
+      count: 0,
+      videos: [],
+    }
+  }
 }

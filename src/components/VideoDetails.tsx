@@ -1,7 +1,7 @@
 'use client'
 
 import type { Video } from '@prisma/client'
-import { fetcher } from '@utils/fetcher.utils'
+import { fetcher } from '@utils/fetcherHelper.utils'
 import useSWR from 'swr'
 import { LoadingSpinner } from './LoadingSpinner'
 

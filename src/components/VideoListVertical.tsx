@@ -2,23 +2,10 @@ import styles from '@styles/VerticalList.module.scss'
 import type { CategoryKey, VideosResponse } from 'types'
 import VideoTile from './VideoTile'
 import type { Video } from '@prisma/client'
+import { getVideos } from '@utils/fetcher.utils'
 
 type VerticalListProps = {
   category: CategoryKey
-}
-
-async function getVideos(category: CategoryKey) {
-  const response = await fetch(
-    `http://localhost:3000/api/videos?category=${category}`
-  )
-
-  if (!response || !response.ok) {
-    return null
-  }
-
-  const data: VideosResponse = await response.json()
-
-  return data
 }
 
 export default async function VideoListVertical(props: VerticalListProps) {

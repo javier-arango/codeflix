@@ -2,10 +2,10 @@
 
 import styles from '@styles/ProfileForm.module.scss'
 import { useState } from 'react'
-import type { UserDetails } from 'types'
-import defaultProfileImage from '../../public/assets/defaultProfile.jpg'
 import toast from 'react-hot-toast'
 import { ThreeDots } from 'react-loader-spinner'
+import type { UserDetails } from 'types'
+import defaultProfileImage from '../../public/assets/defaultProfile.jpg'
 
 type Props = {
   user: UserDetails
@@ -115,15 +115,6 @@ export default function EditProfile(props: Props) {
             placeholder="Last Name"
             name="lastName"
             value={formData.lastName}
-            onChange={handleInputChange}
-          />
-          <input
-            required
-            className={styles.input}
-            type="email"
-            placeholder="Email"
-            name="email"
-            value={formData.email}
             onChange={handleInputChange}
           />
           <textarea
