@@ -5,12 +5,13 @@ import styles from '../styles/AuthForm.module.scss'
 import toast from 'react-hot-toast'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { signIn } from 'next-auth/react'
+import { ThreeDots } from 'react-loader-spinner'
 
 export default function AuthForm() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const [isSignup, setIsSignup] = useState(false)
-  // const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false)
   const callbackUrl = searchParams.get('callbackUrl') || '/' // Redirect to home page if no callbackUrl is provided
   const [formData, setFormData] = useState({
     firstName: '',
@@ -18,6 +19,19 @@ export default function AuthForm() {
     email: '',
     password: '',
   })
+
+  // Loading three dots component
+  const threeDots = (
+    <ThreeDots
+      height="20"
+      width="20"
+      radius="9"
+      color="white"
+      ariaLabel="three-dots-loading"
+      wrapperStyle={{}}
+      visible={true}
+    />
+  );
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target
@@ -42,7 +56,7 @@ export default function AuthForm() {
   }
 
   const registerUser = async () => {
-    // setLoading(true)
+    setLoading(true)
     const response = await fetch('/api/auth/register', {
       method: 'POST',
       body: JSON.stringify(formData),
@@ -50,7 +64,7 @@ export default function AuthForm() {
         'Content-Type': 'application/json',
       },
     })
-    // setLoading(false)
+    setLoading(false)
     return response
   }
 
@@ -78,7 +92,7 @@ export default function AuthForm() {
 
   const onSubmitLogin = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    // setLoading(true)
+    setLoading(true)
 
     const email = formData.email
     const password = formData.password
@@ -94,7 +108,7 @@ export default function AuthForm() {
       if (!res?.error) {
         router.push(callbackUrl)
       } else {
-        // setLoading(false)
+        setLoading(false)
         toast.error('Invalid email or password')
       }
     } catch (err) {}
@@ -145,11 +159,7 @@ export default function AuthForm() {
         value={formData.password}
         onChange={handleInputChange}
       />
-      <input
-        id={styles.submit}
-        type="submit"
-        value={isSignup ? 'Signup' : 'Login'}
-      />
+      <button id={styles.submit} type='submit'>{loading ? threeDots : (isSignup ? "Signup" : "Login")}</button>
       {isSignup ? (
         <h2>
           Aleady have an account?{' '}
