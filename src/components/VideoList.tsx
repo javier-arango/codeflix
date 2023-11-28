@@ -32,6 +32,9 @@ export default function VideoList(props: VideosProps) {
       } else {
         toast.success(res.message)
       }
+
+      // Delete the component from the list
+      
     }
   }
 
