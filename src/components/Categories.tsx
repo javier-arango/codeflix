@@ -11,7 +11,7 @@ type CategoriesProps = {
 export default function Categories(props: CategoriesProps) {
   /**
    * Create the category components
-   * @param categories 
+   * @param categories
    * @returns An array of Category component
    */
   const createCategoryComponents = (categories: CategoryInfo[]) => {

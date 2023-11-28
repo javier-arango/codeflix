@@ -27,14 +27,13 @@ export default function VideoList(props: VideosProps) {
       const res = await removeVideoFromPlaylist(videoId, props.playlistId)
 
       // Display error message or success if video was removed or not
-      if(res.error) {
+      if (res.error) {
         toast.error(res.error)
       } else {
         toast.success(res.message)
       }
 
       // Delete the component from the list
-      
     }
   }
 
@@ -66,7 +65,8 @@ export default function VideoList(props: VideosProps) {
   }
 
   // If no videos and it is a playlist, display that message
-  if(props.videos.count == 0) return <div id={styles.noVideos}>No videos in this playlist</div>
+  if (props.videos.count == 0)
+    return <div id={styles.noVideos}>No videos in this playlist</div>
 
   return (
     <section id={styles.videosSection}>

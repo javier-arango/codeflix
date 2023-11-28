@@ -17,7 +17,7 @@ export default function EditProfile(props: Props) {
 
   /**
    * Handle when a value of the inputs has changed
-   * @param event 
+   * @param event
    */
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target
@@ -29,9 +29,11 @@ export default function EditProfile(props: Props) {
 
   /**
    * Handle when the value of text area of the bio has changed
-   * @param event 
+   * @param event
    */
-  const handleTextAreaChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+  const handleTextAreaChange = (
+    event: React.ChangeEvent<HTMLTextAreaElement>
+  ) => {
     const { name, value } = event.target
     setFormData((prevFormData) => ({
       ...prevFormData,
