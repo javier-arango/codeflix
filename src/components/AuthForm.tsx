@@ -31,7 +31,7 @@ export default function AuthForm() {
       wrapperStyle={{}}
       visible={true}
     />
-  );
+  )
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target
@@ -159,7 +159,9 @@ export default function AuthForm() {
         value={formData.password}
         onChange={handleInputChange}
       />
-      <button id={styles.submit} type='submit'>{loading ? threeDots : (isSignup ? "Signup" : "Login")}</button>
+      <button id={styles.submit} type="submit">
+        {loading ? threeDots : isSignup ? 'Signup' : 'Login'}
+      </button>
       {isSignup ? (
         <h2>
           Aleady have an account?{' '}
