@@ -2,8 +2,7 @@ import { baseURL } from '@lib/baseUrl'
 import type { CategoryKey, VideosResponse } from 'types'
 
 export async function getVideos(category: CategoryKey) {
-  const response = await fetch(`${baseURL}/api/videos?category=${category}`, {
-  })
+  const response = await fetch(`${baseURL}/api/videos?category=${category}`, {})
 
   if (!response || !response.ok) {
     return {

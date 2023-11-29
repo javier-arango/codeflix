@@ -12,7 +12,7 @@ const customStyles = {
 export default function Loading() {
   return (
     <div style={customStyles}>
-      <LoadingSpinner size='medium' />
+      <LoadingSpinner size="medium" />
     </div>
   )
 }

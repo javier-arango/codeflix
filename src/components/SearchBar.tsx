@@ -10,7 +10,7 @@ export default function SearchBar() {
 
   /**
    * Handle when the search bar input value has changed
-   * @param event 
+   * @param event
    */
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     // Update searchTerm state to new value typed
@@ -20,7 +20,7 @@ export default function SearchBar() {
 
   /**
    * Handle when the user press enter to search for a term
-   * @param event 
+   * @param event
    */
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {

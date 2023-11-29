@@ -143,11 +143,12 @@ export default function VideoActions(props: Props) {
   }
 
   // Show a loading Skeleton if actions state are loading to prevent user from making a bad request
-  if(loading) return (
-    <div id={styles.action}>
-        <LoadingSpinner size='small'/>
-    </div>
-  )
+  if (loading)
+    return (
+      <div id={styles.action}>
+        <LoadingSpinner size="small" />
+      </div>
+    )
 
   return (
     <div id={styles.action}>

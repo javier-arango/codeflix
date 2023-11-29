@@ -5,7 +5,10 @@ import Link from 'next/link'
 import type { CategoryKey, VideosResponse } from 'types'
 import styles from '../styles/VideoList.module.scss'
 import VideoTile from './VideoTile'
-import { getVideosOfPlaylists, removeVideoFromPlaylist } from '@utils/fetcher.utils'
+import {
+  getVideosOfPlaylists,
+  removeVideoFromPlaylist,
+} from '@utils/fetcher.utils'
 import toast from 'react-hot-toast'
 import { useEffect, useState } from 'react'
 import { LoadingSpinner } from './LoadingSpinner'
@@ -37,7 +40,7 @@ export default function VideoList(props: VideosProps) {
       }
     }
 
-    if(props.playlist) {
+    if (props.playlist) {
       getVideos()
     } else {
       setVideos(props.videos.videos)

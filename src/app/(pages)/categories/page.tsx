@@ -4,7 +4,6 @@ import { VIDEO_CATEGORIES2 } from '@constants/videoCategories.constants'
 import type { CategoryInfo, CategoryKey } from 'types'
 
 export default function CategoriesPage() {
-
   /**
    * Get all the categorires that exist in the database
    * @returns An array of categories with their info

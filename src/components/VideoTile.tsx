@@ -22,7 +22,7 @@ export default function VideoTile(props: videoTileProps) {
 
   /**
    * Handle when the user click the remove Icon to remove a video from a playlist
-   * @param videoId 
+   * @param videoId
    */
   const removeVideoFromPlaylist = (videoId: string) => {
     if (props.deleteHandler) {

@@ -16,7 +16,7 @@ interface VideoViewProps {
 
 /**
  * Help format the description of the video
- * @param description 
+ * @param description
  * @returns Formatted string of the description
  */
 export function formatDescription(description: string): JSX.Element[] {
@@ -37,11 +37,12 @@ export default function VideoView({ videoId }: VideoViewProps) {
   )
 
   if (error) return <div>Failed to load</div>
-  if (isLoading) return (
-    <div id={styles.loadingContainer}>
-      <LoadingSpinner size="medium" />
-    </div>
-  )
+  if (isLoading)
+    return (
+      <div id={styles.loadingContainer}>
+        <LoadingSpinner size="medium" />
+      </div>
+    )
   if (!data) return <div>No data</div>
 
   return (

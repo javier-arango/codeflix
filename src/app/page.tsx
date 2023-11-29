@@ -44,12 +44,12 @@ const getRandomCategories = function (
   const randomCategories: CategoryInfo[] = []
   const randomKeys: CategoryKey[] = []
 
-  while(randomCategories.length <= count) {
+  while (randomCategories.length <= count) {
     const randomIndex = getRandomNumber(0, categoryKeys.length)
     const randomKey = categoryKeys[randomIndex]
 
     // Add if we have not selected key
-    if(!randomKeys.includes(randomKey)) {
+    if (!randomKeys.includes(randomKey)) {
       randomCategories.push(categories[randomKey])
       randomKeys.push(randomKey)
     }

@@ -35,7 +35,7 @@ export default function AuthForm() {
 
   /**
    * Handle when a value of a input has changed to update the form data
-   * @param event 
+   * @param event
    */
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target
@@ -84,7 +84,7 @@ export default function AuthForm() {
 
   /**
    * Handle when the user clicks the signup button
-   * @param event 
+   * @param event
    */
   const onSubmitRegister = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -110,7 +110,7 @@ export default function AuthForm() {
 
   /**
    * Handle when the user clicks the login button
-   * @param event 
+   * @param event
    */
   const onSubmitLogin = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
