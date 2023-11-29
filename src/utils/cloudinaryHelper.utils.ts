@@ -14,7 +14,10 @@ export function generateSHA1ForCloudinary(data: string) {
   return hash.digest('hex')
 }
 
-export function generateSignatureForCloudinary(publicId: string, apiSecret: string) {
+export function generateSignatureForCloudinary(
+  publicId: string,
+  apiSecret: string
+) {
   const timestamp = new Date().getTime()
 
   return `public_id=${publicId}&timestamp=${timestamp}${apiSecret}`
