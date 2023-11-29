@@ -20,6 +20,10 @@ export default function VideoTile(props: videoTileProps) {
   const source = props.video.thumbnailUrl
   const showRemoveIcon = props.showRemoveIcon
 
+  /**
+   * Handle when the user click the remove Icon to remove a video from a playlist
+   * @param videoId 
+   */
   const removeVideoFromPlaylist = (videoId: string) => {
     if (props.deleteHandler) {
       props.deleteHandler(videoId)

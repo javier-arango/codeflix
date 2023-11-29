@@ -35,18 +35,24 @@ const getRandomNumber = function getRandomNumber(
  * Get a quantity of random categories
  * @param categories
  * @param count
- * @returns
+ * @returns Array of random categories
  */
 const getRandomCategories = function (
   categories: Category2,
   count: number
 ): CategoryInfo[] {
   const randomCategories: CategoryInfo[] = []
+  const randomKeys: CategoryKey[] = []
 
-  for (let i = 0; i <= count; i++) {
+  while(randomCategories.length <= count) {
     const randomIndex = getRandomNumber(0, categoryKeys.length)
     const randomKey = categoryKeys[randomIndex]
-    randomCategories.push(categories[randomKey])
+
+    // Add if we have not selected key
+    if(!randomKeys.includes(randomKey)) {
+      randomCategories.push(categories[randomKey])
+      randomKeys.push(randomKey)
+    }
   }
 
   return randomCategories
@@ -80,4 +86,4 @@ export default async function HomePage() {
 }
 
 // Display name
-HomePage.displayName = 'HomePage'
+HomePage.displayName = 'Home Page'

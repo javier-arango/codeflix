@@ -8,26 +8,28 @@ import { LoadingSpinner } from './LoadingSpinner'
 import VideoActions from './VideoActions'
 import VideoListVertical from './VideoListVertical'
 import { VideoPlayer } from './VideoPlayer'
+import React from 'react'
 
 interface VideoViewProps {
   videoId: string
 }
 
-// export function formatDescription(description: string): JSX.Element[] {
-//   return description.split('\n').map((line, index) => (
-//     <React.Fragment key={index}>
-//       {line}
+/**
+ * Help format the description of the video
+ * @param description 
+ * @returns Formatted string of the description
+ */
+export function formatDescription(description: string): JSX.Element[] {
+  return description.split('\n').map((line, index) => (
+    <React.Fragment key={index}>
+      {line}
 
-//       <br />
-//     </React.Fragment>
-//   ))
-// }
+      <br />
+    </React.Fragment>
+  ))
+}
 
 export default function VideoView({ videoId }: VideoViewProps) {
-  // const [isLoading, setIsLoading] = useState(false)
-  // const [error, setError] = useState(false)
-  // const [data, setData] = useState(false)
-
   // Fetch video details
   const { data, error, isLoading } = useSWR<Video>(
     `/api/videos/${videoId}`,
@@ -35,7 +37,11 @@ export default function VideoView({ videoId }: VideoViewProps) {
   )
 
   if (error) return <div>Failed to load</div>
-  if (isLoading) return <LoadingSpinner size="medium" />
+  if (isLoading) return (
+    <div id={styles.loadingContainer}>
+      <LoadingSpinner size="medium" />
+    </div>
+  )
   if (!data) return <div>No data</div>
 
   return (
@@ -53,6 +59,7 @@ export default function VideoView({ videoId }: VideoViewProps) {
             <h1 id={styles.title}>{data.title}</h1>
             <VideoActions videoId={videoId} />
           </div>
+          <div id={styles.moreInfo}>{formatDescription(data.description)}</div>
         </div>
         <div id={styles.videosList}>
           <VideoListVertical category={'ai'} />

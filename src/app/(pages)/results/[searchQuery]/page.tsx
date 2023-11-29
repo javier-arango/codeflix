@@ -8,6 +8,8 @@ export default async function ResultsPage({
   params: { searchQuery: string }
 }) {
   const { searchQuery } = params
+
+  // Search for query in the database
   const data: VideosResponse = await searchVideos(decodeURI(searchQuery))
 
   if (!data) {
@@ -18,4 +20,4 @@ export default async function ResultsPage({
 }
 
 // Display name
-ResultsPage.displayName = 'Results Page'
+ResultsPage.displayName = 'Search Results'

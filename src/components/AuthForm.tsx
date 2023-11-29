@@ -33,6 +33,10 @@ export default function AuthForm() {
     />
   )
 
+  /**
+   * Handle when a value of a input has changed to update the form data
+   * @param event 
+   */
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target
     setFormData((prevFormData) => ({
@@ -41,6 +45,9 @@ export default function AuthForm() {
     }))
   }
 
+  /**
+   * Switch between the login and signup form
+   */
   const switchForm = () => {
     setIsSignup((prevIsSignup) => !prevIsSignup)
     setFormData({
@@ -51,10 +58,17 @@ export default function AuthForm() {
     })
   }
 
+  /**
+   * Just to prevent an ESlint errors, it is not being used
+   */
   const handleKeyDown = () => {
     switchForm()
   }
 
+  /**
+   * Make request to the server to register the user
+   * @returns response from request
+   */
   const registerUser = async () => {
     setLoading(true)
     const response = await fetch('/api/auth/register', {
@@ -68,6 +82,10 @@ export default function AuthForm() {
     return response
   }
 
+  /**
+   * Handle when the user clicks the signup button
+   * @param event 
+   */
   const onSubmitRegister = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     const response = await registerUser()
@@ -90,6 +108,10 @@ export default function AuthForm() {
     }
   }
 
+  /**
+   * Handle when the user clicks the login button
+   * @param event 
+   */
   const onSubmitLogin = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     setLoading(true)

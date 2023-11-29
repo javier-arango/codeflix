@@ -16,12 +16,12 @@ export default async function VideoListVertical(props: VerticalListProps) {
   }
 
   const createVideoTiles = (videos: VideosResponse) => {
-    const array = []
+    const videoTiles = []
 
     if (Array.isArray(videos.videos)) {
       for (let i = 0; i < videos.count; i++) {
         const video = videos.videos[i] as Video
-        array.push(
+        videoTiles.push(
           <VideoTile
             key={i}
             applyMargin={videos.count == 4 ? false : true}
@@ -32,7 +32,7 @@ export default async function VideoListVertical(props: VerticalListProps) {
         )
       }
     }
-    return array
+    return videoTiles
   }
 
   return <div id={styles.cont}>{createVideoTiles(data)}</div>

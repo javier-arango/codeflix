@@ -5,9 +5,10 @@ import Link from 'next/link'
 import type { CategoryKey, VideosResponse } from 'types'
 import styles from '../styles/VideoList.module.scss'
 import VideoTile from './VideoTile'
-import { removeVideoFromPlaylist } from '@utils/fetcher.utils'
+import { getVideosOfPlaylists, removeVideoFromPlaylist } from '@utils/fetcher.utils'
 import toast from 'react-hot-toast'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { LoadingSpinner } from './LoadingSpinner'
 
 type VideosProps = {
   allVideos: boolean
@@ -19,9 +20,29 @@ type VideosProps = {
 }
 
 export default function VideoList(props: VideosProps) {
-  const [videos, setVideos] = useState(props.videos.videos)
+  const [videos, setVideos] = useState([] as Video[])
+  const [loading, setLoading] = useState(false)
 
-  console.log(props.categoryTitle, props.videos.count)
+  // Get videos of the playlist if the list is a playlist, otherwise just use the video passed by the props
+  useEffect(() => {
+    async function getVideos() {
+      setLoading(true)
+      const response: VideosResponse = await getVideosOfPlaylists(
+        props.playlistId as string
+      )
+
+      if (response) {
+        setVideos(response.videos)
+        setLoading(false)
+      }
+    }
+
+    if(props.playlist) {
+      getVideos()
+    } else {
+      setVideos(props.videos.videos)
+    }
+  }, [props.playlistId, props.playlist, props.videos.videos])
 
   /**
    * Remove a video from a playlist
@@ -38,7 +59,7 @@ export default function VideoList(props: VideosProps) {
         toast.success(res.message)
       }
 
-      // Delete the component from the list
+      // Delete the video from the list
       setVideos(
         (prevVideos) => prevVideos?.filter((video) => video.videoId !== videoId)
       )
@@ -50,14 +71,14 @@ export default function VideoList(props: VideosProps) {
    * @param videos the array of the videos response
    * @returns An array of VideoTile component
    */
-  const createVideosTile = (videos: Video[]) => {
+  const createVideosTile = (videosArray: Video[]) => {
     const videoTiles = []
 
-    if (videos) {
-      const quantity = props.allVideos ? videos.length : 4
+    if (videosArray) {
+      const quantity = props.allVideos ? videosArray.length : 4
 
       for (let i = 0; i < quantity; i++) {
-        const video = videos[i]
+        const video = videosArray[i]
         videoTiles.push(
           <VideoTile
             key={video.videoId}
@@ -71,6 +92,14 @@ export default function VideoList(props: VideosProps) {
     }
     return videoTiles
   }
+
+  // Return a loader while fetching to get the videos
+  if (loading)
+    return (
+      <div id={styles.noVideos}>
+        <LoadingSpinner />
+      </div>
+    )
 
   // If no videos and it is a playlist, display that message
   if (videos.length == 0)

@@ -12,7 +12,7 @@ export default function NavBar() {
   const { status } = useSession()
 
   const logout = () => {
-    signOut({ redirect: false, callbackUrl: '/' })
+    signOut({ redirect: true, callbackUrl: '/' })
   }
 
   return (

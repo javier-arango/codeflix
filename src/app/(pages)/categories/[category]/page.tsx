@@ -28,3 +28,6 @@ export default async function CategoryPage({
     </>
   )
 }
+
+// Display name
+CategoryPage.displayName = 'Category'

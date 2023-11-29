@@ -18,6 +18,7 @@ import bookmark from '../../public/assets/bookmark.svg'
 import removeBookmark from '../../public/assets/bookmark_minus.svg'
 import star from '../../public/assets/star.svg'
 import starFill from '../../public/assets/star_fill.svg'
+import { LoadingSpinner } from './LoadingSpinner'
 
 type Props = {
   videoId: string
@@ -28,6 +29,7 @@ export default function VideoActions(props: Props) {
   const [isFavorite, setIsFavorite] = useState(false)
   const [isBookmark, setIsBookmark] = useState(false)
   const [playlists, setPlaylsits] = useState([] as Playlist[])
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     const check = async () => {
@@ -62,19 +64,11 @@ export default function VideoActions(props: Props) {
       return { bookmarkState: false, favoriteState: false }
     }
     async function fetchData() {
-      console.log('Fetching for bookmark or favorite state')
       const { bookmarkState, favoriteState, playlistRes } = await check()
-      console.log(
-        'book: ' +
-          bookmarkState +
-          ', fav: ' +
-          favoriteState +
-          ', playlist: ' +
-          playlistRes
-      )
       setIsBookmark(bookmarkState)
       setIsFavorite(favoriteState)
       setPlaylsits(playlistRes.playlists)
+      setLoading(false)
     }
 
     fetchData()
@@ -147,6 +141,13 @@ export default function VideoActions(props: Props) {
       }
     }
   }
+
+  // Show a loading Skeleton if actions state are loading to prevent user from making a bad request
+  if(loading) return (
+    <div id={styles.action}>
+        <LoadingSpinner size='small'/>
+    </div>
+  )
 
   return (
     <div id={styles.action}>

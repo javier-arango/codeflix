@@ -3,7 +3,6 @@ import type { CategoryKey, VideosResponse } from 'types'
 
 export async function getVideos(category: CategoryKey) {
   const response = await fetch(`${baseURL}/api/videos?category=${category}`, {
-    cache: 'no-cache',
   })
 
   if (!response || !response.ok) {
@@ -21,7 +20,6 @@ export async function getUser(email: string | undefined | null) {
     const res = await fetch(`${baseURL}/api/user/get_user`, {
       method: 'POST',
       body: JSON.stringify({ email }),
-      cache: 'no-cache',
     })
 
     if (!res.ok) {
@@ -47,7 +45,6 @@ export async function removeVideoFromPlaylist(
   const response = await fetch(`${baseURL}/api/user/playlist/edit`, {
     method: 'POST',
     body: JSON.stringify({ videoId, playlistId }),
-    cache: 'no-cache',
   })
 
   if (!response || !response.ok) {
@@ -62,7 +59,6 @@ export async function getPlaylists(userEmail: string | undefined | null) {
     const res = await fetch(`${baseURL}/api/user/playlist/get_all`, {
       method: 'POST',
       body: JSON.stringify({ userEmail }),
-      cache: 'no-cache',
     })
 
     if (!res.ok) {
@@ -84,8 +80,7 @@ export async function getPlaylists(userEmail: string | undefined | null) {
 
 export async function getVideosOfPlaylists(playlistId: string) {
   const response = await fetch(
-    `${baseURL}/api/user/playlist/videos/${playlistId}`,
-    { cache: 'no-cache' }
+    `${baseURL}/api/user/playlist/videos/${playlistId}`
   )
 
   if (!response || !response.ok) {
@@ -110,7 +105,7 @@ export async function addVideoToPlaylist(videoId: string, playlistId: string) {
 
 export async function searchVideos(query?: string): Promise<VideosResponse> {
   try {
-    const res = await fetch(`${baseURL}:3000/api/search`, {
+    const res = await fetch(`${baseURL}/api/search`, {
       method: 'POST',
       body: JSON.stringify({ query }),
     })
