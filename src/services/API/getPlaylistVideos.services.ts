@@ -1,7 +1,7 @@
 import { baseURL } from '@lib/index'
 import type { VideoListResponse } from 'types'
 
-export async function GetPlaylistVideos(
+export async function getPlaylistVideos(
   playlistId: string
 ): Promise<VideoListResponse> {
   try {

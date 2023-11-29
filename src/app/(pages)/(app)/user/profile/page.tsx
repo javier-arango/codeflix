@@ -9,7 +9,7 @@ import {
   type PlaylistPreviewProps,
 } from '@components/foundation/playlist'
 import { getUserDetails } from '@services/API'
-import { GetUserPlaylists } from '@services/API/getUserPlaylists.services'
+import { getUserPlaylists } from '@services/API/getUserPlaylists.services'
 import { authOptions } from 'app/api/auth/[...nextauth]/route'
 import { getServerSession } from 'next-auth'
 import { Suspense } from 'react'
@@ -17,7 +17,7 @@ import type { PlaylistListResponse, UserDetails } from 'types'
 
 async function UserPlaylists({ userEmail }: { userEmail: string }) {
   // Get user playlists
-  const userPlaylists: PlaylistListResponse = await GetUserPlaylists(userEmail)
+  const userPlaylists: PlaylistListResponse = await getUserPlaylists(userEmail)
 
   if (!userPlaylists) {
     return (

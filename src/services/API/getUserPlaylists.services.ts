@@ -1,7 +1,7 @@
 import { baseURL } from '@lib/index'
 import type { PlaylistListResponse } from 'types'
 
-export async function GetUserPlaylists(
+export async function getUserPlaylists(
   userEmail: string
 ): Promise<PlaylistListResponse> {
   try {

@@ -1,11 +1,11 @@
 import { WarningMessage } from '@components/foundation'
 import { PlaylistList } from '@components/foundation/playlist'
 import { ScrollShadow, Spinner } from '@nextui-org/react'
-import { GetPlaylistVideos, getPlaylistDetails } from '@services/API'
+import { getPlaylistVideos, getPlaylistDetails } from '@services/API'
 import { Suspense } from 'react'
 
 async function PlaylistVideos({ id }: { id: string }) {
-  const playlistVideos = await GetPlaylistVideos(id)
+  const playlistVideos = await getPlaylistVideos(id)
 
   if (!playlistVideos) {
     return (

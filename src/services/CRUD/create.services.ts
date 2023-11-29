@@ -1,7 +1,7 @@
 import prisma from '@lib/prisma'
 import type { Channel, User, Video } from '@prisma/client'
 import { hash } from 'bcrypt'
-import type { CreatePlaylist } from 'types'
+import type { CreatePlaylistRequest } from 'types'
 
 // Create services for Channels
 export async function CreateChannel(channel: Channel): Promise<boolean> {
@@ -35,7 +35,7 @@ export async function UploadVideo(video: Video): Promise<boolean> {
 
 // Create services for Playlists
 export async function CreatePlaylist(
-  createPlaylist: CreatePlaylist
+  createPlaylist: CreatePlaylistRequest
 ): Promise<boolean> {
   const { playlist, userEmail, videoId } = createPlaylist
 

@@ -29,7 +29,11 @@ export default async function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={roboto.className}>
         <Providers>
-          <Toaster />
+          <Toaster
+            toastOptions={{
+              duration: 2000, // toast will last 2 seconds
+            }}
+          />
           <AppNavBar session={session} />
           {children}
           <Footer />
