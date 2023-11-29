@@ -1,4 +1,5 @@
-import { AuthForm, Logo } from '@components/foundation'
+import { AuthForm } from '@components/AuthForm'
+import { Logo } from '@components/foundation'
 import { Card, CardBody, CardHeader } from '@nextui-org/react'
 
 export default function Login() {

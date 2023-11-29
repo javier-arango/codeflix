@@ -11,6 +11,7 @@ export async function getUserDetails(
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ email }),
+      cache: 'no-cache',
     })
 
     if (!res.ok) {

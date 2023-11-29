@@ -54,9 +54,18 @@ export default async function ProfilePage() {
   // User session
   const session = await getServerSession(authOptions)
 
+  if (!session) {
+    return (
+      <WarningMessage
+        title="You are not logged in."
+        subtitle="Please log in to edit your profile"
+      />
+    )
+  }
+
   // Fetch user data
   let user: UserDetails | null = null
-  if (session && session.user && session.user.email) {
+  if (session.user && session.user.email) {
     user = await getUserDetails(session.user.email)
   }
 
@@ -80,11 +89,8 @@ export default async function ProfilePage() {
           </Suspense>
         </UserProfile>
       ) : (
-        // User is not login yet send the user to login page
-        <WarningMessage
-          title="User not sign in"
-          subtitle="Please sign in to view your profile"
-        />
+        // There was an error fetching user from db
+        <WarningMessage title="An error occurred" subtitle="Please try again" />
       )}
     </div>
   )

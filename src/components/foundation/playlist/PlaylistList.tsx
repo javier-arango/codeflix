@@ -16,7 +16,6 @@ export const PlaylistList = ({
   playlistId,
   playlistVideos,
 }: PlaylistListProps) => {
-  // Use the custom hook for optimistic updates
   const [videos, setOptimisticVideos, rollbackVideos] = useOptimistic<Video[]>(
     playlistVideos.videos
   )

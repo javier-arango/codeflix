@@ -90,7 +90,7 @@ export const AppNavBar = ({ session }: AppNavBarProps) => {
                     <ListboxItem key="profile" href="/user/profile">
                       Profile
                     </ListboxItem>
-                    <ListboxItem key="edit" href="/user/edit">
+                    <ListboxItem key="edit" href="/user/profile/edit">
                       Edit Profile
                     </ListboxItem>
                     <ListboxItem key="playlist" href="/user/playlist">

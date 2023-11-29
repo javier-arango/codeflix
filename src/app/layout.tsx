@@ -1,5 +1,5 @@
-import { Footer } from '@components/footer/Footer'
-import { AppNavBar } from '@components/navBar/NavBar'
+import { Footer } from '@components/Footer'
+import { AppNavBar } from '@components/NavBar'
 import '@styles/globals.css'
 import type { Metadata } from 'next'
 import type { Session } from 'next-auth'

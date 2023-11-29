@@ -1,8 +1,34 @@
 import { prisma } from '@lib/index'
 import type { User } from '@prisma/client'
+import { getUserDetails } from '@services/API'
 import { compare } from 'bcrypt'
 import NextAuth, { type NextAuthOptions } from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
+
+// session: async ({ session, token }) => {
+//   // Fetch the latest user data from the database
+//   const user: User | null = await prisma.user.findUnique({
+//     where: {
+//       id: token.id, // Assuming 'id' is stored in the token
+//     },
+//   });
+
+//   if (user) {
+//     // Return the updated session with the latest user data
+//     return {
+//       ...session,
+//       user: {
+//         ...session.user,
+//         id: user.id,
+//         image: user.avatar,
+//         email: user.email,
+//         name: user.firstName + ' ' + user.lastName,
+//       },
+//     };
+//   }
+
+//   return session;
+// },
 
 export const authOptions: NextAuthOptions = {
   pages: {
@@ -64,14 +90,21 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   callbacks: {
-    session: ({ session, token }) => {
-      return {
-        ...session,
-        user: {
-          ...session.user,
-          id: token.id,
-        },
+    session: async ({ session, token }) => {
+      // Fetch the latest user data from the database
+      const user = await getUserDetails(token.email as string)
+
+      if (user) {
+        return {
+          ...session,
+          user: {
+            ...session.user,
+            id: token.id,
+          },
+        }
       }
+
+      return session
     },
     jwt: ({ token, user }) => {
       if (user) {
