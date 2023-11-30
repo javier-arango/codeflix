@@ -27,7 +27,7 @@ export default async function EditProfilePage() {
   }
 
   return (
-    <div className='flex justify-center items-center'>
+    <div className="flex justify-center items-center">
       {user ? (
         <Card
           // fullWidth

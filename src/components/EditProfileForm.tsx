@@ -43,7 +43,10 @@ export const EditProfileForm = ({
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 md:space-y-6 pb-12">
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="space-y-4 md:space-y-6 pb-12"
+    >
       {/* Inputs container */}
       <div className="flex flex-col items-center w-full gap-8">
         {/* Avatar */}
