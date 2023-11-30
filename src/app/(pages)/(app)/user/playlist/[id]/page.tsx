@@ -1,7 +1,7 @@
 import { WarningMessage } from '@components/foundation'
 import { PlaylistList } from '@components/foundation/playlist'
 import { ScrollShadow, Spinner } from '@nextui-org/react'
-import { getPlaylistVideos, getPlaylistDetails } from '@services/API'
+import { getPlaylistDetails, getPlaylistVideos } from '@services/API'
 import { Suspense } from 'react'
 
 async function PlaylistVideos({ id }: { id: string }) {
@@ -43,7 +43,7 @@ export default async function PlaylistPage({
   }
 
   return (
-    <div className="px-0 py-4 lg:p-8 md:p-4">
+    <>
       <div className="flex flex-col items-center gap-2 pb-8">
         <h1 className="text-5xl">{playlist.name}</h1>
         {playlist.description && (
@@ -60,7 +60,7 @@ export default async function PlaylistPage({
       >
         <PlaylistVideos id={id} />
       </Suspense>
-    </div>
+    </>
   )
 }
 

@@ -25,7 +25,7 @@ export default async function HomePage() {
   }
 
   return (
-    <main className="px-0 py-4 lg:p-8 md:p-4">
+    <main>
       <div className="py-4">
         <SelectList categories={categoryValues} />
       </div>

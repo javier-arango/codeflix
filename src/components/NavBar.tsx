@@ -4,6 +4,7 @@ import { Logo, SearchBar } from '@components/foundation'
 import {
   Avatar,
   Button,
+  Divider,
   Link,
   Listbox,
   ListboxItem,
@@ -16,16 +17,26 @@ import {
   PopoverTrigger,
 } from '@nextui-org/react'
 import type { Session } from 'next-auth'
-import { signOut } from 'next-auth/react'
-import { useState } from 'react'
-import { FaRegCircleUser } from 'react-icons/fa6'
+import { signOut, useSession } from 'next-auth/react'
+import { useEffect, useState } from 'react'
+import { FaPen, FaRegCircleUser, FaRegUser } from 'react-icons/fa6'
+import { MdLogout } from 'react-icons/md'
 
-interface AppNavBarProps {
-  session: Session | null
-}
-
-export const AppNavBar = ({ session }: AppNavBarProps) => {
+export const AppNavBar = ({
+  initialSession,
+}: {
+  initialSession: Session | null
+}) => {
+  const { data: currentSession } = useSession()
+  const [session, setSession] = useState(initialSession)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+
+  useEffect(() => {
+    // Update session state only if it's different from the current state
+    if (currentSession && currentSession !== session) {
+      setSession(currentSession)
+    }
+  }, [currentSession, session])
 
   // Helper components
   const LoginButton = () => {
@@ -40,6 +51,111 @@ export const AppNavBar = ({ session }: AppNavBarProps) => {
         Sign In
       </Button>
     )
+  }
+
+  const PopoverTopContentMarkup = ({
+    name,
+    image,
+  }: {
+    name?: string | null
+    image?: string | null
+  }) => {
+    if (!image || !name) {
+      return null
+    }
+
+    return (
+      <>
+        <div className="flex flex-row gap-2 pb-2">
+          {/* User avatar */}
+          <Avatar showFallback size="sm" src={image} />
+
+          {/* User name */}
+          <div className="flex flex-col gap-1 items-start justify-center">
+            <h4 className="text-small font-semibold leading-none text-default-600">
+              {name}
+            </h4>
+          </div>
+        </div>
+
+        <Divider />
+      </>
+    )
+  }
+
+  const PopoverContentMarkUp = ({
+    topContent,
+  }: {
+    topContent: React.ReactNode
+  }) => {
+    return (
+      <Listbox
+        variant="faded"
+        hideEmptyContent
+        aria-label="Listbox menu"
+        topContent={topContent}
+        onAction={(key) => {
+          if (key === 'logout') {
+            signOut()
+          }
+        }}
+      >
+        <ListboxItem
+          key="profile"
+          href="/user/profile"
+          startContent={<FaRegUser />}
+        >
+          Profile
+        </ListboxItem>
+        <ListboxItem
+          key="edit"
+          showDivider
+          href="/user/profile/edit"
+          startContent={<FaPen />}
+        >
+          Edit Profile
+        </ListboxItem>
+        <ListboxItem
+          key="logout"
+          className="text-danger"
+          color="danger"
+          startContent={<MdLogout />}
+        >
+          Sign Out
+        </ListboxItem>
+      </Listbox>
+    )
+  }
+
+  const RenderUserMenu = () => {
+    if (session && session.user) {
+      // Render user profile if session is available
+      return (
+        <Popover backdrop="blur" placement="bottom">
+          <PopoverTrigger>
+            <Avatar
+              isBordered
+              showFallback
+              className="cursor-pointer"
+              src={session.user.image || ''}
+            />
+          </PopoverTrigger>
+          <PopoverContent className="p-4">
+            <PopoverContentMarkUp
+              topContent={
+                <PopoverTopContentMarkup
+                  name={session.user.name}
+                  image={session.user.image}
+                />
+              }
+            />
+          </PopoverContent>
+        </Popover>
+      )
+    } else {
+      // Render login button if no session
+      return <LoginButton />
+    }
   }
 
   return (
@@ -66,53 +182,7 @@ export const AppNavBar = ({ session }: AppNavBarProps) => {
       {/* Sign In Button or User Profile */}
       <NavbarContent justify="end">
         <NavbarItem>
-          {session && session.user ? (
-            <Popover backdrop="blur" placement="bottom">
-              <PopoverTrigger>
-                <Avatar
-                  isBordered
-                  showFallback
-                  className="cursor-pointer"
-                  src={session.user.image || ''}
-                />
-              </PopoverTrigger>
-              <PopoverContent className="p-1">
-                <div className="px-1 py-2">
-                  <Listbox
-                    variant="faded"
-                    aria-label="Listbox menu"
-                    onAction={(key) => {
-                      if (key === 'logout') {
-                        signOut()
-                      }
-                    }}
-                  >
-                    <ListboxItem key="profile" href="/user/profile">
-                      Profile
-                    </ListboxItem>
-                    <ListboxItem key="edit" href="/user/profile/edit">
-                      Edit Profile
-                    </ListboxItem>
-                    <ListboxItem key="playlist" href="/user/playlist">
-                      Playlist
-                    </ListboxItem>
-                    <ListboxItem key="history" showDivider href="/user/history">
-                      History
-                    </ListboxItem>
-                    <ListboxItem
-                      key="logout"
-                      className="text-danger"
-                      color="danger"
-                    >
-                      Sign Out
-                    </ListboxItem>
-                  </Listbox>
-                </div>
-              </PopoverContent>
-            </Popover>
-          ) : (
-            <LoginButton />
-          )}
+          <RenderUserMenu />
         </NavbarItem>
       </NavbarContent>
     </Navbar>

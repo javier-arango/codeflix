@@ -27,13 +27,13 @@ export default async function EditProfilePage() {
   }
 
   return (
-    <div className="p-8">
+    <div className='flex justify-center items-center'>
       {user ? (
         <Card
-          fullWidth
+          // fullWidth
           shadow="none"
           classNames={{
-            base: 'bg-transparent',
+            base: 'bg-transparent w-full md:w-w-4/5 lg:w-1/2 ',
           }}
         >
           <CardHeader>

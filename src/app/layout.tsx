@@ -34,8 +34,8 @@ export default async function RootLayout({
               duration: 2000, // toast will last 2 seconds
             }}
           />
-          <AppNavBar session={session} />
-          {children}
+          <AppNavBar initialSession={session} />
+          <div className="px-2 py-4 lg:p-8 md:p-4">{children}</div>
           <Footer />
         </Providers>
       </body>

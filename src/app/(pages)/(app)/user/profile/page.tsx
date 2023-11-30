@@ -70,7 +70,7 @@ export default async function ProfilePage() {
   }
 
   return (
-    <div className="p-8">
+    <>
       {user ? (
         <UserProfile user={user}>
           {/* User playlists */}
@@ -92,7 +92,7 @@ export default async function ProfilePage() {
         // There was an error fetching user from db
         <WarningMessage title="An error occurred" subtitle="Please try again" />
       )}
-    </div>
+    </>
   )
 }
 

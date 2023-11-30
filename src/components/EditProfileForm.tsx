@@ -2,6 +2,7 @@
 
 import { Button, Input, Textarea } from '@nextui-org/react'
 import { updateUserProfile } from '@services/API'
+import { useSession } from 'next-auth/react'
 import type { SubmitHandler } from 'react-hook-form'
 import { Controller, useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
@@ -19,6 +20,7 @@ export const EditProfileForm = ({
   bio,
   avatar,
 }: EditProfileFormProps) => {
+  const { update } = useSession()
   const {
     register,
     handleSubmit,
@@ -34,13 +36,14 @@ export const EditProfileForm = ({
       // Update user profile
       await updateUserProfile(userEmail, data)
       toast.success('Profile updated successfully.')
+      update()
     } catch (err) {
       toast.error('An error occurred. Please try again.')
     }
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 md:space-y-6">
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 md:space-y-6 pb-12">
       {/* Inputs container */}
       <div className="flex flex-col items-center w-full gap-8">
         {/* Avatar */}
