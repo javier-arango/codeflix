@@ -66,7 +66,7 @@ export const Logo = ({ href = '/', className }: LogoProps) => {
     <Link href={href} color="foreground">
       <LogoSVG />
       <p className={`font-bold text-inherit uppercase ${className}`}>
-        Cinemify
+        Codeflix
       </p>
     </Link>
   )
