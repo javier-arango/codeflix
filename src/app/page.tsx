@@ -1,7 +1,6 @@
-import { SelectList, VideoList } from '@components/foundation'
+import { VideoList, WarningMessage } from '@components/foundation'
 import { VIDEO_CATEGORIES, type CategoryKey } from '@constants/index'
 import { getVideosByCategory } from '@services/API'
-import { AiFillWarning } from 'react-icons/ai'
 import type { VideoListResponse } from 'types'
 
 export default async function HomePage() {
@@ -10,27 +9,27 @@ export default async function HomePage() {
   ) as CategoryKey[]
 
   // Fetch videos for the given category
-  const videoList: VideoListResponse = await getVideosByCategory('ai')
+  const videoList: VideoListResponse = await getVideosByCategory('all')
 
   if (!videoList) {
     return (
-      <div className="flex flex-col items-center justify-center w-screen h-screen">
-        <AiFillWarning className="text-6xl text-default-500" />
-        <h1 className="text-2xl font-bold">Videos not found</h1>
-        <p className="text-default-500 text-sm">
-          An error occurred while trying to fetch the videos
-        </p>
-      </div>
+      <WarningMessage
+        title="Videos not found"
+        subtitle="An error occurred while trying to fetch the videos"
+      />
     )
   }
 
   return (
-    <main className="px-2 py-4 lg:p-8 md:p-4">
-      <div className="py-4">
-        <SelectList categories={categoryValues} />
-      </div>
-
-      <VideoList videos={videoList.videos} />
+    <main>
+      {videoList.videos.length === 0 ? (
+        <WarningMessage
+          title="No videos found"
+          subtitle="Please try to refresh the page"
+        />
+      ) : (
+        <VideoList videos={videoList.videos} categories={categoryValues} />
+      )}
     </main>
   )
 }

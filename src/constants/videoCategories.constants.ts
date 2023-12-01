@@ -5,7 +5,6 @@ export type CategoryKey =
   | 'db'
   | 'cybersecurity'
   | 'datascience'
-  | 'database'
   | 'frontend'
   | 'fullstack'
   | 'iot'
@@ -24,7 +23,6 @@ export const VIDEO_CATEGORIES: Category = {
   db: 'Database Management',
   cybersecurity: 'Cybersecurity',
   datascience: 'Data Science',
-  database: 'Database Management',
   frontend: 'React JS',
   fullstack: 'Full Stack Development',
   iot: 'Internet of Things (IoT)',

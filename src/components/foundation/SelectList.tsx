@@ -8,12 +8,14 @@ import { Button, Chip, ScrollShadow } from '@nextui-org/react'
 
 interface SelectListProps {
   categories: CategoryKey[]
-  selected?: CategoryKey
+  selected: CategoryKey
+  onSelect: (category: CategoryKey) => void
 }
 
 export const SelectList = ({
   categories,
-  selected = 'all',
+  selected,
+  onSelect,
 }: SelectListProps) => {
   const isCategorySelected = (category: string) => selected === category
 
@@ -32,7 +34,7 @@ export const SelectList = ({
           variant={isCategorySelected(category) ? 'bordered' : 'solid'}
           as={Button}
           className="min-w-fit"
-          onClick={() => console.log(category)}
+          onClick={() => onSelect(category)}
         >
           {VIDEO_CATEGORIES[category]}
         </Chip>

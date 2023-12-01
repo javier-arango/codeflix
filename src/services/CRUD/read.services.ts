@@ -43,6 +43,17 @@ export async function GetVideo(id: string) {
 
 // Read services for Videos
 export async function SearchVideosByCategory(categoryId: CategoryKey) {
+  // Find all the videos
+  if (categoryId === 'all') {
+    const videos: Video[] = await prisma.video.findMany({
+      orderBy: {
+        viewsCount: 'desc',
+      },
+    })
+
+    return videos
+  }
+
   // Find the videos with the category id passed
   // Filter by viewsCount in descending order
   const videos: Video[] = await prisma.video.findMany({
