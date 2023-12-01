@@ -131,7 +131,7 @@ export const AppNavBar = ({
     if (session && session.user) {
       // Render user profile if session is available
       return (
-        <Popover backdrop="blur" placement="bottom">
+        <Popover backdrop="opaque" size="lg" placement="bottom">
           <PopoverTrigger>
             <Avatar
               isBordered

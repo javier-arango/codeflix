@@ -43,7 +43,7 @@ export default async function PlaylistPage({
   }
 
   return (
-    <>
+    <div className="px-2 py-4 lg:p-8 md:p-4">
       <div className="flex flex-col items-center gap-2 pb-8">
         <h1 className="text-5xl">{playlist.name}</h1>
         {playlist.description && (
@@ -60,7 +60,7 @@ export default async function PlaylistPage({
       >
         <PlaylistVideos id={id} />
       </Suspense>
-    </>
+    </div>
   )
 }
 

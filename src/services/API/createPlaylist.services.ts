@@ -1,16 +1,14 @@
 import { baseURL } from '@lib/index'
+import type { CreatePlaylistRequest } from 'types'
 
-export async function removeVideoFromPlaylist(
-  playlistId: string,
-  videoId: string
-) {
+export async function createPlaylist(playlistRequest: CreatePlaylistRequest) {
   try {
-    const res = await fetch(`${baseURL}/api/user/playlist/edit`, {
+    const res = await fetch(`${baseURL}/api/user/playlist/create`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ videoId, playlistId }),
+      body: JSON.stringify({ ...playlistRequest }),
     })
 
     if (!res.ok) {

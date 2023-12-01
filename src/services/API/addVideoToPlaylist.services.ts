@@ -1,15 +1,9 @@
 import { baseURL } from '@lib/index'
 
-export async function removeVideoFromPlaylist(
-  playlistId: string,
-  videoId: string
-) {
+export async function addVideoToPlaylist(playlistId: string, videoId: string) {
   try {
-    const res = await fetch(`${baseURL}/api/user/playlist/edit`, {
+    const res = await fetch(`${baseURL}/api/user/playlist/add_to_playlist`, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
       body: JSON.stringify({ videoId, playlistId }),
     })
 

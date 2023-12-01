@@ -62,14 +62,14 @@ export const UserProfile = ({ user, children }: UserProfileProps) => {
       </CardHeader>
       <CardBody>
         {/* User bio */}
-        <Accordion fullWidth variant="shadow" defaultExpandedKeys={['2']}>
+        <Accordion fullWidth variant="shadow" defaultExpandedKeys={['bio']}>
           <AccordionItem
-            key="1"
+            key="bio"
             aria-label="User bio"
-            subtitle="Expand to see bio"
+            subtitle="Collapse to hide bio"
             title="Bio"
           >
-            {user.bio || 'No bio'}
+            <p>{user.bio || 'No bio'}</p>
           </AccordionItem>
         </Accordion>
 

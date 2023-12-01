@@ -33,7 +33,7 @@ async function UserPlaylists({ userEmail }: { userEmail: string }) {
           subtitle="Please create a playlist to view it here"
         />
       ) : (
-        <div className="flex flex-row flex-wrap gap-2 lg:gap-4">
+        <div className="flex flex-row flex-wrap gap-6 md:gap-4 lg:gap-4">
           {userPlaylists.playlists.map((playlist: PlaylistPreviewProps) => (
             <PlaylistPreview
               key={playlist.id}
@@ -70,7 +70,7 @@ export default async function ProfilePage() {
   }
 
   return (
-    <>
+    <div className="px-2 py-4 lg:p-8 md:p-4">
       {user ? (
         <UserProfile user={user}>
           {/* User playlists */}
@@ -92,7 +92,7 @@ export default async function ProfilePage() {
         // There was an error fetching user from db
         <WarningMessage title="An error occurred" subtitle="Please try again" />
       )}
-    </>
+    </div>
   )
 }
 

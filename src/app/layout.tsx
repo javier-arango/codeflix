@@ -35,7 +35,7 @@ export default async function RootLayout({
             }}
           />
           <AppNavBar initialSession={session} />
-          <div className="px-2 py-4 lg:p-8 md:p-4">{children}</div>
+          {children}
           <Footer />
         </Providers>
       </body>

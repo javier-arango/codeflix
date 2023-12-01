@@ -1,6 +1,6 @@
 'use client'
 
-import { Card, CardBody, CardFooter, Chip } from '@nextui-org/react'
+import { Card, CardBody, Chip } from '@nextui-org/react'
 import { truncateText } from '@utils/formatData.utils'
 import { generateImageBluerURL } from '@utils/generateImageBluerUrl.utils'
 import { useRouter } from 'next/navigation'
@@ -31,7 +31,7 @@ export const PlaylistPreview = ({
         isPressable
         radius="none"
         allowTextSelectionOnPress
-        style={{ width: '210px' }}
+        className="lg:w-[210px] md:w-[210px] w-full"
         classNames={{
           base: 'bg-transparent',
         }}
@@ -39,7 +39,7 @@ export const PlaylistPreview = ({
           router.push(`/user/playlist/${id}`)
         }}
       >
-        <CardBody className="p-0">
+        <CardBody className="p-0 gap-2">
           {/* Thumbnail */}
           <div className="relative">
             <Thumbnail
@@ -57,8 +57,7 @@ export const PlaylistPreview = ({
               {videoCount}
             </Chip>
           </div>
-        </CardBody>
-        <CardFooter>
+
           <div className="flex flex-col gap-1 h-full pr-4 text-left">
             {/* Playlist name */}
             <h1 className="font-bold text-base">{name}</h1>
@@ -70,7 +69,7 @@ export const PlaylistPreview = ({
               </p>
             )}
           </div>
-        </CardFooter>
+        </CardBody>
       </Card>
     </>
   )

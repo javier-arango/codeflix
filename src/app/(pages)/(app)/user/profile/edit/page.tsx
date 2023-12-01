@@ -27,35 +27,40 @@ export default async function EditProfilePage() {
   }
 
   return (
-    <div className="flex justify-center items-center">
-      {user ? (
-        <Card
-          // fullWidth
-          shadow="none"
-          classNames={{
-            base: 'bg-transparent w-full md:w-w-4/5 lg:w-1/2 ',
-          }}
-        >
-          <CardHeader>
-            <h1 className="text-3xl md:text-4xl lg:text-4xl font-bold">
-              Edit Profile
-            </h1>
-          </CardHeader>
+    <div className="px-2 py-4 lg:p-8 md:p-4">
+      <div className="flex justify-center items-center">
+        {user ? (
+          <Card
+            // fullWidth
+            shadow="none"
+            classNames={{
+              base: 'bg-transparent w-full md:w-w-4/5 lg:w-1/2 ',
+            }}
+          >
+            <CardHeader>
+              <h1 className="text-3xl md:text-4xl lg:text-4xl font-bold">
+                Edit Profile
+              </h1>
+            </CardHeader>
 
-          <CardBody>
-            <EditProfileForm
-              userEmail={user.email}
-              firstName={user.firstName}
-              lastName={user.lastName}
-              bio={user.bio}
-              avatar={user.avatar}
-            />
-          </CardBody>
-        </Card>
-      ) : (
-        // There was an error fetching user from db
-        <WarningMessage title="An error occurred" subtitle="Please try again" />
-      )}
+            <CardBody>
+              <EditProfileForm
+                userEmail={user.email}
+                firstName={user.firstName}
+                lastName={user.lastName}
+                bio={user.bio}
+                avatar={user.avatar}
+              />
+            </CardBody>
+          </Card>
+        ) : (
+          // There was an error fetching user from db
+          <WarningMessage
+            title="An error occurred"
+            subtitle="Please try again"
+          />
+        )}
+      </div>
     </div>
   )
 }

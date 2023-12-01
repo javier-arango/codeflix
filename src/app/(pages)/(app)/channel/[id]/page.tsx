@@ -60,7 +60,7 @@ export default async function ChannelPage({
   }
 
   return (
-    <>
+    <div className="px-2 py-4 lg:p-8 md:p-4">
       <ChannelMetadata {...channelDetails} />
 
       <Divider />
@@ -76,7 +76,7 @@ export default async function ChannelPage({
           <VideoListGrid channelId={channelDetails.channelId} />
         </div>
       </Suspense>
-    </>
+    </div>
   )
 }
 

@@ -29,7 +29,7 @@ export default async function ResultsPage({
   }
 
   return (
-    <>
+    <div className="px-2 py-4 lg:p-8 md:p-4">
       <h1 className="text-lg font-bold py-4 text-center md:text-left">
         {`${searchResponse.count} results for ${query}`}
       </h1>
@@ -42,7 +42,7 @@ export default async function ResultsPage({
           />
         ))}
       </div>
-    </>
+    </div>
   )
 }
 

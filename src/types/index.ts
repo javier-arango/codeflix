@@ -31,6 +31,10 @@ export interface UpdatedProfile {
   bio?: string
 }
 
+export interface VideoExistResponse {
+  videoExists: boolean
+}
+
 export interface CreatePlaylistRequest {
   userEmail: string
   videoId?: string

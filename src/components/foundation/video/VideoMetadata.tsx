@@ -4,7 +4,6 @@ import {
   Accordion,
   AccordionItem,
   Avatar,
-  Button,
   Card,
   CardBody,
   CardFooter,
@@ -17,8 +16,6 @@ import {
   formatPublishedAt,
   formatToCompactNumber,
 } from '@utils/index'
-import { useState } from 'react'
-import { AiOutlineMinusSquare, AiOutlinePlusSquare } from 'react-icons/ai'
 
 interface VideoMetadataProps {
   channelId: string
@@ -31,6 +28,7 @@ interface VideoMetadataProps {
   likesCount: number
   commentCount: number
   publishedAt: Date
+  children?: React.ReactNode | React.ReactNode[]
 }
 
 export const VideoMetadata = ({
@@ -44,9 +42,8 @@ export const VideoMetadata = ({
   likesCount,
   commentCount,
   publishedAt,
+  children,
 }: VideoMetadataProps) => {
-  const [isSaved, setIsSaved] = useState(false)
-
   return (
     <Card fullWidth radius="none">
       <CardHeader>
@@ -86,34 +83,8 @@ export const VideoMetadata = ({
               </div>
             </div>
 
-            <Tooltip
-              color="foreground"
-              showArrow={true}
-              delay={0}
-              closeDelay={0}
-              content={
-                isSaved
-                  ? 'Remove video from playlist'
-                  : 'Save video to playlist'
-              }
-            >
-              <Button
-                className={
-                  isSaved
-                    ? 'bg-transparent text-foreground border-default-200'
-                    : ''
-                }
-                color="primary"
-                radius="full"
-                startContent={
-                  isSaved ? <AiOutlineMinusSquare /> : <AiOutlinePlusSquare />
-                }
-                variant={isSaved ? 'bordered' : 'solid'}
-                onPress={() => setIsSaved(!isSaved)}
-              >
-                {isSaved ? 'Unsaved' : 'Save'}
-              </Button>
-            </Tooltip>
+            {/* Save video to playlist */}
+            {children}
           </div>
         </div>
       </CardHeader>
