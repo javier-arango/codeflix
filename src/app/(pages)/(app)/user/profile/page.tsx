@@ -4,10 +4,7 @@ import {
   UserProfile,
   WarningMessage,
 } from '@components/foundation'
-import {
-  PlaylistPreview,
-  type PlaylistPreviewProps,
-} from '@components/foundation/playlist'
+import { PlaylistPreviewList } from '@components/foundation/playlist'
 import { getUserDetails } from '@services/API'
 import { getUserPlaylists } from '@services/API/getUserPlaylists.services'
 import { authOptions } from 'app/api/auth/[...nextauth]/route'
@@ -33,18 +30,9 @@ async function UserPlaylists({ userEmail }: { userEmail: string }) {
           subtitle="Please create a playlist to view it here"
         />
       ) : (
-        <div className="flex flex-row flex-wrap gap-6 md:gap-4 lg:gap-4">
-          {userPlaylists.playlists.map((playlist: PlaylistPreviewProps) => (
-            <PlaylistPreview
-              key={playlist.id}
-              id={playlist.id}
-              name={playlist.name}
-              thumbnail={playlist.thumbnail}
-              description={playlist.description}
-              videoCount={playlist.videoCount}
-            />
-          ))}
-        </div>
+        <>
+          <PlaylistPreviewList userPlaylists={userPlaylists.playlists} />
+        </>
       )}
     </>
   )

@@ -1,6 +1,7 @@
 export * from './addVideoToPlaylist.services'
 export * from './checkIfVideoIsSavedToPlaylist.services'
 export * from './createPlaylist.services'
+export * from './deletePlaylist.services'
 export * from './getChannelDetails.services'
 export * from './getChannelVideos.utils'
 export * from './getPlaylistDetails.services'

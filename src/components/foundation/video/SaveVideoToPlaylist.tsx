@@ -239,7 +239,7 @@ export const SaveVideoToPlaylist = ({
                 {/* Checkbox to add video to playlist */}
                 <ScrollShadow
                   hideScrollBar
-                  className="flex flex-col gap-4 h-[400px]"
+                  className="flex flex-col gap-4 h-[150px]"
                 >
                   {userPlaylists.map((playlist) => (
                     <SaveToPlaylistButton
@@ -256,7 +256,10 @@ export const SaveVideoToPlaylist = ({
                   <CreatePlaylistForm
                     userEmail={userEmail}
                     videoId={videoId}
-                    onPress={onClose}
+                    onPress={() => {
+                      onClose()
+                      setOpenCreatePlaylistForm(false)
+                    }}
                   />
                 ) : (
                   <Button
