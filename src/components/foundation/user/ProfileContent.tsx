@@ -31,12 +31,6 @@ export const ProfileContent = ({ playlists }: ProfileContentProps) => {
       <Tab key="playlists" title="Playlists">
         <>{playlists}</>
       </Tab>
-      <Tab key="favorite" title="Favorite">
-        <div>Favorite</div>
-      </Tab>
-      <Tab key="watchLater" title="Watch Later">
-        <div>Watch Later</div>
-      </Tab>
     </Tabs>
   )
 }

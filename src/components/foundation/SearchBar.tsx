@@ -30,9 +30,10 @@ export const SearchBar = () => {
           inputWrapper:
             'h-full font-normal text-default-500 bg-default-400/20 dark:bg-default-500/20',
         }}
+        radius="full"
         placeholder="Search"
         size="sm"
-        startContent={<AiOutlineSearch size={18} />}
+        startContent={<AiOutlineSearch size={24} />}
         type="search"
         {...register('searchQuery')}
       />

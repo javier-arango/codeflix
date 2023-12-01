@@ -173,8 +173,8 @@ export const AppNavBar = ({
       </NavbarContent>
 
       {/* Search Bar */}
-      <NavbarContent className="sm:flex gap-4" justify="center">
-        <NavbarItem>
+      <NavbarContent justify="center">
+        <NavbarItem className="lg:w-[400px] md:w-[300px]">
           <SearchBar />
         </NavbarItem>
       </NavbarContent>

@@ -16,6 +16,7 @@ export const Footer = () => {
         <span className="block text-default-400 sm:text-center my-6 sm:mx-auto lg:my-8">
           Created with ♥ by{' '}
           <Link
+            isExternal
             color="foreground"
             underline="hover"
             href="https://github.com/javier-arango"
