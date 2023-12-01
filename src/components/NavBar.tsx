@@ -168,12 +168,12 @@ export const AppNavBar = ({
       {/* Logo */}
       <NavbarContent>
         <NavbarBrand>
-          <Logo />
+          <Logo className="hidden md:block" />
         </NavbarBrand>
       </NavbarContent>
 
       {/* Search Bar */}
-      <NavbarContent className="hidden sm:flex gap-4" justify="center">
+      <NavbarContent className="sm:flex gap-4" justify="center">
         <NavbarItem>
           <SearchBar />
         </NavbarItem>

@@ -63,9 +63,11 @@ interface LogoProps {
 
 export const Logo = ({ href = '/', className }: LogoProps) => {
   return (
-    <Link href={href} color="foreground" className={className}>
+    <Link href={href} color="foreground">
       <LogoSVG />
-      <p className="font-bold text-inherit uppercase">Cinemify</p>
+      <p className={`font-bold text-inherit uppercase ${className}`}>
+        Cinemify
+      </p>
     </Link>
   )
 }

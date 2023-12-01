@@ -1,4 +1,7 @@
-import { VideoList, WarningMessage } from '@components/foundation'
+import {
+  VideoListWithCategorySelect,
+  WarningMessage,
+} from '@components/foundation'
 import { VIDEO_CATEGORIES, type CategoryKey } from '@constants/index'
 import { getVideosByCategory } from '@services/API'
 import type { VideoListResponse } from 'types'
@@ -28,7 +31,10 @@ export default async function HomePage() {
           subtitle="Please try to refresh the page"
         />
       ) : (
-        <VideoList videos={videoList.videos} categories={categoryValues} />
+        <VideoListWithCategorySelect
+          videos={videoList.videos}
+          categories={categoryValues}
+        />
       )}
     </main>
   )
