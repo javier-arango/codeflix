@@ -82,7 +82,7 @@ export const Logo = ({ href = '/', className, color = 'dark' }: LogoProps) => {
           textTransform: 'uppercase',
         }}
       >
-        Cinemify
+        Codeflix
       </p>
     </Link>
   )
