@@ -70,7 +70,7 @@ export const Logo = ({ href = '/', className }: LogoProps) => {
         alignItems: 'center',
         flexDirection: 'row',
         textDecoration: 'none',
-        color: "#00c2d1",
+        color: '#00c2d1',
       }}
     >
       <LogoSVG />
