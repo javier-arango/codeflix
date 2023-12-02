@@ -18,13 +18,13 @@ import { getPlaylistId } from '@utils/helper.utils'
 
 export default async function Profile() {
   const session = await getServerSession(authOptions)
-  let user : UserDetails | null = null;
-  let playlistRes;
+  let user: UserDetails | null = null
+  let playlistRes
 
-  if(session && session.user && session.user.email) {
+  if (session && session.user && session.user.email) {
     user = await getUser(session.user.email)
 
-    if(user) playlistRes = await getPlaylists(user.email)
+    if (user) playlistRes = await getPlaylists(user.email)
   }
 
   let watchlistVideos: VideosResponse
@@ -40,7 +40,7 @@ export default async function Profile() {
     )
   } else return null
 
-  if(!user) return null;
+  if (!user) return null
 
   return (
     <>
