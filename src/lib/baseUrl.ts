@@ -8,12 +8,11 @@ const getBaseURL = () => {
       return getEnvVariable('NEXT_PUBLIC_URL')
     }
 
-    return `https://${getEnvVariable('VERCEL_URL')}`
+    return `https://codeflix-one.vercel.app`
   }
 
   return window.location.origin
 }
 
 // Base URL for API calls
-
 export const baseURL = getBaseURL()
