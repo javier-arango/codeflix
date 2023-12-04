@@ -9,7 +9,12 @@ type CategoriesProps = {
 }
 
 export default function Categories(props: CategoriesProps) {
-  const getCategories = (categories: CategoryInfo[]) => {
+  /**
+   * Create the category components
+   * @param categories
+   * @returns An array of Category component
+   */
+  const createCategoryComponents = (categories: CategoryInfo[]) => {
     const array = []
 
     for (let i = 1; i < categories.length; i++) {
@@ -24,8 +29,6 @@ export default function Categories(props: CategoriesProps) {
 
     return array
   }
-
-  // console.log(props.categories)
 
   return (
     <section id={styles.categorySection}>
@@ -44,7 +47,7 @@ export default function Categories(props: CategoriesProps) {
               props.allCategories ? styles.allCategories : styles.someCategories
             }
           >
-            {getCategories(props.categories)}
+            {createCategoryComponents(props.categories)}
           </div>
         </div>
       </div>

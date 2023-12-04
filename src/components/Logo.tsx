@@ -58,10 +58,9 @@ export const LogoSVG = () => (
 interface LogoProps {
   href?: string
   className?: string
-  color?: 'dark' | 'light'
 }
 
-export const Logo = ({ href = '/', className, color = 'dark' }: LogoProps) => {
+export const Logo = ({ href = '/', className }: LogoProps) => {
   return (
     <Link
       href={href}
@@ -71,7 +70,7 @@ export const Logo = ({ href = '/', className, color = 'dark' }: LogoProps) => {
         alignItems: 'center',
         flexDirection: 'row',
         textDecoration: 'none',
-        color: `${color === 'dark' ? 'black' : 'white'}`,
+        color: '#00c2d1',
       }}
     >
       <LogoSVG />
@@ -82,7 +81,7 @@ export const Logo = ({ href = '/', className, color = 'dark' }: LogoProps) => {
           textTransform: 'uppercase',
         }}
       >
-        Cinemify
+        Codeflix
       </p>
     </Link>
   )

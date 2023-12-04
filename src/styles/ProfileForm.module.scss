@@ -1,5 +1,27 @@
 @import 'base/variables.scss';
 
+#title {
+  color: $color-green;
+  margin-bottom: 30px;
+}
+
+#container {
+  min-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#pic {
+  width: 100px;
+  height: 100px;
+  background-position: center;
+  background-size: cover;
+  border-radius: 50%;
+  margin-bottom: 20px;
+}
+
 #form {
   width: 500px;
   min-height: 100px;
@@ -18,7 +40,17 @@
   padding-left: 10px;
 }
 
-.input:focus {
+#bio {
+  width: 300px;
+  min-height: 50px;
+  border: 2px solid $color-green;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  padding-left: 10px;
+}
+
+.input:focus,
+#bio:focus {
   outline: none !important;
   border: 2px solid $color-green;
   box-shadow: 0 0 4px $color-green;
@@ -40,9 +72,4 @@
 
 #submit:hover {
   box-shadow: 0 0 4px $color-green;
-}
-
-.switch {
-  color: $color-green;
-  cursor: pointer;
 }

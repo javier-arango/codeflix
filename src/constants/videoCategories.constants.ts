@@ -22,7 +22,6 @@ export const VIDEO_CATEGORIES: Category = {
   db: 'Database Management',
   cybersecurity: 'Cybersecurity',
   datascience: 'Data Science',
-  database: 'Database Management',
   frontend: 'React JS',
   fullstack: 'Full Stack Development',
   iot: 'Internet of Things (IoT)',
@@ -51,7 +50,6 @@ export const VIDEO_CATEGORIES2: Category2 = {
     name: 'Data Science',
     img: dataScienceImage,
   },
-  database: { key: 'database', name: 'Database Management', img: dbImage },
   frontend: { key: 'frontend', name: 'React JS', img: frontImage },
   fullstack: {
     key: 'fullstack',

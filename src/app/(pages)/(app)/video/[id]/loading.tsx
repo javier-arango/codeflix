@@ -3,7 +3,7 @@ import { LoadingSpinner } from '@components/LoadingSpinner'
 
 const customStyles = {
   width: '100%',
-  height: '100vh',
+  height: '90vh',
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
@@ -12,7 +12,7 @@ const customStyles = {
 export default function Loading() {
   return (
     <div style={customStyles}>
-      <LoadingSpinner />
+      <LoadingSpinner size="medium" />
     </div>
   )
 }

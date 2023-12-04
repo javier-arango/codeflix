@@ -9,7 +9,6 @@ export type CategoryKey =
   | 'db'
   | 'cybersecurity'
   | 'datascience'
-  | 'database'
   | 'frontend'
   | 'fullstack'
   | 'iot'
