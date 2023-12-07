@@ -8,7 +8,7 @@ export function getCloudinaryPublicIdFromUrl(url: string): string | null {
 }
 
 export function generateSHA1ForCloudinary(data: string) {
-  const hash = crypto.createHash('sha1')
+  const hash = crypto.createHash('sha512')
   hash.update(data)
 
   return hash.digest('hex')
